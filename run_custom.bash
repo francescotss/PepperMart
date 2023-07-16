@@ -2,7 +2,7 @@
 
 # Use  ./run.bash [version]
 
-IMAGENAME=pepper-hri
+IMAGENAME=pepper-hri-pnp
 
 VERSION=latest
 if [ ! "$1" == "" ]; then
@@ -37,7 +37,7 @@ echo "Pepper IP is $PEPPER_IP"
 echo "starting docker container"
 
 docker run -it -d \
-    --name pepperhri \
+    --name pepperhri-pnp \
     -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
     -v $HOME/.Xauthority:/home/robot/.Xauthority:rw \
     -e DISPLAY=$DISPLAY \
@@ -50,6 +50,7 @@ docker run -it -d \
     -v $MODIM_HOME:/home/robot/src/modim \
     -v $HOME/.qibullet:/home/robot/.qibullet \
     -e MODIM_HOME=/home/robot/src/modim \
+    -e PNP_HOME=/home/robot/src/PetriNetPlans \
     -e PEPPER_IP=$PEPPER_IP \
     $IMAGENAME:$VERSION
 
@@ -57,4 +58,4 @@ docker run -it -d \
 echo "Attaching... ( docker exec -it pepperhri /bin/bash )"
 
 
-docker exec -it pepperhri /bin/bash
+docker exec -it pepperhri-pnp /bin/bash

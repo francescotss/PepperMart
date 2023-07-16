@@ -14,42 +14,17 @@ ARG NAOQI=notavailable
 
 RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
 
-RUN dpkg --add-architecture i386
-
 RUN apt-get update && \
     apt-get install -y \
-        tmux less sudo eom wget libwebsockets-dev flex \
+        tmux less sudo eom wget libwebsockets-dev xterm  \
         nano unzip wget iputils-ping net-tools netcat openssh-client \
+        openjdk-11-jdk libxml2-dev libxml++2.6-dev flex \
         bash-completion python-pip \
         ros-melodic-desktop \
+        ros-melodic-navigation ros-melodic-stage-ros \
         ros-melodic-naoqi-libqi ros-melodic-naoqi-libqicore \
         ros-melodic-naoqi-driver ros-melodic-naoqi-bridge-msgs && \
     rm -rf /var/lib/apt/lists/*
-
-
-# Android studio
-
-RUN apt-get update && apt-get install -y \
-        build-essential git neovim wget unzip sudo \
-        libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1 libbz2-1.0:i386 \
-        libxrender1 libxtst6 libxi6 libfreetype6 libxft2 xz-utils vim\
-        qemu qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils libnotify4 libglu1 libqt5widgets5 openjdk-8-jdk openjdk-11-jdk xvfb \
-        && \
-    apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-ARG ANDROID_STUDIO_URL=https://redirector.gvt1.com/edgedl/android/studio/ide-zips/2022.1.1.21/android-studio-2022.1.1.21-linux.tar.gz
-ARG ANDROID_STUDIO_VERSION=2022.1.1.21
-
-RUN wget "$ANDROID_STUDIO_URL" -O android-studio.tar.gz
-RUN tar xzvf android-studio.tar.gz
-RUN rm android-studio.tar.gz
-
-RUN ln -s /studio-data/profile/AndroidStudio$ANDROID_STUDIO_VERSION .AndroidStudio$ANDROID_STUDIO_VERSION
-RUN ln -s /studio-data/Android Android
-RUN ln -s /studio-data/profile/android .android
-RUN ln -s /studio-data/profile/java .java
-RUN ln -s /studio-data/profile/gradle .gradle
-ENV ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
 
 # User: robot (password: robot) with sudo power
 
@@ -110,6 +85,7 @@ RUN rosdep update
 
 RUN mkdir -p $HOME/src/
 
+
 # OpenCV
 RUN pip install opencv-python==4.2.0.32
 
@@ -124,9 +100,40 @@ ENV PEPPER_TOOLS_HOME /home/robot/src/pepper_tools
 
 RUN echo "export PEPPER_IP=127.0.0.1\n" >> $HOME/.bashrc
 
+
+# Petri Net Plans
+
+RUN cd $HOME/src && git clone --depth 1 https://github.com/iocchi/PetriNetPlans
+
+RUN cd $HOME/src/PetriNetPlans/PNP &&  mkdir -p build &&  cd build  &&  cmake ..  && make
+
+RUN cd $HOME/src/PetriNetPlans/PNPgen &&  mkdir -p build &&  cd build  &&  cmake ..  && make
+
+RUN echo "export LD_LIBRARY_PATH=\"\${LD_LIBRARY_PATH}:/usr/local/lib\" " >> $HOME/.bashrc
+
+USER root
+
+RUN cd /home/robot/src/PetriNetPlans/PNP/build && make clean && make install
+
+RUN cd /home/robot/src/PetriNetPlans/PNPgen/build && make clean && make install
+
+RUN cd /usr/local/bin && ln -sf /home/robot/src/PetriNetPlans/Jarp/scripts/jarp.sh .
+
+USER robot
+
+RUN cd $HOME/ros/catkin_ws/src && \
+    ln -s $HOME/src/PetriNetPlans/PNPros/ROS_bridge/pnp_msgs . && \
+    ln -s $HOME/src/PetriNetPlans/PNPros/ROS_bridge/pnp_ros . && \
+    ln -s $HOME/src/PetriNetPlans/PNPros/examples/rp_example/rp_action . && \
+    ln -s $HOME/src/PetriNetPlans/PNPros/examples/rp_example/rp_action_msgs . && \
+    ln -s $HOME/src/PetriNetPlans/PNPros/examples/rp_example/rp_pnp . && \
+    ln -s $HOME/src/PetriNetPlans/PNPros/examples/rp_example/rp_demo .
+
+
+
 # Compile ROS packages
 
-RUN /bin/bash -c "source $HOME/ros/catkin_ws/devel/setup.bash; cd $HOME/ros/catkin_ws; catkin_make"
+RUN /bin/bash -c "source $HOME/ros/catkin_ws/devel/setup.bash; cd $HOME/ros/catkin_ws; catkin_make -j1"
 
 ADD init.bash /home/robot/init.bash
 
@@ -135,5 +142,3 @@ ADD init.bash /home/robot/init.bash
 WORKDIR /home/robot
 
 CMD [ "bash", "-ci", "/home/robot/init.bash" ]
-
-

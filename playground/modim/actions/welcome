@@ -1,16 +1,16 @@
 IMAGE
 <*, *, *, *>:  img/welcome.jpg
 ----
-TEXT
+TEXT_default
 <*,*,it,*>: Benvenuto
-<*,*,*,*>:  Welcome
+<*,*,*,*>:  How can I help you?
 ----
 GESTURE
 <*,*,*,*>: animations/Stand/Gestures/Hey_1
 ----
 TTS
 <*,*,it,*>: Ciao! Benvenuto!
-<*,*,*,*>:  Hello! Welcome!
+<*,*,*,*>:  Hi! how can I help you?
 ----
 BUTTONS
 start

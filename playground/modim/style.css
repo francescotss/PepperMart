@@ -1,0 +1,22 @@
+.map-grid {
+    display: grid;
+    grid-template-columns: repeat(10, auto);
+    grid-template-rows: repeat(10, auto);
+    width: 90%;
+    height: 85vh;
+    
+}
+
+.map-tile {
+    border: 1px solid black;
+    height: 100%;
+    width: 100%;
+}
+
+.map-pathway {
+    background-color: gray;
+}
+
+.map-shelf {
+    background-color: blue;
+}
