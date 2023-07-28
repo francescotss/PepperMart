@@ -19,7 +19,7 @@ RUN apt-get update && \
         tmux less sudo eom wget libwebsockets-dev xterm  \
         nano unzip wget iputils-ping net-tools netcat openssh-client \
         openjdk-11-jdk libxml2-dev libxml++2.6-dev flex \
-        bash-completion python-pip \
+        bash-completion python-pip build-essential \
         ros-melodic-desktop \
         ros-melodic-navigation ros-melodic-stage-ros \
         ros-melodic-naoqi-libqi ros-melodic-naoqi-libqicore \
@@ -91,6 +91,8 @@ RUN pip install opencv-python==4.2.0.32
 
 # qibullet
 RUN pip install --user qibullet
+RUN pip install qibuild --user
+
 
 # Pepper tools mounted from local host
 
@@ -99,6 +101,7 @@ VOLUME /home/robot/src/pepper_tools
 ENV PEPPER_TOOLS_HOME /home/robot/src/pepper_tools
 
 RUN echo "export PEPPER_IP=127.0.0.1\n" >> $HOME/.bashrc
+RUN echo "export PATH=$PATH:$HOME/.local/bin\n" >> $HOME/.bashrc
 
 
 # Petri Net Plans

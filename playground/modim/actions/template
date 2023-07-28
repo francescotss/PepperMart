@@ -1,0 +1,19 @@
+IMAGE
+<*, *, *, *>:  img/welcome.jpg
+----
+TEXT_default
+<*,*,it,*>: Benvenuto
+<*,*,*,*>:  How can I help you?
+----
+GESTURE
+<*,*,*,*>: animations/Stand/Gestures/Hey_1
+----
+TTS
+<*,*,it,*>: Ciao! Benvenuto!
+<*,*,*,*>:  Hi! how can I help you?
+----
+BUTTONS
+start
+<*,*,it,*>: Inizia
+<*,*,*,*>:  Start
+----

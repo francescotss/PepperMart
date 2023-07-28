@@ -1,0 +1,3 @@
+TEXT_mapdata
+<*,*,*,*>: {'tiles': [{'classes': 'walkable', 'id': '1-1'}, {'classes': 'shelf food', 'id': '1-2'}, {'classes': 'path', 'id': '1-1'}, {'classes': 'map-start', 'id': '0-0'}], 'products': [{'classes': '', 'id': '1-2', 'name': 'eggs'}]}
+----

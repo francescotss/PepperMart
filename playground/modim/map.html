@@ -17,21 +17,7 @@
       font-size: 300%;
     }
 
-  input[type=button] {
-    background-color: #A01010; /* Red */
-    border: none;
-    border-radius: 8px;
-    color: white;
-    padding: 14px 24px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 24px;
-    margin:10px 10px 10px 10px;
-  }
-
- 
-
+  
   </style>
 </head>
 <body>
@@ -43,26 +29,26 @@
     <p>
     <div align='center'>
        <div class="map-grid" id="map">
-
-       </div>
+      </div>
     </div>
-    </p>
-
-    <!-- text -->
-
-    <p>
-    <h1>
-    <div align='center' id='text_default'>Welcome</div>
-    </h1>
     </p>
 
     <!-- buttons -->
   
     <p>
       <div align='center' id='buttons'>
-        <input type="button" id="hello" value="Hello" onclick="hello()">
+        
       </div>
     </p>
+
+
+    <!-- data transmission -->
+
+    <p>
+      <div align='center' id='text_mapdata' style="display: none;">placeholder</div>
+    </p>
+  
+
 
   <!-- ****** SCRIPTS ****** -->
 
@@ -76,33 +62,71 @@
     console.log("Trying connection...")
     wsrobot_init(ip,port);
 
-    function hello() {
-        console.log("runnig interaction...");
-        codews.send("im.robot.say('hello')\n");
-    }
 
     function create_map() {
+
       for (let i = 0; i<10; i++) {
         for (let j = 0; j<10; j++) {
           const div = document.createElement("div");
-          const id = "tile_"+i+j;
+          const id = i+"-"+j;
           div.setAttribute('id', id);
           div.classList.add('map-tile');
+          document.getElementById("map").appendChild(div);     
 
-          if (j%2 == 0) {
-            div.classList.add('map-pathway');
+          if (id == '0-0' || id == '0-1') {
+          // div.classList.add('map-start');
+            div.innerHTML = '<div class="path">&#11044</div>';
+          //  div.innerHTML = '<i class="arrow up"></i>'
           }
-          else {
-            div.classList.add('map-shelf');
-          }
-          document.getElementById("map").appendChild(div);
+        }
+      }
+    }
+    document.body.onload = create_map();
+ 
+    function load_map(json) {
+      console.log("Loading map...");
+    
+      let data = json.replace(/'/g, '"')
+      data = JSON.parse(data);
+      console.log(data);
+
+      const tiles = data.tiles;
+      for (let i = 0; i<tiles.length; i++ ) {
+        let tile = tiles[i];
+        let div = document.getElementById(tile.id);
+        
+        
+        div.className += ` ${tile.classes}`;//.add(tile.classes);
+
+        // Special tiles:
+        if (tile.classes.includes("path")) {
+          div.innerHTML = '&#11044';
+        }
+        if (tile.classes.includes("map-start")) {
+          div.innerHTML = '<div class="start">start</div>';
+        }
+      }
+
+      const products = data.products 
+      for (let i = 0; i<products.length; i++ ) {
+        let product = products[i];
+        let div = document.getElementById(product.id);
+
+        div.innerHTML = ` <img class="product ${product.classes}" height=50% src="img/${product.name}.png" alt="No image"/></div>`;
+        
+        if (product.classes.includes("not-available")) {
+          div.classList.add("not-available")
         }
       }
     }
 
-    document.body.onload = create_map;
+    var observer = new MutationObserver(function (m) { 
+      const data = document.getElementById('text_mapdata').innerHTML;
+      load_map(data);
+    });
+    data_text = document.getElementById('text_mapdata');
+    observer.observe(data_text, {childList: true}); 
 
-    
   </script>
 
 </body>

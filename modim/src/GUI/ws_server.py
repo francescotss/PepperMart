@@ -66,6 +66,9 @@ def init_interaction_manager():
             if (pepper_cmd.robot.isConnected):
                 robot_initialized = True
                 robot = pepper_cmd.robot
+                print("Robot connected")
+            else:
+                print("Robot not connected")
         elif (robot_type=='marrtino'):
             pass
     im = interaction_manager.InteractionManager(display_ws, robot)

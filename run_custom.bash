@@ -14,6 +14,7 @@ CAMERA_DEVICE=/dev/video0
 PEPPER_TOOLS_HOME=$HOME/eai2/pepper_tools
 MODIM_HOME=$HOME/eai2/modim
 PLAYGROUND_FOLDER=$HOME/eai2/playground
+HOME_FOLDER=$HOME/eai2/home
 PEPPER_IP=172.17.0.2
 
 
@@ -37,7 +38,7 @@ echo "Pepper IP is $PEPPER_IP"
 echo "starting docker container"
 
 docker run -it -d \
-    --name pepperhri-pnp \
+    --name pepperhri-pnp-2 \
     -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
     -v $HOME/.Xauthority:/home/robot/.Xauthority:rw \
     -e DISPLAY=$DISPLAY \
@@ -49,13 +50,15 @@ docker run -it -d \
     -v $PEPPER_TOOLS_HOME:/home/robot/src/pepper_tools \
     -v $MODIM_HOME:/home/robot/src/modim \
     -v $HOME/.qibullet:/home/robot/.qibullet \
+    -v $HOME_FOLDER:/home/robot/src \
     -e MODIM_HOME=/home/robot/src/modim \
     -e PNP_HOME=/home/robot/src/PetriNetPlans \
     -e PEPPER_IP=$PEPPER_IP \
+    -e MODIM_IP=127.0.0.1 \
     $IMAGENAME:$VERSION
 
 
-echo "Attaching... ( docker exec -it pepperhri /bin/bash )"
+echo "Attaching... ( docker exec -it pepperhri-pnp /bin/bash )"
 
 
-docker exec -it pepperhri-pnp /bin/bash
+docker exec -it pepperhri /bin/bash

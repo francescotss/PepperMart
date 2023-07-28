@@ -25,7 +25,7 @@ if [ -f downloads/naoqi-sdk-2.5.5.5-linux64.tar.gz ]; then
 fi
 
 
-docker build $3 -t $IMAGENAME:$VERSION --build-arg NAOQI=$NAOQI -f $DOCKERFILE .
+docker build $3 --no-cache -t $IMAGENAME:$VERSION --build-arg NAOQI=$NAOQI -f $DOCKERFILE .
 
 docker tag $IMAGENAME:$VERSION $IMAGENAME:latest
 

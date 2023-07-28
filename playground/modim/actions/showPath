@@ -1,0 +1,12 @@
+GESTURE
+<*,*,*,*>: animations/Stand/Gestures/Hey_1
+----
+TTS
+<*,*,*,*>:  This is the best way to do your shopping! Take your time to check the map, if you need to add or remove an item just ask. 
+----
+BUTTONS
+continue
+<*,*,*,*>:  Continue
+add
+<*,*,*,*>:  Add items
+----

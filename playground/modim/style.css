@@ -1,22 +1,98 @@
+body {
+    background-color: #fff;
+}
+
+input[type=button] {
+    background-color: #A01010; /* Red */
+    border: none;
+    border-radius: 8px;
+    color: white;
+    padding: 14px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 24px;
+    margin:10px 10px 10px 10px;
+  }
+
 .map-grid {
     display: grid;
-    grid-template-columns: repeat(10, auto);
-    grid-template-rows: repeat(10, auto);
+    grid-template-columns: repeat(10, minmax(30px, 1fr));
+    grid-template-rows: repeat(10, minmax(30px, 1fr));
     width: 90%;
     height: 85vh;
-    
 }
 
 .map-tile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: 1px solid black;
     height: 100%;
     width: 100%;
+    text-align: center;
 }
 
-.map-pathway {
-    background-color: gray;
+.walkable {
+    background-color: rgba(128, 128, 128, 0.342);
 }
 
-.map-shelf {
-    background-color: blue;
+.shelf {
+    background-color: rgba(0, 95, 124, 0.384);
 }
+
+.shelf.food {
+    background-color: chocolate;
+}
+
+.shelf.not-available {
+    filter: grayscale(0.9);
+}
+
+.map-start .start {
+    background-color: green;
+    color: white;
+    border-radius: 30px;
+    padding: 5px 15px;
+}
+
+.product.take {
+    background-color: green;
+    color: white;
+    border-radius: 30px;
+    padding: 5px 15px;
+}
+
+.path {
+    color: green;
+}
+
+
+
+/* Arrows */
+.arrow {
+    border: solid green;
+    border-width: 0 6px 6px 0;
+    display: inline-block;
+    padding: 6px;
+}
+
+.arrow.right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+  }
+  
+.arrow.left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+  }
+  
+.arrow.up {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+  }
+  
+.arrow.down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+  }
