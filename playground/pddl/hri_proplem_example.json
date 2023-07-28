@@ -4,12 +4,14 @@
         "step_1",
         "step_2",
         "step_3",
-        "step_4"
+        "step_4",
+        "step_5",
+        "step_6"
     ],
     "step_0": {
         "actions": [
             {
-                "name": "tell",
+                "name": "wait_welcome_reply",
                 "arguments": [
                     "human"
                 ]
@@ -18,19 +20,19 @@
         "outcomes": [
             {
                 "condition": [
-                    "(telling_info human)"
+                    "(telling_registration human)"
                 ],
                 "next": "step_1"
             },
             {
                 "condition": [
-                    "(telling_registration human)"
+                    "(telling_shopping human)"
                 ],
                 "next": "step_2"
             },
             {
                 "condition": [
-                    "(telling_shopping human)"
+                    "(telling_info human)"
                 ],
                 "next": "step_3"
             },
@@ -45,7 +47,7 @@
     "step_1": {
         "actions": [
             {
-                "name": "info_done",
+                "name": "do_registration",
                 "arguments": [
                     "human"
                 ]
@@ -54,16 +56,24 @@
         "outcomes": [
             {
                 "condition": [
-                    "(interaction_ok human)"
+                    "(telling_where human)",
+                    "(is_registered human)"
                 ],
-                "next": "GOAL"
+                "next": "step_5"
+            },
+            {
+                "condition": [
+                    "(telling_shopping human)",
+                    "(is_registered human)"
+                ],
+                "next": "step_6"
             }
         ]
     },
     "step_2": {
         "actions": [
             {
-                "name": "registration_done",
+                "name": "do_registration_during_shopping",
                 "arguments": [
                     "human"
                 ]
@@ -72,16 +82,16 @@
         "outcomes": [
             {
                 "condition": [
-                    "(interaction_ok human)"
+                    "(is_registered human)"
                 ],
-                "next": "GOAL"
+                "next": "step_6"
             }
         ]
     },
     "step_3": {
         "actions": [
             {
-                "name": "shopping_done",
+                "name": "do_info",
                 "arguments": [
                     "human"
                 ]
@@ -90,16 +100,22 @@
         "outcomes": [
             {
                 "condition": [
-                    "(interaction_ok human)"
+                    "(telling_where human)"
                 ],
-                "next": "GOAL"
+                "next": "step_4"
+            },
+            {
+                "condition": [
+                    "(telling_shopping human)"
+                ],
+                "next": "step_2"
             }
         ]
     },
     "step_4": {
         "actions": [
             {
-                "name": "where_done",
+                "name": "do_where",
                 "arguments": [
                     "human"
                 ]
@@ -108,7 +124,43 @@
         "outcomes": [
             {
                 "condition": [
-                    "(interaction_ok human)"
+                    "(interaction_done human)"
+                ],
+                "next": "GOAL"
+            }
+        ]
+    },
+    "step_5": {
+        "actions": [
+            {
+                "name": "do_where",
+                "arguments": [
+                    "human"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(interaction_done human)"
+                ],
+                "next": "GOAL"
+            }
+        ]
+    },
+    "step_6": {
+        "actions": [
+            {
+                "name": "do_shopping",
+                "arguments": [
+                    "human"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(interaction_done human)"
                 ],
                 "next": "GOAL"
             }

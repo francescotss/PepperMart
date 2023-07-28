@@ -20,30 +20,48 @@
 
     (:predicates
         
-        (interaction_ok ?h - human)
+        (interaction_done ?h - human)
         (human_here ?h - human)
 
 
         (telling_registration ?h - human) 
-        (registration_ok ?h - human)
+        (registration_done ?h - human)
         
 
         (telling_shopping ?h - human)
-        (shopping_ok ?h - human)
+        (shopping_done ?h - human)
 
         (telling_info ?h - human)
-        (info_ok ?h - human)
+        (info_done ?h - human)
         
 
         (telling_where ?h - human)
-        (where_ok ?h - human)
+        (where_done ?h - human)
         
+
+        (is_registered ?h - human)
     
     )
 
+    (:action do_registration_during_shopping
+        :parameters (?h - human)
+        :precondition 
+        (and 
+            
+            (not (is_registered ?h))
+            
+        )
+        :effect 
+        (and 
+            (is_registered ?h)
+            ; (telling_registration ?h)
+        )
+    )
+    
+
 
     
-    (:action registration_done
+    (:action do_registration
         :parameters
         (
             ?h - human
@@ -52,16 +70,25 @@
         (and
             (human_here ?h)
             (telling_registration ?h)
+            (not (is_registered ?h))
+
+            (not (telling_info ?h))
+            (not (telling_shopping ?h))
+            (not (telling_where ?h))
         )
         :effect
         (and
             (not (telling_registration ?h))
-            (interaction_ok ?h)
+            (is_registered ?h)
+            (oneof
+                (telling_shopping ?h)
+                (telling_where ?h)
+            )
         )
         
     )
 
-    (:action shopping_done
+    (:action do_shopping
         :parameters
         (
             ?h - human
@@ -70,16 +97,22 @@
         (and
             (human_here ?h)
             (telling_shopping ?h)
+            (is_registered ?h)
+
+            
+            (not (telling_info ?h))
+            (not (telling_registration ?h))
+            (not (telling_where ?h))
         )
         :effect
         (and
             (not (telling_shopping ?h))
-            (interaction_ok ?h)
+            (interaction_done ?h)
         )
         
     )
 
-    (:action info_done
+    (:action do_info
         :parameters
         (
             ?h - human
@@ -88,17 +121,26 @@
         (and
             (human_here ?h)
             (telling_info ?h)
+
+            (not (telling_registration ?h))
+            (not (telling_shopping ?h))
+            (not (telling_where ?h))
+            
         )
         :effect
         (and
             (not (telling_info ?h))
-            (interaction_ok ?h)
+            (oneof
+                (telling_shopping ?h)
+                (telling_where ?h)
+            )
+            ; (interaction_done ?h)
         )
         
     )
 
 
-    (:action where_done
+    (:action do_where
         :parameters
         (
             ?h - human
@@ -107,16 +149,21 @@
         (and
             (human_here ?h)
             (telling_where ?h)
+
+            
+            (not (telling_info ?h))
+            (not (telling_shopping ?h))
+            (not (telling_registration ?h))
         )
         :effect
         (and
             (not (telling_where ?h))
-            (interaction_ok ?h)
+            (interaction_done ?h)
         )
         
     )
 
-    (:action tell_welcome
+    (:action wait_welcome_reply
         :parameters
         (
             ?h - human

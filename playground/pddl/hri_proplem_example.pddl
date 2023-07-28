@@ -14,7 +14,7 @@
 
     (:goal
         (and
-            (interaction_ok HUMAN)
+            (interaction_done HUMAN)
         )
         
     )
