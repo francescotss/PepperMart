@@ -11,6 +11,7 @@
     
     (:init
         (near HUMAN ROBOT) 
+        (human_is_registerd HUMAN)
     )
 
     (:goal
