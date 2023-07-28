@@ -1,0 +1,117 @@
+{
+    "plan": [
+        "step_0",
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4"
+    ],
+    "step_0": {
+        "actions": [
+            {
+                "name": "tell",
+                "arguments": [
+                    "human"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(telling_info human)"
+                ],
+                "next": "step_1"
+            },
+            {
+                "condition": [
+                    "(telling_registration human)"
+                ],
+                "next": "step_2"
+            },
+            {
+                "condition": [
+                    "(telling_shopping human)"
+                ],
+                "next": "step_3"
+            },
+            {
+                "condition": [
+                    "(telling_where human)"
+                ],
+                "next": "step_4"
+            }
+        ]
+    },
+    "step_1": {
+        "actions": [
+            {
+                "name": "info_done",
+                "arguments": [
+                    "human"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(interaction_ok human)"
+                ],
+                "next": "GOAL"
+            }
+        ]
+    },
+    "step_2": {
+        "actions": [
+            {
+                "name": "registration_done",
+                "arguments": [
+                    "human"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(interaction_ok human)"
+                ],
+                "next": "GOAL"
+            }
+        ]
+    },
+    "step_3": {
+        "actions": [
+            {
+                "name": "shopping_done",
+                "arguments": [
+                    "human"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(interaction_ok human)"
+                ],
+                "next": "GOAL"
+            }
+        ]
+    },
+    "step_4": {
+        "actions": [
+            {
+                "name": "where_done",
+                "arguments": [
+                    "human"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(interaction_ok human)"
+                ],
+                "next": "GOAL"
+            }
+        ]
+    }
+}

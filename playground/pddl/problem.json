@@ -1,0 +1,194 @@
+{
+    "plan": [
+        "step_0",
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4",
+        "step_5",
+        "step_6",
+        "step_7",
+        "step_8"
+    ],
+    "step_0": {
+        "actions": [
+            {
+                "name": "move",
+                "arguments": [
+                    "human",
+                    "cell_5_9",
+                    "cell_4_9"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(at human cell_4_9)"
+                ],
+                "next": "step_1"
+            }
+        ]
+    },
+    "step_1": {
+        "actions": [
+            {
+                "name": "move",
+                "arguments": [
+                    "human",
+                    "cell_4_9",
+                    "cell_4_8"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(at human cell_4_8)"
+                ],
+                "next": "step_2"
+            }
+        ]
+    },
+    "step_2": {
+        "actions": [
+            {
+                "name": "move",
+                "arguments": [
+                    "human",
+                    "cell_4_8",
+                    "cell_4_7"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(at human cell_4_7)"
+                ],
+                "next": "step_3"
+            }
+        ]
+    },
+    "step_3": {
+        "actions": [
+            {
+                "name": "move",
+                "arguments": [
+                    "human",
+                    "cell_4_7",
+                    "cell_4_6"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(at human cell_4_6)"
+                ],
+                "next": "step_4"
+            }
+        ]
+    },
+    "step_4": {
+        "actions": [
+            {
+                "name": "move",
+                "arguments": [
+                    "human",
+                    "cell_4_6",
+                    "cell_4_5"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(at human cell_4_5)"
+                ],
+                "next": "step_5"
+            }
+        ]
+    },
+    "step_5": {
+        "actions": [
+            {
+                "name": "move",
+                "arguments": [
+                    "human",
+                    "cell_4_5",
+                    "cell_4_4"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(at human cell_4_4)"
+                ],
+                "next": "step_6"
+            }
+        ]
+    },
+    "step_6": {
+        "actions": [
+            {
+                "name": "move",
+                "arguments": [
+                    "human",
+                    "cell_4_4",
+                    "cell_4_3"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(at human cell_4_3)"
+                ],
+                "next": "step_7"
+            }
+        ]
+    },
+    "step_7": {
+        "actions": [
+            {
+                "name": "move",
+                "arguments": [
+                    "human",
+                    "cell_4_3",
+                    "cell_4_2"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(at human cell_4_2)"
+                ],
+                "next": "step_8"
+            }
+        ]
+    },
+    "step_8": {
+        "actions": [
+            {
+                "name": "reach",
+                "arguments": [
+                    "human",
+                    "cell_4_2",
+                    "fishcounter",
+                    "cell_5_2"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(reached human fishcounter)"
+                ],
+                "next": "GOAL"
+            }
+        ]
+    }
+}
