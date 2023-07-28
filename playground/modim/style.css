@@ -64,6 +64,13 @@ input[type=button] {
     padding: 5px 15px;
 }
 
+.product.show {
+    background-color: green;
+    color: white;
+    border-radius: 30px;
+    padding: 5px 15px;
+}
+
 .path {
     color: green;
 }

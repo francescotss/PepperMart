@@ -3,27 +3,127 @@ pdir = os.getenv('MODIM_HOME')
 sys.path.append(pdir + '/src/GUI')
 from ws_client import *
 import ws_client
+import utils
+global DEBUG
+DEBUG = True
+
+product_vocabolary = ["eggs", "milk"]
 
 
-class Modim():
+class InteractionHandler():
     
-    def __init__(self, robot, product_vocabolary=None):
+    def __init__(self, robot, data):
         self.mws = ModimWSClient()
         self.mws.setDemoPathAuto(__file__)
         self.robot = robot
-        self.product_vocabolary = product_vocabolary
+        self.data = data
+        self.product_asked = None
         
-    def home(self):
+    def init_robot(self):
         def _func():
             im.init()
         self.mws.run_interaction(_func)
+        
+        if not DEBUG:
+            self.robot.setLanguage("en")
+            self.robot.setAlive(True)
+            self.robot.startSensorMonitor() 
+            self.robot.startLaserMonitor()
+        
+        
+    def run_action(self, action):
+        utils.color_print("\n\n\nExecuting action {} \n".format(action), "green")
+        if action == "wait_welcome_reply":
+            res =  self._welcome()
+        elif action == "do_registration":
+            res = self._registration()
+        elif action == "do_info":
+            res = self._info()
+        elif action == "do_where":
+            res = self._where()
+        elif action == "do_shopping":
+            res = self._shopping()  
+        
+        utils.color_print("\nEnd action {}".format(action), "green")
+        return res
+        
+    
+        
+    
+    
+    # -------- Action Handlers -------- #
+    
+    def _welcome(self):
+        def _modim_callback():
+            im.display.loadUrl('index.html')
+            im.execute('welcome')  
+        self.mws.run_interaction(_modim_callback)
+        
+        # TODO: Build vocabolary
+        help_voc = ["help", "what can you do", "what can i ask"]
+        registration_voc = ["register", "signin"]
+        shopping_voc = ["shopping", "cart"]
+        where_voc = ["where"] + utils.build_vocabolary(["where"], product_vocabolary)
+        vocabulary = help_voc + registration_voc + shopping_voc
+        
+        answer = utils.ask_loop(vocabulary, self.robot, timeout=10, patience=3)
+           
+        if answer == "ERROR":
+            return "ERROR"
+        
+        elif answer in help_voc:
+            return "(telling_info human)"
+        
+        elif answer in registration_voc:
+            return "(telling_registration human)"
+        
+        elif answer in shopping_voc:
+            return "(telling_shopping human)"
+        
+        elif answer in where_voc:
+            # answer: where + product
+            answer = answer.split(" ")
+            if len(answer) > 1:
+                self.product_asked = answer[1]
+            return "(telling_where human)"
+        
+        
+    
+    def _registration(self):
+        return "(telling_registration human)"  
+    
+    def _info(self):
+        return ""
+    
+    def _where(self):
+        def _modim_callback():
+            im.display.loadUrl('map.html')
+            im.execute('mapdata')
+            im.execute('showProduct')
+            
+        if self.product_asked is None:
+            self.robot.asay("What are you looking for?")
+            answer = utils.ask_loop(product_vocabolary, self.robot)
+            if answer == "ERROR":
+                return "ERROR"
+            self.product_asked = answer
+        
+        self.data.add_product_class(self.product_asked,"show")
+        map_data = self.data.get_map_data()
+        utils.create_data_file(map_data)
+        self.robot.asay("Check the map to find the {}".format(self.product_asked))            
+        self.mws.run_interaction(_modim_callback)
+        self.data.reset_map()  
+              
+        return "(interaction_done human)"
+    
+    def _shopping(self):
+        return
+      
    
     def show_path(self, data=None):
         
-        with open('modim/actions/mapdata', 'w') as action_file:
-            json_text = str(data) #json.dumps(data) Not working: modim will remove the double quotes. 
-            text = "TEXT_mapdata\n<*,*,*,*>: " + json_text + "\n----"
-            action_file.write(text)
+
 
         def _func():
             im.display.loadUrl('map.html')
