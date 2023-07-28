@@ -7,7 +7,6 @@ import ws_client
 
 class Modim():
     
-    
     def __init__(self, robot, product_vocabolary=None):
         self.mws = ModimWSClient()
         self.mws.setDemoPathAuto(__file__)

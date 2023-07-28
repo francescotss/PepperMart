@@ -33,3 +33,16 @@ P: questa è la strada più veloce per fare la spesa. Se vuoi aggiungere un prod
 ## Tutorial
 
 - Cosa sa fare pepper.
+
+
+
+# Resources
+pddl notes: https://ai.dmi.unibas.ch/_files/teaching/hs21/po/exercises/pddl_intro.pdf
+
+online pddl planner: http://editor.planning.domains/#
+
+example planning with costs: https://github.com/planimation/backend/issues/19
+
+(http://editor.planning.domains/#read_session=873KGrMAIa)
+
+https://github.com/mokhtarivahid/safe-planner

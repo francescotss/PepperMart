@@ -19,6 +19,7 @@ input[type=button] {
     display: grid;
     grid-template-columns: repeat(10, minmax(30px, 1fr));
     grid-template-rows: repeat(10, minmax(30px, 1fr));
+    border: 1px solid black;
     width: 90%;
     height: 85vh;
 }

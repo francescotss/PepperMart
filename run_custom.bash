@@ -2,7 +2,7 @@
 
 # Use  ./run.bash [version]
 
-IMAGENAME=pepper-hri-pnp
+IMAGENAME=pepper-hri
 
 VERSION=latest
 if [ ! "$1" == "" ]; then
@@ -58,7 +58,7 @@ docker run -it -d \
     $IMAGENAME:$VERSION
 
 
-echo "Attaching... ( docker exec -it pepperhri-pnp /bin/bash )"
+echo "Attaching... ( docker exec -it pepperhri /bin/bash )"
 
 
 docker exec -it pepperhri /bin/bash
