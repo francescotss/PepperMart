@@ -1,8 +1,8 @@
 (define 
-    (problem problem1)
+    (problem supermarket_problem_example)
     (:domain supermarket)
     
-    (:objectS
+    (:objects
         
         cell_1_1	cell_2_1	cell_3_1	cell_4_1	cell_5_1	cell_6_1	cell_7_1	cell_8_1	cell_9_1	cell_10_1
         cell_1_2	cell_2_2	cell_3_2	cell_4_2	cell_5_2	cell_6_2	cell_7_2	cell_8_2	cell_9_2	cell_10_2
@@ -490,7 +490,7 @@
         
         (and 
         
-            ; (reached HUMAN fishcounter)
+            (reached HUMAN fishcounter)
             ; ; (reached HUMAN infopoint)
             ; (reached HUMAN household)
             ; (reached HUMAN cashdesk)

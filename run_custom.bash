@@ -58,4 +58,5 @@ docker run -it -d \
 echo "Attaching... ( docker exec -it pepperhri /bin/bash )"
 
 
-docker exec -it pepperhri-pnp /bin/bash
+# docker exec -it pepperhri-pnp /bin/bash
+docker exec -it pepperhri /bin/bash

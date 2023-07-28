@@ -6,7 +6,6 @@
         :strips 
         :typing 
         :negative-preconditions
-        :action-costs
     )
     
     
