@@ -1,0 +1,144 @@
+{
+    "plan": [
+        "step_0",
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4",
+        "step_5"
+    ],
+    "step_0": {
+        "actions": [
+            {
+                "name": "robot_say_welcome",
+                "arguments": [
+                    "robot",
+                    "human"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(human_say_welcome human)"
+                ],
+                "next": "step_1"
+            }
+        ]
+    },
+    "step_1": {
+        "actions": [
+            {
+                "name": "robot_wait_human_decision",
+                "arguments": [
+                    "robot",
+                    "human"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(human_say_where human)"
+                ],
+                "next": "step_2"
+            },
+            {
+                "condition": [
+                    "(human_say_shopping human)"
+                ],
+                "next": "step_3"
+            },
+            {
+                "condition": [
+                    "(human_say_info human)"
+                ],
+                "next": "step_4"
+            },
+            {
+                "condition": [
+                    "(human_say_registration human)"
+                ],
+                "next": "step_5"
+            }
+        ]
+    },
+    "step_2": {
+        "actions": [
+            {
+                "name": "robot_do_where",
+                "arguments": [
+                    "robot",
+                    "human"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(interaction_done human robot)"
+                ],
+                "next": "GOAL"
+            }
+        ]
+    },
+    "step_3": {
+        "actions": [
+            {
+                "name": "robot_do_registration_during_do_shopping",
+                "arguments": [
+                    "robot",
+                    "human"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(human_is_registered human)",
+                    "(interaction_done human robot)"
+                ],
+                "next": "GOAL"
+            }
+        ]
+    },
+    "step_4": {
+        "actions": [
+            {
+                "name": "robot_do_info",
+                "arguments": [
+                    "robot",
+                    "human"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(interaction_done human robot)"
+                ],
+                "next": "GOAL"
+            }
+        ]
+    },
+    "step_5": {
+        "actions": [
+            {
+                "name": "robot_do_registration",
+                "arguments": [
+                    "robot",
+                    "human"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(human_is_registered human)",
+                    "(interaction_done human robot)"
+                ],
+                "next": "GOAL"
+            }
+        ]
+    }
+}

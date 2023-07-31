@@ -11,7 +11,7 @@
     
     (:init
         (interaction_start HUMAN ROBOT) 
-        (human_is_registered HUMAN)
+        ; (human_is_registered HUMAN)
     )
 
     (:goal

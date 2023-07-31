@@ -49,32 +49,7 @@
 
         ; indica che l'umano e` registrato
         (human_is_registered ?h - human)
-        
-        ; ; indica che l'umano ha gia fatto la prima interazione (il saluto)
-        ; (human_doing_welcome ?h - human)
-        ; (human_doing_registration ?h - human)
-        ; (human_doing_shopping ?h - human)
-        ; (human_doing_where ?h - human)
-        ; (human_doing_info ?h - human)
-
-
-        ; ; il robot aspetta la risposta dell'umano (puo essere "human_say_<qualcosa>" oppure "human_say_no_<qualcosa>") 
-        ; ; dopo aver fatto una specifica domanda
-
-        ; (robot_wait_registration_reply ?r - robot ?h - human)
-        ; (robot_wait_shopping_reply ?r - robot ?h - human)
-        ; (robot_wait_where_reply ?r - robot ?h - human)
-        ; (robot_wait_info_reply ?r - robot ?h - human)
-
-        
-
-        ; ; il robot aspetta le keywords specifiche per fare in modo di iniziare una delle possibili interazioni (registrazione, spesa, info, trova prodotto)
-        ; (robot_wait_registration_keyword ?r - robot ?h - human)
-        ; (robot_wait_shopping_keyword ?r - robot ?h - human)
-        ; (robot_wait_where_keyword ?r - robot ?h - human)
-        ; (robot_wait_info_keyword ?r - robot ?h - human)
-        
-        
+                
         
     )
 
