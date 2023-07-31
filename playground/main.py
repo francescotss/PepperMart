@@ -1,5 +1,7 @@
 from modim.scripts import *
 import os, sys, json
+
+from playground.modim.src.entity import Product, Entity
 pepper_tools_dir = os.getenv('PEPPER_TOOLS_HOME')
 sys.path.append(pepper_tools_dir+ '/cmd_server')
 
@@ -60,6 +62,18 @@ if __name__ == "__main__":
     plan_excuter(plan, interaction_handler)
 
     exit()
+    
+    # cell_1_1 = Entity("1-1", ["walkable"])
+    # cell_1_2 = Entity("1-2", ["shelf", "food"])
+    # path_1_1 = Entity("1-1", ["path"])
+    # start_0_0 = Entity("0-0", ["map-start"])
+    # product_1 = Product("eggs", "1-2", [""])
+    
+    # data_ = {
+    #     'tiles': [cell_1_1, cell_1_2, path_1_1, start_0_0],
+    #     'products': [product_1]
+    # }
+    
     data = {
         'tiles': [{"id": "1-1", "classes": "walkable"}, {"id": "1-2", "classes": "shelf food"}, {"id": "1-1", "classes": "path"}, {"id": "0-0", "classes": "map-start"}],
         "products": [{"id": "1-2", "name": "eggs", "classes": ""}]

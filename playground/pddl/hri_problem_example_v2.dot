@@ -1,0 +1,22 @@
+digraph Struc {
+ graph [fontname = "helvetica"];
+ node [fontname = "helvetica"];
+ edge [fontname = "helvetica"];
+ node [shape=ellipse];
+ packMode="graph";
+ n0 [label="(robot_say_welcome robot human)"];
+ n0->n1 [fontsize=12, label="+ (human_say_welcome human)"];
+ n1 [style=filled, color=lightgrey, label="(robot_wait_human_decision_registered robot human)"];
+ n1->n2 [fontsize=12, label="+ (human_say_info human)"];
+ n1->n3 [fontsize=12, label="+ (human_say_shopping human)"];
+ n1->n4 [fontsize=12, label="+ (human_say_where human)"];
+ n2 [label="(robot_do_info robot human)"];
+ n2->n5 [fontsize=12, label="+ (interaction_done human robot)\n- (interaction_start human robot)"];
+ n3 [label="(robot_do_shopping robot human)"];
+ n3->n6 [fontsize=12, label="+ (interaction_done human robot)\n- (interaction_start human robot)"];
+ n4 [label="(robot_do_where robot human)"];
+ n4->n7 [fontsize=12, label="+ (interaction_done human robot)\n- (interaction_start human robot)"];
+ n5 [shape=circle,label="",peripheries=2];
+ n6 [shape=circle,label="",peripheries=2];
+ n7 [shape=circle,label="",peripheries=2];
+}

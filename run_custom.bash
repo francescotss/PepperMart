@@ -38,7 +38,7 @@ echo "Pepper IP is $PEPPER_IP"
 echo "starting docker container"
 
 docker run -it -d \
-    --name pepperhri-pnp-2 \
+    --name pepperhri \
     -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
     -v $HOME/.Xauthority:/home/robot/.Xauthority:rw \
     -e DISPLAY=$DISPLAY \
@@ -52,7 +52,6 @@ docker run -it -d \
     -v $HOME/.qibullet:/home/robot/.qibullet \
     -v $HOME_FOLDER:/home/robot/src \
     -e MODIM_HOME=/home/robot/src/modim \
-    -e PNP_HOME=/home/robot/src/PetriNetPlans \
     -e PEPPER_IP=$PEPPER_IP \
     -e MODIM_IP=127.0.0.1 \
     $IMAGENAME:$VERSION

@@ -108,7 +108,6 @@
         )
     )
 
-
     (:action robot_say_welcome
         :parameters (?r - robot ?h - human)
         :precondition 
@@ -169,7 +168,6 @@
     ; )
 
     
-
     ; (:action robot_say_generic_registered
     ;     :parameters (?r - robot ?h - human)
     ;     :precondition
@@ -241,7 +239,6 @@
             (human_say_info ?h)
         )
     )
-
 
     (:action human_reply_registration
         :parameters (?r - robot ?h - human)

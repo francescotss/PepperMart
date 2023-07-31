@@ -1,0 +1,34 @@
+digraph Struc {
+ graph [fontname = "helvetica"];
+ node [fontname = "helvetica"];
+ edge [fontname = "helvetica"];
+ node [shape=ellipse];
+ packMode="graph";
+ n0 [label="(robot_say_welcome robot human)"];
+ n0->n1 [fontsize=12, label="+ (robot_wait_welcome_reply robot human)"];
+ n1 [style=filled, color=lightgrey, label="(human_reply_welcome robot human)"];
+ n1->n2 [fontsize=12, label="+ (interaction_start human robot) (robot_wait_where_keyword robot human) (human_is_welcome human)\n- (robot_wait_welcome_reply robot human)"];
+ n1->n3 [fontsize=12, label="+ (interaction_start human robot) (robot_wait_shopping_keyword robot human) (human_is_welcome human)\n- (robot_wait_welcome_reply robot human)"];
+ n1->n4 [fontsize=12, label="+ (interaction_start human robot) (robot_wait_info_keyword robot human) (human_is_welcome human)\n- (robot_wait_welcome_reply robot human)"];
+ n1->n5 [fontsize=12, label="+ (interaction_start human robot) (robot_wait_registration_keyword robot human) (human_is_welcome human)\n- (robot_wait_welcome_reply robot human)"];
+ n2 [label="(human_ask_where robot human)"];
+ n2->n6 [fontsize=12, label="+ (human_say_where human)\n- (robot_wait_where_keyword robot human)"];
+ n3 [label="(human_ask_shopping robot human)"];
+ n3->n7 [fontsize=12, label="+ (human_say_shopping human)\n- (robot_wait_shopping_keyword robot human)"];
+ n4 [label="(human_ask_info robot human)"];
+ n4->n8 [fontsize=12, label="+ (human_say_info human)\n- (robot_wait_info_keyword robot human)"];
+ n5 [label="(human_ask_registration robot human)"];
+ n5->n9 [fontsize=12, label="+ (human_say_registration human)\n- (robot_wait_registration_keyword robot human)"];
+ n6 [label="(do_where robot human)"];
+ n6->n10 [fontsize=12, label="+ (interaction_done human robot)\n- (human_say_where human)"];
+ n7 [label="(do_registration_during_do_shopping human robot)"];
+ n7->n11 [fontsize=12, label="+ (human_is_registerd human)"];
+ n8 [label="(do_info human robot)"];
+ n8->n10 [fontsize=12, label="+ (interaction_done human robot)\n- (human_say_info human)"];
+ n9 [label="(do_registration robot human)"];
+ n9->n12 [fontsize=12, label="+ (human_is_registerd human) (interaction_done human robot)\n- (human_say_registration human)"];
+ n10 [shape=circle,label="",peripheries=2];
+ n11 [label="(do_shopping human robot)"];
+ n11->n12 [fontsize=12, label="+ (interaction_done human robot)\n- (human_say_shopping human)"];
+ n12 [shape=circle,label="",peripheries=2];
+}
