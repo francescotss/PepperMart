@@ -1,4 +1,4 @@
-import os, sys, json, inspect
+import os, sys, json, inspect, textwrap
 pdir = os.getenv('MODIM_HOME')
 sys.path.append(pdir + '/src/GUI')
 from ws_client import *
@@ -6,8 +6,6 @@ import ws_client
 import utils
 global DEBUG
 DEBUG = True
-
-product_vocabolary = ["eggs", "milk"]
 
 
 class InteractionHandler():
@@ -30,10 +28,24 @@ class InteractionHandler():
             self.robot.startSensorMonitor() 
             self.robot.startLaserMonitor()
         
+    def send_interaction(self, code, vars=[]):
+        self.mws.code = ""
+        for var, value in vars:
+            self.mws.setGlobalVar(var, value)
+        
+        lcode = inspect.getsourcelines(code)
+        locode = ""
+        for l in lcode[0][1:]:
+            locode += l
+        self.mws.code += textwrap.dedent(locode)
+        self.mws.cconnect()
+        print(self.mws.code)
+        return self.mws.csend(self.mws.code)
+
         
     def run_action(self, action):
         utils.color_print("\n\n\nExecuting action {} \n".format(action), "green")
-        if action == "wait_welcome_reply":
+        if action == "robot_say_welcome":
             res =  self._welcome()
         elif action == "do_registration":
             res = self._registration()
@@ -56,17 +68,21 @@ class InteractionHandler():
     def _welcome(self):
         def _modim_callback():
             im.display.loadUrl('index.html')
-            im.execute('welcome')  
-        self.mws.run_interaction(_modim_callback)
+            im.execute('welcome')
+            a = im.ask(actionname=None, timeout=-1)  
+
+        ret = self.send_interaction(_modim_callback)
+
+        print(ret)
         
         # TODO: Build vocabolary
         help_voc = ["help", "what can you do", "what can i ask"]
         registration_voc = ["register", "signin"]
         shopping_voc = ["shopping", "cart"]
-        where_voc = ["where"] + utils.build_vocabolary(["where"], product_vocabolary)
+        where_voc = ["where"] + utils.build_vocabolary(["where"], self.data.product_vocabolary)
         vocabulary = help_voc + registration_voc + shopping_voc
         
-        answer = utils.ask_loop(vocabulary, self.robot, timeout=10, patience=3)
+        answer = utils.ask_loop(vocabulary, self.robot, timeout=10, patience=2)
            
         if answer == "ERROR":
             return "ERROR"
@@ -103,7 +119,7 @@ class InteractionHandler():
             
         if self.product_asked is None:
             self.robot.asay("What are you looking for?")
-            answer = utils.ask_loop(product_vocabolary, self.robot)
+            answer = utils.ask_loop(self.data.product_vocabolary, self.robot)
             if answer == "ERROR":
                 return "ERROR"
             self.product_asked = answer
@@ -122,8 +138,6 @@ class InteractionHandler():
       
    
     def show_path(self, data=None):
-        
-
 
         def _func():
             im.display.loadUrl('map.html')

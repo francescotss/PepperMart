@@ -1,0 +1,251 @@
+{
+    "plan": [
+        "step_0",
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4",
+        "step_5",
+        "step_6",
+        "step_7",
+        "step_8",
+        "step_9",
+        "step_10"
+    ],
+    "step_0": {
+        "actions": [
+            {
+                "name": "robot_say_welcome",
+                "arguments": [
+                    "robot",
+                    "human"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(robot_wait_welcome_reply robot human)"
+                ],
+                "next": "step_1"
+            }
+        ]
+    },
+    "step_1": {
+        "actions": [
+            {
+                "name": "human_reply_welcome",
+                "arguments": [
+                    "robot",
+                    "human"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(interaction_start human robot)",
+                    "(human_is_welcome human)",
+                    "(robot_wait_registration_keyword robot human)"
+                ],
+                "next": "step_2"
+            },
+            {
+                "condition": [
+                    "(interaction_start human robot)",
+                    "(human_is_welcome human)",
+                    "(robot_wait_info_keyword robot human)"
+                ],
+                "next": "step_3"
+            },
+            {
+                "condition": [
+                    "(interaction_start human robot)",
+                    "(human_is_welcome human)",
+                    "(robot_wait_where_keyword robot human)"
+                ],
+                "next": "step_4"
+            },
+            {
+                "condition": [
+                    "(interaction_start human robot)",
+                    "(human_is_welcome human)",
+                    "(robot_wait_shopping_keyword robot human)"
+                ],
+                "next": "step_5"
+            }
+        ]
+    },
+    "step_2": {
+        "actions": [
+            {
+                "name": "human_ask_registration",
+                "arguments": [
+                    "robot",
+                    "human"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(human_say_registration human)"
+                ],
+                "next": "step_6"
+            }
+        ]
+    },
+    "step_3": {
+        "actions": [
+            {
+                "name": "human_ask_info",
+                "arguments": [
+                    "robot",
+                    "human"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(human_say_info human)"
+                ],
+                "next": "step_7"
+            }
+        ]
+    },
+    "step_4": {
+        "actions": [
+            {
+                "name": "human_ask_where",
+                "arguments": [
+                    "robot",
+                    "human"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(human_say_where human)"
+                ],
+                "next": "step_8"
+            }
+        ]
+    },
+    "step_5": {
+        "actions": [
+            {
+                "name": "human_ask_shopping",
+                "arguments": [
+                    "robot",
+                    "human"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(human_say_shopping human)"
+                ],
+                "next": "step_9"
+            }
+        ]
+    },
+    "step_6": {
+        "actions": [
+            {
+                "name": "do_registration",
+                "arguments": [
+                    "robot",
+                    "human"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(interaction_done human robot)",
+                    "(human_is_registerd human)"
+                ],
+                "next": "GOAL"
+            }
+        ]
+    },
+    "step_7": {
+        "actions": [
+            {
+                "name": "do_info",
+                "arguments": [
+                    "human",
+                    "robot"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(interaction_done human robot)"
+                ],
+                "next": "GOAL"
+            }
+        ]
+    },
+    "step_8": {
+        "actions": [
+            {
+                "name": "do_where",
+                "arguments": [
+                    "robot",
+                    "human"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(interaction_done human robot)"
+                ],
+                "next": "GOAL"
+            }
+        ]
+    },
+    "step_9": {
+        "actions": [
+            {
+                "name": "do_registration_during_do_shopping",
+                "arguments": [
+                    "human",
+                    "robot"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(human_is_registerd human)"
+                ],
+                "next": "step_10"
+            }
+        ]
+    },
+    "step_10": {
+        "actions": [
+            {
+                "name": "do_shopping",
+                "arguments": [
+                    "human",
+                    "robot"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(interaction_done human robot)"
+                ],
+                "next": "GOAL"
+            }
+        ]
+    }
+}

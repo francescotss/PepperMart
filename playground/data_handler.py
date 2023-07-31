@@ -13,11 +13,15 @@ PRODUCT_LIST = [
     {"name":"milk", "id":"1-2", "classes":""},
 ]
 
+
+PRODUCT_VOCABOLARY = ["eggs", "milk"]
+
 class DataHandler():
     
     def __init__(self):
         self.map_list = MAP_LIST
         self.product_list = PRODUCT_LIST
+        self.product_vocabolary = PRODUCT_VOCABOLARY
         
     def reset_map(self):
         self.map_list = MAP_LIST

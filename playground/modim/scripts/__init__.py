@@ -1,2 +1,2 @@
-import modim
+import interaction_handler
 import utils

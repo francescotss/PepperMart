@@ -1,16 +1,15 @@
-from modim.scripts import *
 import os, sys, json
 pepper_tools_dir = os.getenv('PEPPER_TOOLS_HOME')
 sys.path.append(pepper_tools_dir+ '/cmd_server')
 
-os.environ["PEPPER_IP"] = "172.17.0.2"
+#os.environ["PEPPER_IP"] = "172.17.0.2"
 os.environ["MODIM_IP"] = "127.0.0.1"
-
 
 import pepper_cmd
 from pepper_cmd import *
 
 from data_handler import DataHandler
+from modim.scripts.interaction_handler import InteractionHandler
 
 global DEBUG
 DEBUG = True
@@ -44,10 +43,10 @@ def plan_excuter(plan, interaction_handler):
 if __name__ == "__main__":
     # Start pepper tools
     begin()
-    
+
     # Start modim and robot
     data_handler = DataHandler()
-    interaction_handler = modim.InteractionHandler(pepper_cmd.robot, data_handler)
+    interaction_handler = InteractionHandler(pepper_cmd.robot, data_handler)
     interaction_handler.init_robot()
     
     # Read plan
@@ -58,13 +57,6 @@ if __name__ == "__main__":
     
     # Execute plan
     plan_excuter(plan, interaction_handler)
-
-    exit()
-    data = {
-        'tiles': [{"id": "1-1", "classes": "walkable"}, {"id": "1-2", "classes": "shelf food"}, {"id": "1-1", "classes": "path"}, {"id": "0-0", "classes": "map-start"}],
-        "products": [{"id": "1-2", "name": "eggs", "classes": ""}]
-        }
-    interaction_handler.show_path(data)
 
     # Stop pepper tools
     end()

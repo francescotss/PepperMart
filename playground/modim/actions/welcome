@@ -1,5 +1,5 @@
 IMAGE
-<*, *, *, *>:  img/welcome.jpg
+<*, *, *, *>:  img/logo.png
 ----
 TEXT_default
 <*,*,it,*>: Benvenuto
@@ -13,8 +13,11 @@ TTS
 <*,*,*,*>:  Hi! how can I help you?
 ----
 BUTTONS
-start
-<*,*,it,*>: Inizia
-<*,*,*,*>:  Start
+registration
+<*,*,*,*>:  Sign in
+where
+<*,*,*,*>:  Find a product
+shopping
+<*,*,*,*>:  Start shopping
 ----
 

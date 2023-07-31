@@ -38,7 +38,7 @@ echo "Pepper IP is $PEPPER_IP"
 echo "starting docker container"
 
 docker run -it -d \
-    --name pepperhri-pnp-2 \
+    --name pepperhri \
     -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
     -v $HOME/.Xauthority:/home/robot/.Xauthority:rw \
     -e DISPLAY=$DISPLAY \

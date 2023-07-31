@@ -5,31 +5,9 @@
   <title>Welcome</title>
 
   <script src="qaws.js"></script>
+  <link rel="stylesheet" href="style.css">
 
-  <style>
-    body {
-      background-color: #fff;
-      font-family: sans-serif;
-    }
-    h1 {
-      font-weight: normal;
-      font-size: 300%;
-    }
 
-  input[type=button] {
-    background-color: #A01010; /* Red */
-    border: none;
-    border-radius: 8px;
-    color: white;
-    padding: 14px 24px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 24px;
-    margin:10px 10px 10px 10px;
-  }
-
-  </style>
 </head>
 <body>
 
@@ -38,14 +16,14 @@
 
     <!-- image -->
     <p>
-    <div align='center'> <img height=300 id='image_default' src="img/welcome.jpg" alt="No image"/> </div>
+    <div align='center'> <img class="main-img" id='image_default' src="img/logo.png" alt="No image"/> </div>
     </p>
 
     <!-- text -->
 
     <p>
     <h1>
-    <div align='center' id='text_default'>Welcome</div>
+    <div align='center' id='text_default' style="margin-top: 60px;">Welcome, I am Pepper!</div>
     </h1>
     </p>
 
@@ -54,7 +32,6 @@
   
     <p>
       <div align='center' id='buttons'>
-        <input type="button" id="hello" value="Hello" onclick="hello()">
       </div>
     </p>
 
@@ -69,6 +46,25 @@
 
     console.log("Trying connection...")
     wsrobot_init(ip,port);
+
+
+    var observer = new MutationObserver(function (m) { 
+      const buttons_array = document.getElementById('buttons').childNodes;
+      for (button of buttons_array) {
+        //button.onclick = function(event) { button_callback(event) };
+      }
+    });
+    data_text = document.getElementById('buttons');
+    observer.observe(data_text, {childList: true}); 
+
+    function button_callback(event) {
+      var bsrc = event.srcElement || event.originalTarget
+      codews.send(`\nwith open('/home/robot/playground/data_bridge','w') as f:\n  f.write('${bsrc.id}')\n`);
+
+      console.log('Callback '+bsrc.id);
+    }
+    
+    
     
   </script>
 

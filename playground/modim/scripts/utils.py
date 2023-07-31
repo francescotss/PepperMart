@@ -22,9 +22,8 @@ def create_data_file(data):
         text = "TEXT_mapdata\n<*,*,*,*>: " + json_text + "\n----"
         action_file.write(text)        
 
-def ask_loop(vocabulary, robot, timeout=5, patience=3):
+def ask_loop(vocabulary, robot, timeout=5, patience=3, buttons=False):
     try_again = ["try again", "Sorry, can you repeat?", "Please say again"]
-    
     count = 0
     while count < patience:
         ret = robot.asr(vocabulary, timeout) 

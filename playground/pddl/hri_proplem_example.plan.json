@@ -1,0 +1,17 @@
+{
+    "main": {
+        "list": [
+            "robot_say_welcome_robot_human",
+            "human_reply_welcome_robot_human",
+            "human_ask_registration_robot_human",
+            "do_registration_robot_human"
+        ],
+        "ordering": "total"
+    },
+    "actions": [
+        "robot_say_welcome_robot_human",
+        "human_reply_welcome_robot_human",
+        "human_ask_registration_robot_human",
+        "do_registration_robot_human"
+    ]
+}
