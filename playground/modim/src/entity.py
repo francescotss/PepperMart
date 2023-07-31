@@ -1,11 +1,11 @@
  
 class Entity:
-    def __init__(self, _id, _classes):
-        self._id = _id
+    def __init__(self, _position, _classes):
+        self._position = _position
         self._classes = _classes
     
     def to_string(self):
-        return "id: " + self._id + " classes: " + [c + " " for c in self._classes];
+        return "id: " + self._position[0] + "-" + self._position[1] + " classes: " + [c + " " for c in self._classes];
             
     
     def to_json(self):
