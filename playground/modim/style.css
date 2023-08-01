@@ -1,11 +1,19 @@
 body {
-    background-color: #fff;
+    height: 100vh;
+    margin: 0;
+    /*background-image: radial-gradient(ellipse, rgba(255, 255, 255, 0.884) 35%, rgba(0, 0, 0, 0.404) 83%, rgba(0, 0, 0, 0.404) 100%), url('img/bg.jpg'); */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.80), rgba(0, 0, 0, 0.80)), url('img/bg.jpg');
+    background-size: cover;
+    background-position: center;
+    /* background-blend-mode: hard-light; */
+    background-blend-mode: hard-light;
     font-family: sans-serif;
 }
 
 h1 {
     font-weight: normal;
     font-size: 300%;
+    color: white;
     }
 
 input[type=button] {

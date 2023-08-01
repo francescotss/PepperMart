@@ -1,23 +1,19 @@
 IMAGE
-<*, *, *, *>:  img/logo_inverted.png
+<*, *, *, *>:  img/welcome.jpg
 ----
 TEXT_default
+<*,*,it,*>: Benvenuto
 <*,*,*,*>:  How can I help you?
 ----
 GESTURE
 <*,*,*,*>: animations/Stand/Gestures/Hey_1
 ----
 TTS
+<*,*,it,*>: Ciao! Benvenuto!
 <*,*,*,*>:  Hi! how can I help you?
 ----
 BUTTONS
-register
-<*,*,*,*>:  Sign in
-where
-<*,*,*,*>:  Find a product
-shopping
-<*,*,*,*>:  Start shopping
-help
-<*,*,*,*>:  Help
+start
+<*,*,it,*>: Inizia
+<*,*,*,*>:  Start
 ----
-

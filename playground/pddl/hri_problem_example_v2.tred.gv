@@ -1,0 +1,29 @@
+strict digraph "" {
+	graph [fontname=helvetica];
+	node [fontname=helvetica,
+		label="\N",
+		shape=ellipse
+	];
+	edge [fontname=helvetica];
+	"(end)"	 [label=end,
+		peripheries=2,
+		shape=circle];
+	"(robot_do_where robot human)" -> "(end)";
+	"(robot_do_shopping robot human)" -> "(end)";
+	"(robot_wait_human_decision_registered robot human)"	 [color=lightgrey,
+		style=filled];
+	"(robot_wait_human_decision robot human)"	 [color=lightgrey,
+		style=filled];
+	"(robot_wait_human_decision_registered robot human)" -> "(robot_wait_human_decision robot human)";
+	"(robot_wait_human_decision robot human)" -> "(robot_do_info robot human)"	 [label="(human_say_info human)"];
+	"(robot_wait_human_decision robot human)" -> "(robot_do_registration robot human)"	 [label="(human_say_registration human)"];
+	"(robot_do_info robot human)" -> "(robot_say_welcome robot human)"	 [label="(interaction_start human robot)"];
+	"(robot_do_registration robot human)" -> "(robot_do_shopping robot human)"	 [label="(human_is_registered human)"];
+	"(robot_do_registration robot human)" -> "(robot_wait_human_decision_registered robot human)"	 [label="(can_wait_welcome human) (human_is_registered human)"];
+	"(robot_say_welcome robot human)" -> "(robot_do_where robot human)"	 [label="(can_wait_welcome human)"];
+	"(robot_say_welcome robot human)" -> "(robot_wait_human_decision_registered robot human)"	 [label="(can_wait_welcome human)"];
+	"(start)"	 [label=start,
+		peripheries=1,
+		shape=circle];
+	"(start)" -> "(robot_say_welcome robot human)";
+}

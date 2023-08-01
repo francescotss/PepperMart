@@ -25,7 +25,7 @@
         (interaction_done ?h - human ?r - robot) ; it is the GOAL
 
         ; umano risponde al messagio di welcome
-        (human_say_welcome ?h - human)
+        (can_wait_welcome ?h - human)
 
         ; l'umano dice una delle keywords che fanno partire una delle possibili interazioni
         (human_say_registration ?h - human)
@@ -63,32 +63,38 @@
         )
         :effect 
         (and 
-            (human_say_welcome ?h)
+            (can_wait_welcome ?h)
         )
     )
 
     (:action robot_wait_human_decision
         :parameters (?r - robot ?h - human)
-        :precondition (and (human_say_welcome ?h) (not (human_is_registered ?h)))
+        :precondition (and (can_wait_welcome ?h) (not (human_is_registered ?h)))
         :effect (and 
             (oneof
-                (human_say_registration ?h)
-                (human_say_shopping ?h)
-                (human_say_where ?h)
-                (human_say_info ?h)
+                 (human_say_registration ?h)
+                 (interaction_start ?h ?r)
+                 (human_say_where ?h)
+                 (human_say_info ?h)
             )
+            (not (can_wait_welcome ?h))
+            (not (interaction_start ?h ?r))
         )
     )
 
     (:action robot_wait_human_decision_registered
         :parameters (?r - robot ?h - human)
-        :precondition (and (human_say_welcome ?h) (human_is_registered ?h))
+        :precondition (and (can_wait_welcome ?h) (human_is_registered ?h))
         :effect (and 
             (oneof
                 (human_say_shopping ?h)
                 (human_say_where ?h)
                 (human_say_info ?h)
+                (interaction_start ?h ?r)
+                (can_wait_welcome ?h)
             )
+            (not (can_wait_welcome ?h))
+            (not (interaction_start ?h ?r))
         )
     )
 
@@ -97,8 +103,8 @@
         :precondition (and (human_say_registration ?h) (not (human_is_registered ?h)))
         :effect (and 
             (human_is_registered ?h)
-            (not (interaction_start ?h ?r))
-            (interaction_done ?h ?r)
+ ;            (interaction_start ?h ?r)
+            (can_wait_welcome ?h)
         )
     )
     
@@ -111,15 +117,15 @@
         )
     )
 
-    (:action robot_do_registration_during_do_shopping
-        :parameters (?r - robot ?h - human)
-        :precondition (and (human_say_shopping ?h) (not (human_is_registered ?h)))
-        :effect (and 
-            (human_is_registered ?h)
-            (not (interaction_start ?h ?r))
-            (interaction_done ?h ?r)
-        )
-    )
+    ; (:action robot_do_registration_during_do_shopping
+    ;     :parameters (?r - robot ?h - human)
+    ;     :precondition (and (human_say_shopping ?h) (not (human_is_registered ?h)))
+    ;     :effect (and 
+    ;         (human_is_registered ?h)
+    ;         (not (interaction_start ?h ?r))
+    ;         (interaction_done ?h ?r)
+    ;     )
+    ; )
     
     
     (:action robot_do_where
@@ -135,8 +141,8 @@
         :parameters (?r - robot ?h - human)
         :precondition (and (human_say_info ?h))
         :effect (and 
-            (not (interaction_start ?h ?r))
-            (interaction_done ?h ?r)
+            (interaction_start ?h ?r)
+;            (interaction_done ?h ?r)
         )
     )
     

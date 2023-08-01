@@ -241,7 +241,7 @@ def client_return():
             conn_client.send("%s\n" %return_value)
             return_value = None
         else:
-            conn_client.send("00\n")
+            conn_client.send("01\n")
 
     except Exception as e:
         print(RED+"Run code: Connection error"+RESET)
