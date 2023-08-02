@@ -1,5 +1,5 @@
  
-class Entity:
+class Entity(object):
     def __init__(self, _position, _classes):
         self._position = _position
         self._classes = _classes
@@ -15,7 +15,7 @@ class Entity:
     
 class Product(Entity):
     def __init__(self, _name, _id, _classes):
-        super().__init__(_id, _classes)
+        super(Product, self).__init__(_id, _classes)
         self._name = _name
         
     def to_string(self):
@@ -23,15 +23,14 @@ class Product(Entity):
 
     # def to_pddl_object()
      
-     
-     
+    
 # pddl interface
 class Type:
-    def __init__(self, name : str):
+    def __init__(self, name):
         self.name = name
         
-class Object:
-    def __init__(self, name : str, type : Type) -> None:
+class Object(object):
+    def __init__(self, name, type):
         self.name = name
         self.type = type
         
@@ -40,9 +39,24 @@ class Object:
             return self.name + " - " + self.type.name 
         else:
             return self.name
-    
+        
+class CellObject(Object):
+    def __init__(self, name, pos):
+        super(CellObject, self).__init__(name, Type("cell"))
+        self.pos = pos
+
+class ProductObject(Object):
+    def __init__(self, name):
+        super(ProductObject, self).__init__(name, Type("product"))
+        
+
+class SectionObject(Object):
+    def __init__(self, name):
+        super(SectionObject, self).__init__(name, Type("section"))
+
+
 class Predicate:
-    def __init__(self, name : str, args : list[Object]) -> None:
+    def __init__(self, name, args):
         self.name = name
         self.args = args
     
