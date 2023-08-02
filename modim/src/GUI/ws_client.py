@@ -157,7 +157,7 @@ class ModimWSClient:
 
     def store_interaction(self, interaction):
         lcode = inspect.getsourcelines(interaction)    
-        for l in lcode[0][1:]:
+        for l in lcode[0][0:]:
             self.code += l
         self.code += '\n'
 

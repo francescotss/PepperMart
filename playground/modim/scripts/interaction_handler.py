@@ -1,11 +1,11 @@
-import os, sys, json, inspect, textwrap
+import os, sys, json, inspect, textwrap, time
 pdir = os.getenv('MODIM_HOME')
 sys.path.append(pdir + '/src/GUI')
 from ws_client import *
 import ws_client
 import utils
 global DEBUG
-DEBUG = True
+DEBUG = False
 
 
 class InteractionHandler():
@@ -15,8 +15,11 @@ class InteractionHandler():
         self.mws.setDemoPathAuto(__file__)
         self.robot = robot
         self.data = data
+        self.interaction_started = False
+        self.user_logged = False
+        self.user_name = None
         self.product_asked = None
-        
+         
     def init_robot(self):
         def _func():
             im.init()
@@ -25,9 +28,69 @@ class InteractionHandler():
         if not DEBUG:
             self.robot.setLanguage("en")
             self.robot.setAlive(True)
+            self.robot.startFaceDetection()
             self.robot.startSensorMonitor() 
             self.robot.startLaserMonitor()
+    
+    def shutdown_robot(self):
+        if not DEBUG:
+            self.robot.stopFaceDetection()      
+            self.robot.stopSensorMonitor()
+            self.robot.stopLaserMonitor()
+            self.robot.setAlive(False)
         
+    def reset(self):
+        self.data.reset_map()
+        self.user_logged = False
+        self.user_name = None
+        self.product_asked = None
+            
+    def is_person_here(self):
+        activation_zone = 1.2 # distance in meters
+        if DEBUG:
+            return True
+        values = self.robot.sensorvalue()
+        laser = values[0]
+        sonar = values[1]
+        rear_sonar = values[2]
+        return 0 < laser < activation_zone or 0 < sonar < activation_zone
+        
+    def waitfor_person(self):
+        if DEBUG: return
+        
+        start_time = None
+        wait_time = 2.0 # Time to wait before starting the interaction
+        utils.color_print("Waiting for person", "yellow")
+        while True:
+            if self.is_person_here():
+                if start_time is None:
+                    start_time = time.time()
+                elif time.time() - start_time > wait_time:
+                    utils.color_print("Person detected", "green")
+                    return # Person detected for wait_time seconds
+            if not self.is_person_here():
+                start_time = None
+            time.sleep(0.5)    
+    
+    def waitfor_goodbye(self):
+        if DEBUG: return False
+        
+        start_time = None
+        wait_time = 3.0 # Time to wait before choose to say goodbye
+        utils.color_print("Waiting to see if the person is gone", "yellow")
+        while True:
+            if not self.is_person_here():
+                if start_time is None:
+                    start_time = time.time()
+                elif time.time() - start_time > wait_time:
+                    utils.color_print("Person not detected", "red")
+                    return True # Person not detected for wait_time seconds
+            if self.is_person_here():
+                utils.color_print("Person detected", "green")
+                return False
+            time.sleep(0.5)  
+        
+                
     def send_interaction(self, code, vars=[]):
         self.mws.code = ""
         for var, value in vars:
@@ -42,22 +105,27 @@ class InteractionHandler():
         print(self.mws.code)
         return self.mws.csend(self.mws.code)
 
-        
     def run_action(self, action):
+        if not self.is_person_here() and self.waitfor_goodbye():
+            return "GOODBYE"
+            
         utils.color_print("\n\n\nExecuting action {} \n".format(action), "green")
         if action == "robot_say_welcome":
-            res =  self._welcome()
-        elif action == "do_registration":
-            res = self._registration()
-        elif action == "do_info":
-            res = self._info()
-        elif action == "do_where":
-            res = self._where()
+            res =  self._robot_say_welcome()
+        elif action == "robot_wait_human_decision" or action == "robot_wait_human_decision_registered":
+            res =  self._robot_wait_human_decision()
+        elif action == "robot_do_registration":
+            res = self._robot_do_registration()
+        elif action == "robot_do_info":
+            res = self._robot_do_info()
+        elif action == "robot_do_where":
+            res = self._robot_do_where()
         elif action == "do_shopping":
             res = self._shopping()  
         
         utils.color_print("\nEnd action {}".format(action), "green")
         return res
+        
         
     
         
@@ -65,53 +133,78 @@ class InteractionHandler():
     
     # -------- Action Handlers -------- #
     
-    def _welcome(self):
-        def _modim_callback():
+    def _robot_say_welcome(self):
+        def _welcome_callback():
             im.display.loadUrl('index.html')
             im.execute('welcome')
-            a = im.ask(actionname=None, timeout=-1)  
-
-        ret = self.send_interaction(_modim_callback)
-
-        print(ret)
+        def _welcomeBack_callback():
+            im.display.loadUrl('index.html')
+            im.execute('welcomeBack')
         
-        # TODO: Build vocabolary
+        if not self.interaction_started:
+            self.send_interaction(_welcome_callback)
+            self.interaction_started = True
+        else:
+            self.send_interaction(_welcomeBack_callback)
+        
+        return  "(can_wait_welcome human)"
+    
+    def _robot_wait_human_decision(self):
+        def _modim_callback():
+            im.execute('welcomeBack')
+            im.executeModality('ASR',vocabulary)
+            answer = im.ask(actionname=None, timeout=5) 
+            time.sleep(0.6) # Wait for asr thread shutdown
+            im.display.setReturnValue(answer)
+
+    
         help_voc = ["help", "what can you do", "what can i ask"]
-        registration_voc = ["register", "signin"]
+        registration_voc = ["register", "sign in"]
         shopping_voc = ["shopping", "cart"]
         where_voc = ["where"] + utils.build_vocabolary(["where"], self.data.product_vocabolary)
-        vocabulary = help_voc + registration_voc + shopping_voc
+        vocabulary = help_voc + registration_voc + shopping_voc + where_voc
         
-        answer = utils.ask_loop(vocabulary, self.robot, timeout=10, patience=2)
-           
+        answer = self.send_interaction(_modim_callback, [["vocabulary", vocabulary]])
+        
+        if answer == 'timeout':
+            return self.run_action("robot_wait_human_decision")
+               
         if answer == "ERROR":
             return "ERROR"
         
         elif answer in help_voc:
-            return "(telling_info human)"
+            return "(human_say_info human)"
         
         elif answer in registration_voc:
-            return "(telling_registration human)"
+            if self.user_logged:
+                self.robot.say("Hi %s, you are already registered!" %self.user_name)
+                return "(interaction_start human robot)"
+            return "(human_say_registration human)"
         
         elif answer in shopping_voc:
-            return "(telling_shopping human)"
+            if not self.user_logged:
+                self.robot.say("I'm sorry, you must be registered")
+                return "(interaction_start human robot)"
+            return "(human_say_shopping human)"
         
         elif answer in where_voc:
             # answer: where + product
             answer = answer.split(" ")
             if len(answer) > 1:
                 self.product_asked = answer[1]
-            return "(telling_where human)"
+            return "(human_say_where human)"
         
         
     
-    def _registration(self):
-        return "(telling_registration human)"  
+    def _robot_do_registration(self):
+        
+        self.user_logged = True
+        return "(human_is_registered human)"  
     
-    def _info(self):
-        return ""
+    def _robot_do_info(self):
+        return "(interaction_start human robot)"
     
-    def _where(self):
+    def _robot_do_where(self):
         def _modim_callback():
             im.display.loadUrl('map.html')
             im.execute('mapdata')
@@ -131,11 +224,16 @@ class InteractionHandler():
         self.mws.run_interaction(_modim_callback)
         self.data.reset_map()  
               
-        return "(interaction_done human)"
+        return "(interaction_done human robot)"
     
     def _shopping(self):
-        return
+        return "(interaction_done human robot)"
       
+   
+   
+   
+   
+   
    
     def show_path(self, data=None):
 

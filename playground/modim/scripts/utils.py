@@ -7,6 +7,8 @@ def color_print(string, color=None):
         print("\033[1;32m {}\033[0m".format(string))
     elif color == 'red':
         print("\033[91m {}\033[0m".format(string))
+    elif color == 'yellow':
+        print("\033[93m {}\033[0m".format(string))
 
 # Return a vocabolary with all the combination of v1 and v2
 def build_vocabolary(v1, v2):

@@ -4,12 +4,6 @@ IMAGE
 TEXT_default
 <*,*,*,*>:  How can I help you?
 ----
-GESTURE
-<*,*,*,*>: animations/Stand/Gestures/Hey_1
-----
-TTS
-<*,*,*,*>:  Hi! how can I help you?
-----
 BUTTONS
 register
 <*,*,*,*>:  Sign in
