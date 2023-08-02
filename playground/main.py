@@ -95,7 +95,9 @@ if __name__ == "__main__":
                 MODIM_LABELS.TYPE.value: "product",
                 MODIM_LABELS.WORD.value: el.args[0].name
             }
-            
+            modim_data.append(modim_data_record)
+            modim_vocabulary.append(modim_vocabulary_record)
+    
                
         elif el.name == "is" and len(el.args) == 2 and el.args[0].type.name == "section" and el.args[1].type.name == "cell":
             position = el.args[1].pos
@@ -110,6 +112,9 @@ if __name__ == "__main__":
                 MODIM_LABELS.TYPE.value: "section",
                 MODIM_LABELS.WORD.value: el.args[0].name
             }
+            modim_data.append(modim_data_record)
+            modim_vocabulary.append(modim_vocabulary_record)
+       
             
             
         elif el.name == "at" and len(el.args) == 2 and el.args[0].type.name == "human" and el.args[1].type.name == "cell":
@@ -121,11 +126,11 @@ if __name__ == "__main__":
                 MODIM_LABELS.POSITION.value: position,
                 MODIM_LABELS.CLASSES.value: ""
             }
-            
-            
-        modim_data.append(modim_data_record)
-        modim_vocabulary.append(modim_vocabulary_record)
+            modim_data.append(modim_data_record)
        
+            
+            
+        
     print(modim_data) 
     print(modim_vocabulary)    
 
