@@ -319,7 +319,7 @@ data_dict = {
 }
 
 
-market = Market("./pddl_files/supermarket_world.pddl", "./pddl_files/supermarket_problem_template.pddl")
+market = Market("./pddl/supermarket_world.pddl", "./pddl/supermarket_problem_template.pddl")
 
 market.fill_problem_template(data_dict)
 
