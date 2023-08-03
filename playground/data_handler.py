@@ -8,42 +8,35 @@ class MODIM_LABELS(Enum):
     WORD = "word"
     
 # TODO DELETE
-MAP_LIST = [
-    {"id": "1-1", "classes": "walkable"}, 
-    {"id": "1-2", "classes": "shelf food"}, 
-    {"id": "1-1", "classes": "path"}, 
-    {"id": "0-0", "classes": "map-start"}
-]
-
-# TODO DELETE
 # ID: position
 # classes: not-available
-PRODUCT_LIST = [
-    {"name":"eggs", "id":"1-1", "classes":""},
+MODIM_DATA = [
+    {"type": "product","name":"eggs", "id":"1-1", "classes":""},
+    {'type': 'human', 'name': 'HUMAN', 'id': '5-9', 'classes': ''},
     {"name":"milk", "id":"1-2", "classes":""},
 ]
 
 
 
-PRODUCT_VOCABOLARY = ["eggs", "milk"]
+PRODUCT_VOCABOLARY = [{"type": "product", "word": "eggs"}, {"type": "section", "word": "infopoint"}]
 
 class DataHandler():
     
-    # def __init__(self, modim_data, vocabulary):
-    #     self.modim_data = modim_data
-    #     self.product_vocabolary = vocabulary
+    def __init__(self, modim_data, vocabulary):
+        self.modim_data = modim_data
+        self.product_vocabolary = vocabulary
     
-    def __init__(self):    
-        self.map_list = MAP_LIST                # TODO DELETE
-        self.product_list = PRODUCT_LIST        # TODO DELETE
-        self.product_vocabolary = PRODUCT_VOCABOLARY    # TODO DELETE
+    # def __init__(self):    
+    #     self.map_list = MAP_LIST                # TODO DELETE
+    #     self.product_list = PRODUCT_LIST        # TODO DELETE
+    #     self.product_vocabolary = PRODUCT_VOCABOLARY    # TODO DELETE
     
-    # def reset_map(self, modim_data):
-    #     self.modim_data = modim_data
+    def reset_map(self, modim_data):
+        self.modim_data = modim_data
        
-    def reset_map(self):
-        self.map_list = MAP_LIST                # TODO DELETE
-        self.product_list = PRODUCT_LIST        # TODO DELETE
+    # def reset_map(self):
+    #     self.map_list = MAP_LIST                # TODO DELETE
+    #     self.product_list = PRODUCT_LIST        # TODO DELETE
         
     def get_product_list(self):
         return self.product_list

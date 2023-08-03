@@ -135,8 +135,8 @@ if __name__ == "__main__":
     print(modim_vocabulary)    
 
     # Start modim and robot
-    data_handler = DataHandler()                    # TODO DELETE
-    # data_handler = DataHandler(modim_data, modim_vocabulary)
+    #data_handler = DataHandler()                    # TODO DELETE
+    data_handler = DataHandler(modim_data, modim_vocabulary)
     interaction_handler = InteractionHandler(pepper_cmd.robot, data_handler)
     
     
