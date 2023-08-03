@@ -18,7 +18,53 @@
         cell_5_11 cell_11_9 - cell ; entrace and exit
         ; household personal_care beverages frozen_foods meatcounter fishcounter infopoint cashdesk entrace exit - section
     
-<objects>
+		HUMAN - human
+		CART - cart
+		LIST - list
+		TOOTHPASTE - product
+		SHAMPOO - product
+		BODYLOTION - product
+		DEODORAN - product
+		BEEF - product
+		CHICKEN - product
+		HAMBURGER - product
+		SALMON - product
+		TUNA - product
+		OCTOPUS - product
+		OYSTER - product
+		EGGS - product
+		MILK - product
+		BREAD - product
+		CHEESE - product
+		RICE - product
+		SUGAR - product
+		SALT - product
+		COFFEE - product
+		COOKIES - product
+		KETCHUP - product
+		COCACOLA - product
+		ORANGEJUICE - product
+		WATER - product
+		CHINOTTO - product
+		FROZENPIZZA - product
+		FROZENFISH - product
+		ICECREAM - product
+		FROZENSHRIMP - product
+		FROZENFISHSTICKS - product
+		WAFFLE - product
+		MAGNUM - product
+		POPSICLE - product
+		household - section
+		personal_care - section
+		beverages - section
+		frozen_foods - section
+		meatcounter - section
+		fishcounter - section
+		infopoint - section
+		cashdesk - section
+		entrace - section
+		exit - section
+
     
     )
     
@@ -83,14 +129,80 @@
         
         ; (is cell_9_7 cashdesk) (is cell_9_9 cashdesk)
         
-<inits>
+		(at HUMAN cell_5_9)
+		(at TOOTHPASTE cell_2_4)
+		(at SHAMPOO cell_2_5)
+		(at BODYLOTION cell_3_4)
+		(at DEODORAN cell_3_5)
+		(at BEEF cell_2_2)
+		(at CHICKEN cell_3_2)
+		(at HAMBURGER cell_3_2)
+		(at SALMON cell_5_2)
+		(at TUNA cell_5_2)
+		(at OCTOPUS cell_6_2)
+		(at OYSTER cell_6_2)
+		(at EGGS cell_2_7)
+		(at MILK cell_2_8)
+		(at BREAD cell_2_9)
+		(at CHEESE cell_3_7)
+		(at RICE cell_3_7)
+		(at SUGAR cell_3_8)
+		(at SALT cell_3_9)
+		(at COFFEE cell_2_8)
+		(at COOKIES cell_3_8)
+		(at KETCHUP cell_2_9)
+		(at COCACOLA cell_5_4)
+		(at WATER cell_5_5)
+		(at CHINOTTO cell_6_4)
+		(at ORANGEJUICE cell_6_5)
+		(at FROZENPIZZA cell_8_2)
+		(at FROZENFISH cell_8_2)
+		(at ICECREAM cell_8_2)
+		(at WAFFLE cell_8_2)
+		(at MAGNUM cell_8_2)
+		(at POPSICLE cell_8_2)
+		(at FROZENSHRIMP cell_8_2)
+		(at FROZENFISHSTICKS cell_8_2)
+		(is cell_2_2 meatcounter)
+		(is cell_3_2 meatcounter)
+		(is cell_5_2 fishcounter)
+		(is cell_6_2 fishcounter)
+		(is cell_2_4 personal_care)
+		(is cell_3_4 personal_care)
+		(is cell_2_5 personal_care)
+		(is cell_3_5 personal_care)
+		(is cell_2_7 household)
+		(is cell_3_7 household)
+		(is cell_2_8 household)
+		(is cell_3_8 household)
+		(is cell_2_9 household)
+		(is cell_3_9 household)
+		(is cell_8_2 frozen_foods)
+		(is cell_8_2 frozen_foods)
+		(is cell_8_2 frozen_foods)
+		(is cell_8_2 frozen_foods)
+		(is cell_8_2 frozen_foods)
+		(is cell_8_2 frozen_foods)
+		(is cell_8_2 frozen_foods)
+		(is cell_8_2 frozen_foods)
+		(is cell_5_4 beverages)
+		(is cell_6_4 beverages)
+		(is cell_5_5 beverages)
+		(is cell_6_5 beverages)
+		(is cell_7_7 infopoint)
+		(is cell_7_8 infopoint)
+		(is cell_7_9 infopoint)
+		(is cell_9_7 cashdesk)
+		(is cell_9_9 cashdesk)
+
 
     )
 
     (:goal
         
         (and 
-    <goals>
+    		(reached HUMAN meatcounter)
+
         )
     )
     

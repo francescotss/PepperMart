@@ -63,7 +63,7 @@ if __name__ == "__main__":
     plan = json.loads(json_data)
     
     # init PepperMarket
-    market = Market("./pddl/supermarket_world.pddl", "./pddl/supermarket_problem_template.pddl")
+    market = Market("./pddl/supermarket_world.pddl", "./pddl/supermarket_problem_template.pddl", "./pddl/temp/supermarket_problem.pddl")
         
     data_dict = {}
     data_dict[PDDL_LABELS.OBJECTS] = objects
@@ -71,7 +71,7 @@ if __name__ == "__main__":
     data_dict[PDDL_LABELS.GOALS] = goals
     
     # TODO implements file creation and save the pddl file created in a temp directory
-    # market.fill_problem_template(data_dict)
+    market.fill_problem_template(data_dict)
 
     modim_data = []
     modim_vocabulary = []
@@ -80,7 +80,6 @@ if __name__ == "__main__":
         modim_data_record = None
         modim_vocabulary_record = None
         if el.name == "at" and len(el.args) == 2 and el.args[0].type.name == "product" and el.args[1].type.name == "cell":
-            
             # convert to modim format
             position = el.args[1].pos
             position = str(position[0]) + "-" +str(position[1])
@@ -99,22 +98,21 @@ if __name__ == "__main__":
             modim_vocabulary.append(modim_vocabulary_record)
     
                
-        elif el.name == "is" and len(el.args) == 2 and el.args[0].type.name == "section" and el.args[1].type.name == "cell":
-            position = el.args[1].pos
+        elif el.name == "is" and len(el.args) == 2 and el.args[1].type.name == "section" and el.args[0].type.name == "cell":
+            position = el.args[0].pos
             position = str(position[0]) + "-" +str(position[1])
             modim_data_record = {
                 MODIM_LABELS.TYPE.value: "section",
-                MODIM_LABELS.NAME.value: el.args[0].name,
+                MODIM_LABELS.NAME.value: el.args[1].name,
                 MODIM_LABELS.POSITION.value: position,
                 MODIM_LABELS.CLASSES.value: ""
             }
             modim_vocabulary_record = {
                 MODIM_LABELS.TYPE.value: "section",
-                MODIM_LABELS.WORD.value: el.args[0].name
+                MODIM_LABELS.WORD.value: el.args[1].name
             }
             modim_data.append(modim_data_record)
             modim_vocabulary.append(modim_vocabulary_record)
-       
             
             
         elif el.name == "at" and len(el.args) == 2 and el.args[0].type.name == "human" and el.args[1].type.name == "cell":
@@ -127,12 +125,10 @@ if __name__ == "__main__":
                 MODIM_LABELS.CLASSES.value: ""
             }
             modim_data.append(modim_data_record)
-       
-            
             
         
-    print(modim_data) 
-    print(modim_vocabulary)    
+    # print(modim_data) 
+    # print(modim_vocabulary)    
 
     # Start modim and robot
     data_handler = DataHandler()                    # TODO DELETE

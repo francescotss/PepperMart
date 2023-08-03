@@ -230,12 +230,72 @@ infopoint = SectionObject("infopoint" )
 cashdesk = SectionObject("cashdesk" )
 entrace = SectionObject("entrace" )
 exit = SectionObject("exit" )
-    
-# # example
+
+objects.append(household)
+objects.append(personal_care)
+objects.append(beverages)
+objects.append(frozen_foods)
+objects.append(meatcounter)
+objects.append(fishcounter)
+objects.append(infopoint)
+objects.append(cashdesk)
+objects.append(entrace)
+objects.append(exit)
+
+inits.append(Predicate("is", [cell_2_2, meatcounter]))
+inits.append(Predicate("is", [cell_3_2, meatcounter]))
+inits.append(Predicate("is", [cell_5_2, fishcounter]))
+inits.append(Predicate("is", [cell_6_2, fishcounter]))
+        
+inits.append(Predicate("is", [cell_2_4, personal_care]))
+inits.append(Predicate("is", [cell_3_4, personal_care]))
+inits.append(Predicate("is", [cell_2_5, personal_care]))
+inits.append(Predicate("is", [cell_3_5, personal_care]))
+        
+        
+inits.append(Predicate("is", [cell_2_7, household]))
+inits.append(Predicate("is", [cell_3_7, household]))
+inits.append(Predicate("is", [cell_2_8, household])) 
+inits.append(Predicate("is", [cell_3_8, household]))
+inits.append(Predicate("is", [cell_2_9, household]))
+inits.append(Predicate("is", [cell_3_9, household]))
+        
+inits.append(Predicate("is", [cell_8_2, frozen_foods])) 
+inits.append(Predicate("is", [cell_9_2, frozen_foods]))
+inits.append(Predicate("is", [cell_9_3, frozen_foods])) 
+inits.append(Predicate("is", [cell_9_3, frozen_foods]))
+inits.append(Predicate("is", [cell_8_4, frozen_foods])) 
+inits.append(Predicate("is", [cell_9_4, frozen_foods]))
+inits.append(Predicate("is", [cell_8_5, frozen_foods])) 
+inits.append(Predicate("is", [cell_9_5, frozen_foods]))
+
+inits.append(Predicate("is", [cell_5_4, beverages])) 
+inits.append(Predicate("is", [cell_6_4, beverages]))
+inits.append(Predicate("is", [cell_5_5, beverages])) 
+inits.append(Predicate("is", [cell_6_5, beverages]))
+
+cell_7_7 = CellObject("cell_7_7", (7, 7))
+cell_7_8 = CellObject("cell_7_8", (7, 8))
+cell_7_9 = CellObject("cell_7_9", (7, 9))
+
+inits.append(Predicate("is", [cell_7_7, infopoint])) 
+inits.append(Predicate("is", [cell_7_8, infopoint])) 
+inits.append(Predicate("is", [cell_7_9, infopoint]))
+
+cell_9_7 = CellObject("cell_9_7", (9, 7))
+cell_9_9 = CellObject("cell_9_9", (9, 9))
+
+inits.append(Predicate("is", [cell_9_7, cashdesk])) 
+inits.append(Predicate("is", [cell_9_9, cashdesk]))
+
+
+
+# # example of usage with CONTAINS GOAL
 # inits.append(Predicate("contains", [list, eggs]))
-# inits.append(Predicate("contains", [cart, icecream]))
-            
-# goals.append(Predicate("reached", [human, eggs]))
-# goals.append(Predicate("reached", [human, infopoint]))
 # goals.append(Predicate("contains", [cart, eggs]))
+        
+        
+    
+# # example of usage with REACHED GOAL         
+# goals.append(Predicate("reached", [human, meatcounter]))
 
