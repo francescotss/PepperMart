@@ -65,15 +65,15 @@
             },
             {
                 "condition": [
-                    "(interaction_start human robot)"
-                ],
-                "next": "step_0"
-            },
-            {
-                "condition": [
                     "(human_say_registration human)"
                 ],
                 "next": "step_4"
+            },
+            {
+                "condition": [
+                    "(can_wait_welcome human)"
+                ],
+                "next": "step_5"
             }
         ]
     },
@@ -92,7 +92,7 @@
                 "condition": [
                     "(interaction_start human robot)"
                 ],
-                "next": "step_5"
+                "next": "step_6"
             }
         ]
     },
@@ -131,11 +131,48 @@
                     "(can_wait_welcome human)",
                     "(human_is_registered human)"
                 ],
-                "next": "step_6"
+                "next": "step_7"
             }
         ]
     },
     "step_5": {
+        "actions": [
+            {
+                "name": "robot_wait_human_decision",
+                "arguments": [
+                    "robot",
+                    "human"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(human_say_info human)"
+                ],
+                "next": "step_2"
+            },
+            {
+                "condition": [
+                    "(human_say_where human)"
+                ],
+                "next": "step_3"
+            },
+            {
+                "condition": [
+                    "(human_say_registration human)"
+                ],
+                "next": "step_4"
+            },
+            {
+                "condition": [
+                    "(can_wait_welcome human)"
+                ],
+                "next": "step_5"
+            }
+        ]
+    },
+    "step_6": {
         "actions": [
             {
                 "name": "robot_say_welcome",
@@ -150,11 +187,11 @@
                 "condition": [
                     "(can_wait_welcome human)"
                 ],
-                "next": "step_7"
+                "next": "step_8"
             }
         ]
     },
-    "step_6": {
+    "step_7": {
         "actions": [
             {
                 "name": "robot_wait_human_decision_registered",
@@ -165,12 +202,6 @@
             }
         ],
         "outcomes": [
-            {
-                "condition": [
-                    "(human_say_shopping human)"
-                ],
-                "next": "step_8"
-            },
             {
                 "condition": [
                     "(human_say_where human)"
@@ -185,13 +216,19 @@
             },
             {
                 "condition": [
-                    "(interaction_start human robot)"
+                    "(can_wait_welcome human)"
+                ],
+                "next": "step_7"
+            },
+            {
+                "condition": [
+                    "(human_say_shopping human)"
                 ],
                 "next": "step_11"
             }
         ]
     },
-    "step_7": {
+    "step_8": {
         "actions": [
             {
                 "name": "robot_wait_human_decision",
@@ -216,34 +253,15 @@
             },
             {
                 "condition": [
-                    "(interaction_start human robot)"
-                ],
-                "next": "step_5"
-            },
-            {
-                "condition": [
                     "(human_say_registration human)"
                 ],
                 "next": "step_13"
-            }
-        ]
-    },
-    "step_8": {
-        "actions": [
-            {
-                "name": "robot_do_shopping",
-                "arguments": [
-                    "robot",
-                    "human"
-                ]
-            }
-        ],
-        "outcomes": [
+            },
             {
                 "condition": [
-                    "(interaction_done human robot)"
+                    "(can_wait_welcome human)"
                 ],
-                "next": "GOAL"
+                "next": "step_14"
             }
         ]
     },
@@ -281,14 +299,14 @@
                 "condition": [
                     "(interaction_start human robot)"
                 ],
-                "next": "step_14"
+                "next": "step_15"
             }
         ]
     },
     "step_11": {
         "actions": [
             {
-                "name": "robot_say_welcome",
+                "name": "robot_do_shopping",
                 "arguments": [
                     "robot",
                     "human"
@@ -298,9 +316,9 @@
         "outcomes": [
             {
                 "condition": [
-                    "(can_wait_welcome human)"
+                    "(interaction_done human robot)"
                 ],
-                "next": "step_15"
+                "next": "GOAL"
             }
         ]
     },
@@ -346,6 +364,43 @@
     "step_14": {
         "actions": [
             {
+                "name": "robot_wait_human_decision",
+                "arguments": [
+                    "robot",
+                    "human"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(human_say_info human)"
+                ],
+                "next": "step_2"
+            },
+            {
+                "condition": [
+                    "(human_say_where human)"
+                ],
+                "next": "step_12"
+            },
+            {
+                "condition": [
+                    "(human_say_registration human)"
+                ],
+                "next": "step_13"
+            },
+            {
+                "condition": [
+                    "(can_wait_welcome human)"
+                ],
+                "next": "step_14"
+            }
+        ]
+    },
+    "step_15": {
+        "actions": [
+            {
                 "name": "robot_say_welcome",
                 "arguments": [
                     "robot",
@@ -362,43 +417,6 @@
             }
         ]
     },
-    "step_15": {
-        "actions": [
-            {
-                "name": "robot_wait_human_decision_registered",
-                "arguments": [
-                    "robot",
-                    "human"
-                ]
-            }
-        ],
-        "outcomes": [
-            {
-                "condition": [
-                    "(human_say_shopping human)"
-                ],
-                "next": "step_8"
-            },
-            {
-                "condition": [
-                    "(human_say_where human)"
-                ],
-                "next": "step_9"
-            },
-            {
-                "condition": [
-                    "(human_say_info human)"
-                ],
-                "next": "step_10"
-            },
-            {
-                "condition": [
-                    "(interaction_start human robot)"
-                ],
-                "next": "step_11"
-            }
-        ]
-    },
     "step_16": {
         "actions": [
             {
@@ -412,15 +430,9 @@
         "outcomes": [
             {
                 "condition": [
-                    "(human_say_shopping human)"
-                ],
-                "next": "step_18"
-            },
-            {
-                "condition": [
                     "(human_say_where human)"
                 ],
-                "next": "step_19"
+                "next": "step_18"
             },
             {
                 "condition": [
@@ -430,9 +442,15 @@
             },
             {
                 "condition": [
-                    "(interaction_start human robot)"
+                    "(can_wait_welcome human)"
                 ],
-                "next": "step_14"
+                "next": "step_16"
+            },
+            {
+                "condition": [
+                    "(human_say_shopping human)"
+                ],
+                "next": "step_19"
             }
         ]
     },
@@ -449,15 +467,9 @@
         "outcomes": [
             {
                 "condition": [
-                    "(human_say_shopping human)"
-                ],
-                "next": "step_18"
-            },
-            {
-                "condition": [
                     "(human_say_where human)"
                 ],
-                "next": "step_19"
+                "next": "step_18"
             },
             {
                 "condition": [
@@ -467,16 +479,22 @@
             },
             {
                 "condition": [
-                    "(interaction_start human robot)"
+                    "(can_wait_welcome human)"
                 ],
-                "next": "step_14"
+                "next": "step_16"
+            },
+            {
+                "condition": [
+                    "(human_say_shopping human)"
+                ],
+                "next": "step_19"
             }
         ]
     },
     "step_18": {
         "actions": [
             {
-                "name": "robot_do_shopping",
+                "name": "robot_do_where",
                 "arguments": [
                     "robot",
                     "human"
@@ -495,7 +513,7 @@
     "step_19": {
         "actions": [
             {
-                "name": "robot_do_where",
+                "name": "robot_do_shopping",
                 "arguments": [
                     "robot",
                     "human"

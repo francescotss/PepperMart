@@ -144,7 +144,8 @@ if __name__ == "__main__":
         try:
             interaction_handler.init_robot()
             interaction_handler.reset()
-            
+            interaction_handler._choose_products()
+            exit()
             # Blocking waiting
             interaction_handler.waitfor_person()
             

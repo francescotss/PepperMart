@@ -73,9 +73,10 @@
         :effect (and 
             (oneof
                  (human_say_registration ?h)
-                 (interaction_start ?h ?r)
+;                 (interaction_start ?h ?r)
                  (human_say_where ?h)
                  (human_say_info ?h)
+                 (can_wait_welcome ?h)
             )
             (not (can_wait_welcome ?h))
             (not (interaction_start ?h ?r))
@@ -90,7 +91,7 @@
                 (human_say_shopping ?h)
                 (human_say_where ?h)
                 (human_say_info ?h)
-                (interaction_start ?h ?r)
+;                (interaction_start ?h ?r)
                 (can_wait_welcome ?h)
             )
             (not (can_wait_welcome ?h))

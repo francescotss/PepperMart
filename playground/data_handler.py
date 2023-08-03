@@ -44,6 +44,12 @@ class DataHandler():
     def reset_map(self):
         self.map_list = MAP_LIST                # TODO DELETE
         self.product_list = PRODUCT_LIST        # TODO DELETE
+        
+    def get_product_list(self):
+        return self.product_list
+    
+    def get_product_vocabulary(self):
+        return self.product_vocabulary
     
     def get_product(self,name):
         for product in self.product_list:

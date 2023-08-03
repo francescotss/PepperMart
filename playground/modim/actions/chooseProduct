@@ -1,0 +1,12 @@
+IMAGE
+<*, *, *, *>:  img/thumb_inverted.png
+----
+TEXT_default
+<*,*,*,*>:  Choose product
+----
+GESTURE
+<*,*,*,*>: animations/Stand/Gestures/Hey_1
+----
+TTS
+<*,*,*,*>: Which product do you need?
+----
