@@ -1,3 +1,13 @@
+from enum import Enum
+
+class MODIM_LABELS(Enum):
+    TYPE = "type"
+    POSITION = "id"
+    CLASSES = "classes"
+    NAME = "name"
+    WORD = "word"
+    
+# TODO DELETE
 MAP_LIST = [
     {"id": "1-1", "classes": "walkable"}, 
     {"id": "1-2", "classes": "shelf food"}, 
@@ -5,7 +15,7 @@ MAP_LIST = [
     {"id": "0-0", "classes": "map-start"}
 ]
 
-
+# TODO DELETE
 # ID: position
 # classes: not-available
 PRODUCT_LIST = [
@@ -14,18 +24,26 @@ PRODUCT_LIST = [
 ]
 
 
-PRODUCT_VOCABULARY = ["eggs", "milk"]
+
+PRODUCT_VOCABOLARY = ["eggs", "milk"]
 
 class DataHandler():
     
-    def __init__(self):
-        self.map_list = MAP_LIST
-        self.product_list = PRODUCT_LIST
-        self.product_vocabulary = PRODUCT_VOCABULARY
-        
+    # def __init__(self, modim_data, vocabulary):
+    #     self.modim_data = modim_data
+    #     self.product_vocabolary = vocabulary
+    
+    def __init__(self):    
+        self.map_list = MAP_LIST                # TODO DELETE
+        self.product_list = PRODUCT_LIST        # TODO DELETE
+        self.product_vocabolary = PRODUCT_VOCABOLARY    # TODO DELETE
+    
+    # def reset_map(self, modim_data):
+    #     self.modim_data = modim_data
+       
     def reset_map(self):
-        self.map_list = MAP_LIST
-        self.product_list = PRODUCT_LIST 
+        self.map_list = MAP_LIST                # TODO DELETE
+        self.product_list = PRODUCT_LIST        # TODO DELETE
         
     def get_product_list(self):
         return self.product_list
@@ -47,4 +65,7 @@ class DataHandler():
         product["classes"] = cls
     
     def get_map_data(self):
-        return {"tiles": self.map_list, "products": self.product_list}
+        return {"tiles": self.map_list, "products": self.product_list}      # TODO DELETE
+    
+    # def get_map_data(self):    
+    #     retrun self.modim_data
