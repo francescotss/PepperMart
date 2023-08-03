@@ -3,15 +3,13 @@
         "list": [
             "robot_say_welcome_robot_human",
             "robot_wait_human_decision_robot_human",
-            "robot_do_info_robot_human",
-            "robot_say_welcome_robot_human",
-            "robot_wait_human_decision_robot_human"
+            "robot_do_where_robot_human"
         ],
         "ordering": "total"
     },
     "actions": [
         "robot_say_welcome_robot_human",
         "robot_wait_human_decision_robot_human",
-        "robot_do_info_robot_human"
+        "robot_do_where_robot_human"
     ]
 }

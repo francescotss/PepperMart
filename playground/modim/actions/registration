@@ -1,19 +1,13 @@
 IMAGE
-<*, *, *, *>:  img/welcome.jpg
+<*, *, *, *>:  img/logo_inverted.png
 ----
 TEXT_default
-<*,*,it,*>: Benvenuto
-<*,*,*,*>:  How can I help you?
+<*,*,*,*>:  What is your name?
 ----
 GESTURE
 <*,*,*,*>: animations/Stand/Gestures/Hey_1
 ----
 TTS
-<*,*,it,*>: Ciao! Benvenuto!
-<*,*,*,*>:  Hi! how can I help you?
+<*,*,*,*>:  What's your name?
 ----
-BUTTONS
-start
-<*,*,it,*>: Inizia
-<*,*,*,*>:  Start
-----
+

@@ -19,8 +19,8 @@ from market import *
 from data import * 
 
 global DEBUG
-# DEBUG = False
-DEBUT = True
+DEBUG = False
+DEBUT = False
 
 def plan_excuter(plan, interaction_handler):
     step_list = plan["plan"]
@@ -35,8 +35,14 @@ def plan_excuter(plan, interaction_handler):
         # Execute action
         res = interaction_handler.run_action(action_name)
         
-        if res == "ERROR" or res == "GOODBYE":
+        if res == "ERROR":
+            interaction_handler.error()
             return
+        if res == "GOODBYE":
+            interaction_handler.goodbye()
+            return
+            
+            
         # Find next action
         for outcome in potential_outcomes:
             if res in outcome["condition"]:
@@ -144,8 +150,7 @@ if __name__ == "__main__":
         try:
             interaction_handler.init_robot()
             interaction_handler.reset()
-            interaction_handler._choose_products()
-            exit()
+            
             # Blocking waiting
             interaction_handler.waitfor_person()
             

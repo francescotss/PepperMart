@@ -42,24 +42,29 @@
             ]
         }
     },
-    "robot_do_info_robot_human": {
-        "name": "robot_do_info",
+    "robot_do_where_robot_human": {
+        "name": "robot_do_where",
         "args": [
             "robot",
             "human"
         ],
         "pre": {},
         "per": {
-            "human_say_info": [
+            "human_say_where": [
                 "human"
             ]
         },
         "add": {
-            "interaction_start": [
+            "interaction_done": [
                 "human",
                 "robot"
             ]
         },
-        "del": {}
+        "del": {
+            "interaction_start": [
+                "human",
+                "robot"
+            ]
+        }
     }
 }

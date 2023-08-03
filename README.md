@@ -50,10 +50,10 @@ https://github.com/mokhtarivahid/safe-planner
 
 # Istruzioni
 Start naoqi server: /opt/Aldebaran/naoqi-sdk-2.5.5.5-linux64/naoqi
-Start modim: cd src/modim/src/GUI && python ws_server.py -robot pepper
-Start main: cd playground/ && python main.py 
+Start modim: cd ~/src/modim/src/GUI && python ws_server.py -robot pepper
+Start main: cd ~/playground/ && python main.py 
 
-Generate plan: cd ~/playground/pddl && ../../safe-planner/sp ~/playground/pddl/hri_world_v2.pddl ~/playground/pddl/hri_problem_example_v2.pddl 
+Generate plan: cd ~/playground/pddl && ../../safe-planner/sp ~/playground/pddl/hri_world_v2.pddl ~/playground/pddl/hri_problem_example_v2.pddl -j -d
 
 To send asr sentence do: cd ~/src/pepper_tools/asr && python human_say.py --sentence "Phrase"
 To send fake sonar: cd ~/src/pepper_tools/sonar && python sonar_sim.py --sensor SonarFront --value 1.0 --duration 10.0

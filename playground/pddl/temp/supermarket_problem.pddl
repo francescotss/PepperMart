@@ -201,8 +201,7 @@
     (:goal
         
         (and 
-    		(reached HUMAN meatcounter)
-
+    
         )
     )
     

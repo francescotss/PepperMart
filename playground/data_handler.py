@@ -1,4 +1,5 @@
 from enum import Enum
+import json
 
 class MODIM_LABELS(Enum):
     TYPE = "type"
@@ -16,7 +17,7 @@ MODIM_DATA = [
     {"name":"milk", "id":"1-2", "classes":""},
 ]
 
-
+USERS_DATA = {"users": [{"name": "francesco"}]}
 
 PRODUCT_VOCABOLARY = [{"type": "product", "word": "eggs"}, {"type": "section", "word": "infopoint"}]
 
@@ -24,7 +25,26 @@ class DataHandler():
     
     def __init__(self, modim_data, vocabulary):
         self.modim_data = modim_data
-        self.product_vocabolary = vocabulary
+        self.product_vocabulary = vocabulary
+
+        with open('users.json', 'r') as userfile:
+            data = json.load(userfile)
+            self.userlist = data["users"]
+            
+    def get_user(self, name):
+        for user in self.userlist:
+            print("USER", user)
+            if user["name"] == name:
+                return user
+        return None
+    
+    def create_user(self, name):
+        user = {"name": name}
+        self.userlist["users"].append(user)
+        
+        with open('users.json', 'w') as userfile:
+            json.dump(self.userlist, userfile)
+        
     
     # def __init__(self):    
     #     self.map_list = MAP_LIST                # TODO DELETE
@@ -42,7 +62,11 @@ class DataHandler():
         return self.product_list
     
     def get_product_vocabulary(self):
-        return self.product_vocabulary
+        ret = []
+        for prod in self.product_vocabulary:
+            if prod["type"] == "product":
+                ret.append(prod["word"])
+        return ret
     
     def get_product(self,name):
         for product in self.product_list:

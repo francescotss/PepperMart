@@ -5,7 +5,7 @@ from ws_client import *
 import ws_client
 import utils
 global DEBUG
-DEBUG = True
+DEBUG = False
 
 
 class InteractionHandler():
@@ -40,7 +40,7 @@ class InteractionHandler():
             self.robot.setAlive(False)
         
     def reset(self):
-        self.data.reset_map()
+        #self.data.reset_map()
         self.user_logged = False
         self.user_name = None
         self.product_asked = None
@@ -120,15 +120,20 @@ class InteractionHandler():
             res = self._robot_do_info()
         elif action == "robot_do_where":
             res = self._robot_do_where()
-        elif action == "do_shopping":
-            res = self._shopping()  
+        elif action == "robot_do_shopping":
+            res = self._robot_do_shopping()  
         
         utils.color_print("\nEnd action {}".format(action), "green")
         return res
         
+    def goodbye(self):
+        # TODO: animation
+        self.robot.say("Bye. See you next time!")
+        self.reset()
         
-    
-        
+    def error(self):
+        # TODO: animation
+        self.reset()
     
     
     # -------- Action Handlers -------- #
@@ -153,7 +158,7 @@ class InteractionHandler():
         def _modim_callback():
             im.execute('welcomeBack')
             im.executeModality('ASR',vocabulary)
-            answer = im.ask(actionname=None, timeout=5) 
+            answer = im.ask(actionname=None, timeout=10) 
             time.sleep(0.6) # Wait for asr thread shutdown
             im.display.setReturnValue(answer)
 
@@ -161,7 +166,7 @@ class InteractionHandler():
         help_voc = ["help", "what can you do", "what can i ask"]
         registration_voc = ["register", "sign in"]
         shopping_voc = ["shopping", "cart"]
-        where_voc = ["where"] + utils.build_vocabolary(["where"], self.data.product_vocabolary)
+        where_voc = ["where"] + utils.build_vocabolary(["where", "where i can find the"], self.data.get_product_vocabulary())
         vocabulary = help_voc + registration_voc + shopping_voc + where_voc
         
         answer = self.send_interaction(_modim_callback, [["vocabulary", vocabulary]])
@@ -197,7 +202,25 @@ class InteractionHandler():
         
     
     def _robot_do_registration(self):
+        def _registration_callback():
+            im.execute('registration')
+            
+        self.send_interaction(_registration_callback)
+        vocabulary = ["francesco", "leonardo"]
+        answer = utils.ask_loop(vocabulary, self.robot)
         
+        if answer == "ERROR":
+            return "ERROR"
+        
+        username = self.data.get_user(answer)
+        if username is None:
+            print("User %s not found, creating data record" %answer)
+            self.data.create_user(answer)
+            self.robot.say("Hi %s, nice to meet you. Welcome to peppermart!" %answer)
+        else:
+            self.robot.say("Welcome back %s" %answer)    
+        
+        self.robot.say("How can I help you today?")
         self.user_logged = True
         return "(human_is_registered human)"  
     
@@ -212,7 +235,7 @@ class InteractionHandler():
             
         if self.product_asked is None:
             self.robot.asay("What are you looking for?")
-            answer = utils.ask_loop(self.data.product_vocabolary, self.robot)
+            answer = utils.ask_loop(self.data.get_product_vocabulary(), self.robot)
             if answer == "ERROR":
                 return "ERROR"
             self.product_asked = answer
@@ -271,12 +294,10 @@ class InteractionHandler():
             else:
                 self.robot.say("%s added" %product)
                 
-        
-        
-        
-    
-    def _shopping(self):
-        self._choose_products()
+ 
+    def _robot_do_shopping(self):
+        products = self._choose_products()
+        print("Product List", products)
         return "(interaction_done human robot)"
       
    
