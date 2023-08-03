@@ -30,7 +30,8 @@ class Market:
         self.domain_file = domain_file
         self.problem_file_template = problem_file_template
         self.temp_problem_file_path = temp_problem_file_path
-        
+    
+    # USE THIS FUNCTION ONE TIMES FOR EACH HUMAN INTERACTION    
     def fill_problem_template(self, data):
         
         

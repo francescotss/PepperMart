@@ -1,0 +1,23 @@
+{
+    "main": {
+        "list": [
+            "move_human_cell_5_9_cell_4_9",
+            "move_human_cell_4_9_cell_4_8",
+            "move_human_cell_4_8_cell_4_7",
+            "move_human_cell_4_7_cell_4_6",
+            "move_human_cell_4_6_cell_3_6",
+            "move_human_cell_3_6_cell_2_6",
+            "take_human_cart_list_cell_2_6_eggs_cell_2_7"
+        ],
+        "ordering": "total"
+    },
+    "actions": [
+        "move_human_cell_5_9_cell_4_9",
+        "move_human_cell_4_9_cell_4_8",
+        "move_human_cell_4_8_cell_4_7",
+        "move_human_cell_4_7_cell_4_6",
+        "move_human_cell_4_6_cell_3_6",
+        "move_human_cell_3_6_cell_2_6",
+        "take_human_cart_list_cell_2_6_eggs_cell_2_7"
+    ]
+}

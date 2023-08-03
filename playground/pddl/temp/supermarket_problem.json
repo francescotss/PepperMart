@@ -1,0 +1,154 @@
+{
+    "plan": [
+        "step_0",
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4",
+        "step_5",
+        "step_6"
+    ],
+    "step_0": {
+        "actions": [
+            {
+                "name": "move",
+                "arguments": [
+                    "human",
+                    "cell_5_9",
+                    "cell_4_9"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(at human cell_4_9)"
+                ],
+                "next": "step_1"
+            }
+        ]
+    },
+    "step_1": {
+        "actions": [
+            {
+                "name": "move",
+                "arguments": [
+                    "human",
+                    "cell_4_9",
+                    "cell_4_8"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(at human cell_4_8)"
+                ],
+                "next": "step_2"
+            }
+        ]
+    },
+    "step_2": {
+        "actions": [
+            {
+                "name": "move",
+                "arguments": [
+                    "human",
+                    "cell_4_8",
+                    "cell_4_7"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(at human cell_4_7)"
+                ],
+                "next": "step_3"
+            }
+        ]
+    },
+    "step_3": {
+        "actions": [
+            {
+                "name": "move",
+                "arguments": [
+                    "human",
+                    "cell_4_7",
+                    "cell_4_6"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(at human cell_4_6)"
+                ],
+                "next": "step_4"
+            }
+        ]
+    },
+    "step_4": {
+        "actions": [
+            {
+                "name": "move",
+                "arguments": [
+                    "human",
+                    "cell_4_6",
+                    "cell_3_6"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(at human cell_3_6)"
+                ],
+                "next": "step_5"
+            }
+        ]
+    },
+    "step_5": {
+        "actions": [
+            {
+                "name": "move",
+                "arguments": [
+                    "human",
+                    "cell_3_6",
+                    "cell_2_6"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(at human cell_2_6)"
+                ],
+                "next": "step_6"
+            }
+        ]
+    },
+    "step_6": {
+        "actions": [
+            {
+                "name": "take",
+                "arguments": [
+                    "human",
+                    "cart",
+                    "list",
+                    "cell_2_6",
+                    "eggs",
+                    "cell_2_7"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(contains cart eggs)"
+                ],
+                "next": "GOAL"
+            }
+        ]
+    }
+}

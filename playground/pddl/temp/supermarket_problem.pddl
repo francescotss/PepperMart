@@ -194,6 +194,7 @@
 		(is cell_7_9 infopoint)
 		(is cell_9_7 cashdesk)
 		(is cell_9_9 cashdesk)
+		(contains LIST EGGS)
 
 
     )
@@ -201,7 +202,7 @@
     (:goal
         
         (and 
-    		(reached HUMAN meatcounter)
+    		(contains CART EGGS)
 
         )
     )
