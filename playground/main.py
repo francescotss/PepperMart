@@ -79,8 +79,11 @@ if __name__ == "__main__":
             interaction_handler.init_robot()
             interaction_handler.reset()
             
+            interaction_handler._robot_do_shopping()
+            
             # Blocking waiting
             interaction_handler.waitfor_person()
+            
             
             # Execute plan
             plan_excuter(plan, interaction_handler)
@@ -88,20 +91,4 @@ if __name__ == "__main__":
         except KeyboardInterrupt:
             interaction_handler.shutdown_robot()
             exit()
-    
-    # Shutdown gracefully            
-    interaction_handler.shutdown_robot()
-    end()
-
-    
-    # cell_1_1 = Entity("1-1", ["walkable"])
-    # cell_1_2 = Entity("1-2", ["shelf", "food"])
-    # path_1_1 = Entity("1-1", ["path"])
-    # start_0_0 = Entity("0-0", ["map-start"])
-    # product_1 = Product("eggs", "1-2", [""])
-    
-    # data_ = {
-    #     'tiles': [cell_1_1, cell_1_2, path_1_1, start_0_0],
-    #     'products': [product_1]
-    # }
     

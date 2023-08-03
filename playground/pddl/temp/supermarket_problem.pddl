@@ -194,7 +194,9 @@
 		(is cell_7_9 infopoint)
 		(is cell_9_7 cashdesk)
 		(is cell_9_9 cashdesk)
-		(contains LIST EGGS)
+		(contains LIST SALMON)
+		(contains LIST MAGNUM)
+		(contains LIST SUGAR)
 
 
     )
@@ -202,7 +204,9 @@
     (:goal
         
         (and 
-    		(contains CART EGGS)
+    		(contains CART SALMON)
+		(contains CART MAGNUM)
+		(contains CART SUGAR)
 
         )
     )

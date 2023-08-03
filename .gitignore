@@ -1,4 +1,8 @@
 /android-studio
+/playground/pddl/temp
+/playground/pddl/*.json
+/playground/pddl/*.gv
+/playground/pddl/*.dot
 devkit/docker/downloads/ctc-linux64-atom-2.5.2.74.zip:Zone.Identifier
 devkit/docker/downloads/pynaoqi-python2.7-2.5.5.5-linux64.tar.gz:Zone.Identifier
 devkit/docker/downloads/naoqi-sdk-2.5.5.5-linux64.tar.gz:Zone.Identifier

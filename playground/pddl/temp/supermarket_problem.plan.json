@@ -3,21 +3,35 @@
         "list": [
             "move_human_cell_5_9_cell_4_9",
             "move_human_cell_4_9_cell_4_8",
+            "take_human_cart_list_cell_4_8_sugar_cell_3_8",
             "move_human_cell_4_8_cell_4_7",
             "move_human_cell_4_7_cell_4_6",
-            "move_human_cell_4_6_cell_3_6",
-            "move_human_cell_3_6_cell_2_6",
-            "take_human_cart_list_cell_2_6_eggs_cell_2_7"
+            "move_human_cell_4_6_cell_4_5",
+            "move_human_cell_4_5_cell_4_4",
+            "move_human_cell_4_4_cell_4_3",
+            "move_human_cell_4_3_cell_5_3",
+            "take_human_cart_list_cell_5_3_salmon_cell_5_2",
+            "move_human_cell_5_3_cell_6_3",
+            "move_human_cell_6_3_cell_7_3",
+            "move_human_cell_7_3_cell_7_2",
+            "take_human_cart_list_cell_7_2_magnum_cell_8_2"
         ],
         "ordering": "total"
     },
     "actions": [
         "move_human_cell_5_9_cell_4_9",
         "move_human_cell_4_9_cell_4_8",
+        "take_human_cart_list_cell_4_8_sugar_cell_3_8",
         "move_human_cell_4_8_cell_4_7",
         "move_human_cell_4_7_cell_4_6",
-        "move_human_cell_4_6_cell_3_6",
-        "move_human_cell_3_6_cell_2_6",
-        "take_human_cart_list_cell_2_6_eggs_cell_2_7"
+        "move_human_cell_4_6_cell_4_5",
+        "move_human_cell_4_5_cell_4_4",
+        "move_human_cell_4_4_cell_4_3",
+        "move_human_cell_4_3_cell_5_3",
+        "take_human_cart_list_cell_5_3_salmon_cell_5_2",
+        "move_human_cell_5_3_cell_6_3",
+        "move_human_cell_6_3_cell_7_3",
+        "move_human_cell_7_3_cell_7_2",
+        "take_human_cart_list_cell_7_2_magnum_cell_8_2"
     ]
 }

@@ -164,7 +164,7 @@ class InteractionHandler():
 
     
         help_voc = ["help", "what can you do", "what can i ask"]
-        registration_voc = ["register", "sign in"]
+        registration_voc = ["register", "sign in", "registration"]
         shopping_voc = ["shopping", "cart"]
         where_voc = ["where"] + utils.build_vocabolary(["where", "where i can find the"], self.data.get_product_vocabulary())
         vocabulary = help_voc + registration_voc + shopping_voc + where_voc
@@ -274,30 +274,39 @@ class InteractionHandler():
             product_buttons.append(button)  
         self.send_interaction(_show_interface, [["buttons", product_buttons], ["single_mode", single_mode]])
         
-        
-        vocabulary = self.data.get_product_vocabulary()
+        product_voc = self.data.get_product_vocabulary()
+        section_voc = self.data.get_section_vocabulary()
         continue_voc = ["done", "that's all", "continue"]
-        vocabulary += continue_voc
+        vocabulary = product_voc + continue_voc
+        if single_mode:
+            vocabulary += section_voc
         
         selected = []
         while True:
-            product = self.send_interaction(_ask_callback, [["vocabulary", vocabulary ], ["buttons", product_buttons]])
+            product = self.send_interaction(_ask_callback, [["vocabulary", vocabulary], ["buttons", product_buttons]])
             if product in continue_voc:
                 return selected
             if product == 'timeout':
                 continue
-            selected.append(product)
+            
+            section = "product" if product in product_voc else "section"
+            entry = {"name": product, "type": section}  
+            selected.append(entry)
+            vocabulary.remove(product)
             if single_mode:
-                return selected[0]
+                return selected
             elif len(selected) == 1:
                 self.robot.say("I've added the %s to your shopping cart. What else?" %product)
             else:
                 self.robot.say("%s added" %product)
-                
+                          
  
     def _robot_do_shopping(self):
         products = self._choose_products()
         print("Product List", products)
+        self.data.set_shopping_goal(products)
+        self.data.solve_problem()
+        
         return "(interaction_done human robot)"
       
    

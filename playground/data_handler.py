@@ -1,12 +1,11 @@
 from enum import Enum
-import json
+import json, subprocess, os
 
 class MODIM_LABELS(Enum):
     TYPE = "type"
     POSITION = "id"
     CLASSES = "classes"
     NAME = "name"
-    WORD = "word"
     
 
 class PDDL_LABELS(Enum):
@@ -42,6 +41,10 @@ class DataHandler():
         self.data = initialization() # init data
         self.map_data = []
         self.vocabulary_data = []
+        self.user_data = None
+        
+        with open('users.json', 'r') as userfile:
+            self.user_data = json.load(userfile)["users"]
         
         # fill map and vocabulary using data given by the initilization() function
         for el in self.data[PDDL_LABELS.INITS]:
@@ -60,7 +63,7 @@ class DataHandler():
                 
                 vocabulary_record = {
                     MODIM_LABELS.TYPE.value: "product",
-                    MODIM_LABELS.WORD.value: el.args[0].name
+                    MODIM_LABELS.NAME.value: el.args[0].name
                 }
                 
                 self.map_data.append(map_record)
@@ -78,7 +81,7 @@ class DataHandler():
                 }
                 vocabulary_record = {
                     MODIM_LABELS.TYPE.value: "section",
-                    MODIM_LABELS.WORD.value: el.args[1].name
+                    MODIM_LABELS.NAME.value: el.args[1].name
                 }
                 self.map_data.append(map_record)
                 self.vocabulary_data.append(vocabulary_record)
@@ -97,14 +100,13 @@ class DataHandler():
         
         # print(self.map_data)
         # print(self.vocabulary_data)
-        
-    
+            
+    def reset(self):
+        self.data = initialization()
+            
     # [GOAL]
     # (reached HUMAN fishcounter)
-    
-    
-            
-    def set_reached_goal(self, product_section_list):
+    def set_where_goal(self, product_section_list):
         goals = []
         human = self.data[PDDL_LABELS.ENTITIES][0]
         # LIST = self.data[PDDL_LABELS.ENTITIES][1]
@@ -112,8 +114,8 @@ class DataHandler():
         
         for element in product_section_list:
             for obj in self.data[PDDL_LABELS.OBJECTS]:
-                if obj.name == element.name:
-                    goals.append(Predicate("reached", human, obj))
+                if obj.name == element[MODIM_LABELS.NAME.value]:
+                    goals.append(Predicate("reached", [human, obj]))
         
         self.update_structure(goals, PDDL_LABELS.GOALS)
                     
@@ -124,7 +126,7 @@ class DataHandler():
     # [GOAL]
     # (contains LIST p1 )
             
-    def set_cart_goal(self, product_list):
+    def set_shopping_goal(self, product_list):
         inits = []
         goals = []
         # HUMAN = self.data[PDDL_LABELS.ENTITIES][0]
@@ -132,10 +134,12 @@ class DataHandler():
         CART = self.data[PDDL_LABELS.ENTITIES][2]
         
         for element in product_list:
+            print(element)
             for obj in self.data[PDDL_LABELS.OBJECTS]:
-                if obj.name == element.name:
-                    inits.append(Predicate("contains", LIST, obj))
-                    goals.append(Predicate("contains", CART, obj))
+                print(obj)
+                if obj.name == element[MODIM_LABELS.NAME.value]:
+                    inits.append(Predicate("contains", [LIST, obj]))
+                    goals.append(Predicate("contains", [CART, obj]))
                     
         self.update_structure(inits, PDDL_LABELS.INITS)
         self.update_structure(goals, PDDL_LABELS.GOALS)
@@ -147,9 +151,40 @@ class DataHandler():
 
     
     # TODO THIS FUNCTION SHOULD BE CALLED ONE TIMES FOR EACH HUMAN INTERACTION
-    def build_problem(self):
-        self.pddl_generator.fill_problem_template(self.data)  
+    def solve_problem(self):
+        self.pddl_generator.fill_problem_template(self.data)
+        os.system("cd ~/playground/pddl/temp && ../../safe-planner/sp ~/playground/pddl/supermarket_world.pddl ~/playground/pddl/temp/supermarket_problem.pddl -j -d") 
+        with open('pddl/temp/supermarket_problem.json', 'r') as jsonfile:
+    
+    def        
         
+        
+    def get_user(self, name):
+        for user in self.user_data:
+            print("USER", user)
+            if user["name"] == name:
+                return user
+        return None
+    
+    def create_user(self, name):
+        user = {"name": name}
+        self.user_data["users"].append(user)  
+        with open('users.json', 'w') as userfile:
+            json.dump(self.user_data, userfile)
+            
+    def get_product_vocabulary(self):
+        ret = []
+        for prod in self.vocabulary_data:
+            if prod[MODIM_LABELS.TYPE.value] == "product":
+                ret.append(prod[MODIM_LABELS.NAME.value])
+        return ret    
+    
+    def get_section_vocabulary(self):
+        ret = []
+        for prod in self.vocabulary_data:
+            if prod[MODIM_LABELS.TYPE.value] == "section":
+                ret.append(prod[MODIM_LABELS.NAME.value])
+        return ret 
     
 
 class PDDLGenerator:
@@ -513,23 +548,3 @@ def initialization():
 
 
 
-    def get_user(self, name):
-        for user in self.userlist:
-            print("USER", user)
-            if user["name"] == name:
-                return user
-        return None
-    
-    def create_user(self, name):
-        user = {"name": name}
-        self.userlist["users"].append(user)
-        
-        with open('users.json', 'w') as userfile:
-            json.dump(self.userlist, userfile)
-            
-def get_product_vocabulary(self):
-        ret = []
-        for prod in self.product_vocabulary:
-            if prod["type"] == "product":
-                ret.append(prod["word"])
-        return ret
