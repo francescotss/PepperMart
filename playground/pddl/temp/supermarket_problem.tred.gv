@@ -1,0 +1,22 @@
+strict digraph "" {
+	graph [fontname=helvetica];
+	node [fontname=helvetica,
+		label="\N",
+		shape=ellipse
+	];
+	edge [fontname=helvetica];
+	"(end)"	 [label=end,
+		peripheries=2,
+		shape=circle];
+	"(take human cart list cell_2_6 eggs cell_2_7)" -> "(end)";
+	"(move human cell_3_6 cell_2_6)" -> "(take human cart list cell_2_6 eggs cell_2_7)"	 [label="(at human cell_2_6)"];
+	"(move human cell_4_6 cell_3_6)" -> "(move human cell_3_6 cell_2_6)"	 [label="(at human cell_3_6)"];
+	"(move human cell_4_7 cell_4_6)" -> "(move human cell_4_6 cell_3_6)"	 [label="(at human cell_4_6)"];
+	"(move human cell_4_8 cell_4_7)" -> "(move human cell_4_7 cell_4_6)"	 [label="(at human cell_4_7)"];
+	"(move human cell_4_9 cell_4_8)" -> "(move human cell_4_8 cell_4_7)"	 [label="(at human cell_4_8)"];
+	"(move human cell_5_9 cell_4_9)" -> "(move human cell_4_9 cell_4_8)"	 [label="(at human cell_4_9)"];
+	"(start)"	 [label=start,
+		peripheries=1,
+		shape=circle];
+	"(start)" -> "(move human cell_5_9 cell_4_9)";
+}
