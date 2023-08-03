@@ -5,7 +5,7 @@ from ws_client import *
 import ws_client
 import utils
 global DEBUG
-DEBUG = False
+DEBUG = True
 
 
 class InteractionHandler():
@@ -178,13 +178,13 @@ class InteractionHandler():
         elif answer in registration_voc:
             if self.user_logged:
                 self.robot.say("Hi %s, you are already registered!" %self.user_name)
-                return "(interaction_start human robot)"
+                return "(can_wait_welcome human)"
             return "(human_say_registration human)"
         
         elif answer in shopping_voc:
             if not self.user_logged:
                 self.robot.say("I'm sorry, you must be registered")
-                return "(interaction_start human robot)"
+                return "(can_wait_welcome human)"
             return "(human_say_shopping human)"
         
         elif answer in where_voc:
@@ -219,14 +219,64 @@ class InteractionHandler():
         
         self.data.add_product_class(self.product_asked,"show")
         map_data = self.data.get_map_data()
-        utils.create_data_file(map_data)
+        utils.create_mapdata_file(map_data)
         self.robot.asay("Check the map to find the {}".format(self.product_asked))            
         self.mws.run_interaction(_modim_callback)
         self.data.reset_map()  
               
         return "(interaction_done human robot)"
     
+    
+    def _choose_products(self, single_mode=False):
+        def _show_interface():
+            im.display.loadUrl('products.html')
+            im.executeModality('BUTTONS', buttons)
+            im.executeModality('BUTTONS_continue', ["continue", "Continue"])
+            if single_mode:
+                im.execute('chooseProduct')
+            else:
+                im.execute('chooseProducts')
+
+        def _ask_callback():
+            im.executeModality('BUTTONS', buttons)
+            im.executeModality('BUTTONS_continue', ["continue", "Continue"])
+            im.executeModality('ASR',vocabulary)
+            answer = im.ask(actionname=None, timeout=10) 
+            time.sleep(0.5) # Wait for asr thread shutdown
+            im.display.setReturnValue(answer)
+            
+        product_buttons = []
+        for product in self.data.get_product_vocabulary():
+            button = [product, product.capitalize()]
+            product_buttons.append(button)  
+        self.send_interaction(_show_interface, [["buttons", product_buttons], ["single_mode", single_mode]])
+        
+        
+        vocabulary = self.data.get_product_vocabulary()
+        continue_voc = ["done", "that's all", "continue"]
+        vocabulary += continue_voc
+        
+        selected = []
+        while True:
+            product = self.send_interaction(_ask_callback, [["vocabulary", vocabulary ], ["buttons", product_buttons]])
+            if product in continue_voc:
+                return selected
+            if product == 'timeout':
+                continue
+            selected.append(product)
+            if single_mode:
+                return selected[0]
+            elif len(selected) == 1:
+                self.robot.say("I've added the %s to your shopping cart. What else?" %product)
+            else:
+                self.robot.say("%s added" %product)
+                
+        
+        
+        
+    
     def _shopping(self):
+        self._choose_products()
         return "(interaction_done human robot)"
       
    

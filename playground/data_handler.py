@@ -14,18 +14,24 @@ PRODUCT_LIST = [
 ]
 
 
-PRODUCT_VOCABOLARY = ["eggs", "milk"]
+PRODUCT_VOCABULARY = ["eggs", "milk"]
 
 class DataHandler():
     
     def __init__(self):
         self.map_list = MAP_LIST
         self.product_list = PRODUCT_LIST
-        self.product_vocabolary = PRODUCT_VOCABOLARY
+        self.product_vocabulary = PRODUCT_VOCABULARY
         
     def reset_map(self):
         self.map_list = MAP_LIST
         self.product_list = PRODUCT_LIST 
+        
+    def get_product_list(self):
+        return self.product_list
+    
+    def get_product_vocabulary(self):
+        return self.product_vocabulary
     
     def get_product(self,name):
         for product in self.product_list:
