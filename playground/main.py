@@ -15,9 +15,6 @@ from pepper_cmd import *
 from data_handler import *
 from modim.scripts.interaction_handler import InteractionHandler
 
-from market import *
-from data import * 
-
 global DEBUG
 # DEBUG = False
 DEBUT = True
@@ -62,26 +59,13 @@ if __name__ == "__main__":
     json_data = open(filename).read()
     plan = json.loads(json_data)
     
-    data_manager = DataHandler()
-    interaction_handler = InteractionHandler(pepper_cmd.robot, data_manager)
-    
     
     # init PepperMarket
-    market = Market("./pddl/supermarket_world.pddl", "./pddl/supermarket_problem_template.pddl", "./pddl/temp/supermarket_problem.pddl")
-         
-    # TODO THIS FUNCTION SHOULD BE CALLED ONE TIMES FOR EACH HUMAN INTERACTION
-    market.fill_problem_template(data_manager.data)  
-    
-        
+    generator = PDDLGenerator("./pddl/supermarket_world.pddl", "./pddl/supermarket_problem_template.pddl", "./pddl/temp/supermarket_problem.pddl")
     
     # Start modim and robot
-    #data_handler = DataHandler()                    # TODO DELETE
-    data_handler = DataHandler(modim_data, modim_vocabulary)
-    interaction_handler = InteractionHandler(pepper_cmd.robot, data_handler)
-    
-    
-    
-    
+    data_manager = DataHandler(generator)
+    interaction_handler = InteractionHandler(pepper_cmd.robot, data_manager)
     
     # Execution loop
     while True:
