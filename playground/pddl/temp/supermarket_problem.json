@@ -58,29 +58,6 @@
     "step_2": {
         "actions": [
             {
-                "name": "take",
-                "arguments": [
-                    "human",
-                    "cart",
-                    "list",
-                    "cell_4_8",
-                    "sugar",
-                    "cell_3_8"
-                ]
-            }
-        ],
-        "outcomes": [
-            {
-                "condition": [
-                    "(contains cart sugar)"
-                ],
-                "next": "step_3"
-            }
-        ]
-    },
-    "step_3": {
-        "actions": [
-            {
                 "name": "move",
                 "arguments": [
                     "human",
@@ -94,11 +71,11 @@
                 "condition": [
                     "(at human cell_4_7)"
                 ],
-                "next": "step_4"
+                "next": "step_3"
             }
         ]
     },
-    "step_4": {
+    "step_3": {
         "actions": [
             {
                 "name": "move",
@@ -114,11 +91,11 @@
                 "condition": [
                     "(at human cell_4_6)"
                 ],
-                "next": "step_5"
+                "next": "step_4"
             }
         ]
     },
-    "step_5": {
+    "step_4": {
         "actions": [
             {
                 "name": "move",
@@ -134,11 +111,11 @@
                 "condition": [
                     "(at human cell_4_5)"
                 ],
-                "next": "step_6"
+                "next": "step_5"
             }
         ]
     },
-    "step_6": {
+    "step_5": {
         "actions": [
             {
                 "name": "move",
@@ -154,11 +131,11 @@
                 "condition": [
                     "(at human cell_4_4)"
                 ],
-                "next": "step_7"
+                "next": "step_6"
             }
         ]
     },
-    "step_7": {
+    "step_6": {
         "actions": [
             {
                 "name": "move",
@@ -174,6 +151,26 @@
                 "condition": [
                     "(at human cell_4_3)"
                 ],
+                "next": "step_7"
+            }
+        ]
+    },
+    "step_7": {
+        "actions": [
+            {
+                "name": "move",
+                "arguments": [
+                    "human",
+                    "cell_4_3",
+                    "cell_3_3"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(at human cell_3_3)"
+                ],
                 "next": "step_8"
             }
         ]
@@ -181,18 +178,21 @@
     "step_8": {
         "actions": [
             {
-                "name": "move",
+                "name": "take",
                 "arguments": [
                     "human",
-                    "cell_4_3",
-                    "cell_5_3"
+                    "cart",
+                    "list",
+                    "cell_3_3",
+                    "chicken",
+                    "cell_3_2"
                 ]
             }
         ],
         "outcomes": [
             {
                 "condition": [
-                    "(at human cell_5_3)"
+                    "(contains cart chicken)"
                 ],
                 "next": "step_9"
             }
@@ -201,21 +201,18 @@
     "step_9": {
         "actions": [
             {
-                "name": "take",
+                "name": "move",
                 "arguments": [
                     "human",
-                    "cart",
-                    "list",
-                    "cell_5_3",
-                    "salmon",
-                    "cell_5_2"
+                    "cell_3_3",
+                    "cell_2_3"
                 ]
             }
         ],
         "outcomes": [
             {
                 "condition": [
-                    "(contains cart salmon)"
+                    "(at human cell_2_3)"
                 ],
                 "next": "step_10"
             }
@@ -227,15 +224,15 @@
                 "name": "move",
                 "arguments": [
                     "human",
-                    "cell_5_3",
-                    "cell_6_3"
+                    "cell_2_3",
+                    "cell_1_3"
                 ]
             }
         ],
         "outcomes": [
             {
                 "condition": [
-                    "(at human cell_6_3)"
+                    "(at human cell_1_3)"
                 ],
                 "next": "step_11"
             }
@@ -247,15 +244,15 @@
                 "name": "move",
                 "arguments": [
                     "human",
-                    "cell_6_3",
-                    "cell_7_3"
+                    "cell_1_3",
+                    "cell_1_4"
                 ]
             }
         ],
         "outcomes": [
             {
                 "condition": [
-                    "(at human cell_7_3)"
+                    "(at human cell_1_4)"
                 ],
                 "next": "step_12"
             }
@@ -267,15 +264,15 @@
                 "name": "move",
                 "arguments": [
                     "human",
-                    "cell_7_3",
-                    "cell_7_2"
+                    "cell_1_4",
+                    "cell_1_5"
                 ]
             }
         ],
         "outcomes": [
             {
                 "condition": [
-                    "(at human cell_7_2)"
+                    "(at human cell_1_5)"
                 ],
                 "next": "step_13"
             }
@@ -289,16 +286,16 @@
                     "human",
                     "cart",
                     "list",
-                    "cell_7_2",
-                    "magnum",
-                    "cell_8_2"
+                    "cell_1_5",
+                    "shampoo",
+                    "cell_2_5"
                 ]
             }
         ],
         "outcomes": [
             {
                 "condition": [
-                    "(contains cart magnum)"
+                    "(contains cart shampoo)"
                 ],
                 "next": "GOAL"
             }

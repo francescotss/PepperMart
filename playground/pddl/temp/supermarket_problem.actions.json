@@ -48,11 +48,11 @@
             ]
         },
         "per": {
-            "adj": [
-                "cell_4_9",
+            "walkable": [
                 "cell_4_8"
             ],
-            "walkable": [
+            "adj": [
+                "cell_4_9",
                 "cell_4_8"
             ]
         },
@@ -66,53 +66,6 @@
             "at": [
                 "human",
                 "cell_4_9"
-            ]
-        }
-    },
-    "take_human_cart_list_cell_4_8_sugar_cell_3_8": {
-        "name": "take",
-        "args": [
-            "human",
-            "cart",
-            "list",
-            "cell_4_8",
-            "sugar",
-            "cell_3_8"
-        ],
-        "pre": {
-            "at": [
-                "sugar",
-                "cell_3_8"
-            ],
-            "contains": [
-                "list",
-                "sugar"
-            ]
-        },
-        "per": {
-            "at": [
-                "human",
-                "cell_4_8"
-            ],
-            "adj": [
-                "cell_4_8",
-                "cell_3_8"
-            ]
-        },
-        "add": {
-            "contains": [
-                "cart",
-                "sugar"
-            ]
-        },
-        "del": {
-            "at": [
-                "sugar",
-                "cell_3_8"
-            ],
-            "contains": [
-                "list",
-                "sugar"
             ]
         }
     },
@@ -165,11 +118,11 @@
             ]
         },
         "per": {
-            "adj": [
-                "cell_4_7",
+            "walkable": [
                 "cell_4_6"
             ],
-            "walkable": [
+            "adj": [
+                "cell_4_7",
                 "cell_4_6"
             ]
         },
@@ -200,11 +153,11 @@
             ]
         },
         "per": {
-            "adj": [
-                "cell_4_6",
+            "walkable": [
                 "cell_4_5"
             ],
-            "walkable": [
+            "adj": [
+                "cell_4_6",
                 "cell_4_5"
             ]
         },
@@ -235,11 +188,11 @@
             ]
         },
         "per": {
-            "walkable": [
-                "cell_4_4"
-            ],
             "adj": [
                 "cell_4_5",
+                "cell_4_4"
+            ],
+            "walkable": [
                 "cell_4_4"
             ]
         },
@@ -291,12 +244,12 @@
             ]
         }
     },
-    "move_human_cell_4_3_cell_5_3": {
+    "move_human_cell_4_3_cell_3_3": {
         "name": "move",
         "args": [
             "human",
             "cell_4_3",
-            "cell_5_3"
+            "cell_3_3"
         ],
         "pre": {
             "at": [
@@ -305,18 +258,18 @@
             ]
         },
         "per": {
+            "walkable": [
+                "cell_3_3"
+            ],
             "adj": [
                 "cell_4_3",
-                "cell_5_3"
-            ],
-            "walkable": [
-                "cell_5_3"
+                "cell_3_3"
             ]
         },
         "add": {
             "at": [
                 "human",
-                "cell_5_3"
+                "cell_3_3"
             ]
         },
         "del": {
@@ -326,202 +279,237 @@
             ]
         }
     },
-    "take_human_cart_list_cell_5_3_salmon_cell_5_2": {
+    "take_human_cart_list_cell_3_3_chicken_cell_3_2": {
         "name": "take",
         "args": [
             "human",
             "cart",
             "list",
-            "cell_5_3",
-            "salmon",
-            "cell_5_2"
+            "cell_3_3",
+            "chicken",
+            "cell_3_2"
         ],
         "pre": {
             "contains": [
                 "list",
-                "salmon"
+                "chicken"
             ],
             "at": [
-                "salmon",
-                "cell_5_2"
+                "chicken",
+                "cell_3_2"
             ]
         },
         "per": {
             "at": [
                 "human",
-                "cell_5_3"
+                "cell_3_3"
             ],
             "adj": [
-                "cell_5_3",
-                "cell_5_2"
+                "cell_3_3",
+                "cell_3_2"
             ]
         },
         "add": {
             "contains": [
                 "cart",
-                "salmon"
+                "chicken"
             ]
         },
         "del": {
             "at": [
-                "salmon",
-                "cell_5_2"
+                "chicken",
+                "cell_3_2"
             ],
             "contains": [
                 "list",
-                "salmon"
+                "chicken"
             ]
         }
     },
-    "move_human_cell_5_3_cell_6_3": {
+    "move_human_cell_3_3_cell_2_3": {
         "name": "move",
         "args": [
             "human",
-            "cell_5_3",
-            "cell_6_3"
+            "cell_3_3",
+            "cell_2_3"
         ],
         "pre": {
             "at": [
                 "human",
-                "cell_5_3"
+                "cell_3_3"
             ]
         },
         "per": {
             "walkable": [
-                "cell_6_3"
+                "cell_2_3"
             ],
             "adj": [
-                "cell_5_3",
-                "cell_6_3"
+                "cell_3_3",
+                "cell_2_3"
             ]
         },
         "add": {
             "at": [
                 "human",
-                "cell_6_3"
+                "cell_2_3"
             ]
         },
         "del": {
             "at": [
                 "human",
-                "cell_5_3"
+                "cell_3_3"
             ]
         }
     },
-    "move_human_cell_6_3_cell_7_3": {
+    "move_human_cell_2_3_cell_1_3": {
         "name": "move",
         "args": [
             "human",
-            "cell_6_3",
-            "cell_7_3"
+            "cell_2_3",
+            "cell_1_3"
         ],
         "pre": {
             "at": [
                 "human",
-                "cell_6_3"
+                "cell_2_3"
             ]
         },
         "per": {
             "adj": [
-                "cell_6_3",
-                "cell_7_3"
+                "cell_2_3",
+                "cell_1_3"
             ],
             "walkable": [
-                "cell_7_3"
+                "cell_1_3"
             ]
         },
         "add": {
             "at": [
                 "human",
-                "cell_7_3"
+                "cell_1_3"
             ]
         },
         "del": {
             "at": [
                 "human",
-                "cell_6_3"
+                "cell_2_3"
             ]
         }
     },
-    "move_human_cell_7_3_cell_7_2": {
+    "move_human_cell_1_3_cell_1_4": {
         "name": "move",
         "args": [
             "human",
-            "cell_7_3",
-            "cell_7_2"
+            "cell_1_3",
+            "cell_1_4"
         ],
         "pre": {
             "at": [
                 "human",
-                "cell_7_3"
+                "cell_1_3"
             ]
         },
         "per": {
             "adj": [
-                "cell_7_3",
-                "cell_7_2"
+                "cell_1_3",
+                "cell_1_4"
             ],
             "walkable": [
-                "cell_7_2"
+                "cell_1_4"
             ]
         },
         "add": {
             "at": [
                 "human",
-                "cell_7_2"
+                "cell_1_4"
             ]
         },
         "del": {
             "at": [
                 "human",
-                "cell_7_3"
+                "cell_1_3"
             ]
         }
     },
-    "take_human_cart_list_cell_7_2_magnum_cell_8_2": {
+    "move_human_cell_1_4_cell_1_5": {
+        "name": "move",
+        "args": [
+            "human",
+            "cell_1_4",
+            "cell_1_5"
+        ],
+        "pre": {
+            "at": [
+                "human",
+                "cell_1_4"
+            ]
+        },
+        "per": {
+            "adj": [
+                "cell_1_4",
+                "cell_1_5"
+            ],
+            "walkable": [
+                "cell_1_5"
+            ]
+        },
+        "add": {
+            "at": [
+                "human",
+                "cell_1_5"
+            ]
+        },
+        "del": {
+            "at": [
+                "human",
+                "cell_1_4"
+            ]
+        }
+    },
+    "take_human_cart_list_cell_1_5_shampoo_cell_2_5": {
         "name": "take",
         "args": [
             "human",
             "cart",
             "list",
-            "cell_7_2",
-            "magnum",
-            "cell_8_2"
+            "cell_1_5",
+            "shampoo",
+            "cell_2_5"
         ],
         "pre": {
             "at": [
-                "magnum",
-                "cell_8_2"
+                "shampoo",
+                "cell_2_5"
             ],
             "contains": [
                 "list",
-                "magnum"
+                "shampoo"
             ]
         },
         "per": {
             "at": [
                 "human",
-                "cell_7_2"
+                "cell_1_5"
             ],
             "adj": [
-                "cell_7_2",
-                "cell_8_2"
+                "cell_1_5",
+                "cell_2_5"
             ]
         },
         "add": {
             "contains": [
                 "cart",
-                "magnum"
+                "shampoo"
             ]
         },
         "del": {
             "at": [
-                "magnum",
-                "cell_8_2"
+                "shampoo",
+                "cell_2_5"
             ],
             "contains": [
                 "list",
-                "magnum"
+                "shampoo"
             ]
         }
     }

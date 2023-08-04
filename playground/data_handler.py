@@ -1,5 +1,5 @@
 from enum import Enum
-import json, subprocess, os
+import json, os
 
 class MODIM_LABELS(Enum):
     TYPE = "type"
@@ -43,9 +43,15 @@ class DataHandler():
         self.vocabulary_data = []
         self.user_data = None
         
-        with open('users.json', 'r') as userfile:
-            self.user_data = json.load(userfile)["users"]
+        self.init_map()
+        self.init_users()
         
+        
+    def init_users(self):
+        with open('users.json', 'r') as userfile:
+            self.user_data = json.load(userfile)
+            
+    def init_map(self):     
         # fill map and vocabulary using data given by the initilization() function
         for el in self.data[PDDL_LABELS.INITS]:
             map_record = None
@@ -103,6 +109,11 @@ class DataHandler():
             
     def reset(self):
         self.data = initialization()
+        self.map_data = []
+        self.vocabulary_data = []
+        self.user_data = None
+        self.init_users()
+        self.init_map()
             
     # [GOAL]
     # (reached HUMAN fishcounter)
@@ -124,8 +135,7 @@ class DataHandler():
     # [INIT]  
     # (contains CART p1 )
     # [GOAL]
-    # (contains LIST p1 )
-            
+    # (contains LIST p1 )          
     def set_shopping_goal(self, product_list):
         inits = []
         goals = []
@@ -134,13 +144,10 @@ class DataHandler():
         CART = self.data[PDDL_LABELS.ENTITIES][2]
         
         for element in product_list:
-            print(element)
             for obj in self.data[PDDL_LABELS.OBJECTS]:
-                print(obj)
                 if obj.name == element[MODIM_LABELS.NAME.value]:
                     inits.append(Predicate("contains", [LIST, obj]))
-                    goals.append(Predicate("contains", [CART, obj]))
-                    
+                    goals.append(Predicate("contains", [CART, obj]))     
         self.update_structure(inits, PDDL_LABELS.INITS)
         self.update_structure(goals, PDDL_LABELS.GOALS)
                     
@@ -148,27 +155,66 @@ class DataHandler():
         for o in objects:
             self.data[structure_identifier].append(o)
 
-
+    def create_map_record(self, type, name, position, classes):
+        map_record = {
+                    MODIM_LABELS.TYPE.value: type,
+                    MODIM_LABELS.NAME.value: name,
+                    MODIM_LABELS.POSITION.value: position,
+                    MODIM_LABELS.CLASSES.value: classes
+                }
+        return map_record
+        
     
     # TODO THIS FUNCTION SHOULD BE CALLED ONE TIMES FOR EACH HUMAN INTERACTION
     def solve_problem(self):
         self.pddl_generator.fill_problem_template(self.data)
+        # Planner needs the absolute path :(
         os.system("cd ~/playground/pddl/temp && ../../safe-planner/sp ~/playground/pddl/supermarket_world.pddl ~/playground/pddl/temp/supermarket_problem.pddl -j -d") 
+                    
+    def update_map_data(self):
         with open('pddl/temp/supermarket_problem.json', 'r') as jsonfile:
+            plan = json.load(jsonfile)
+            step_list = plan["plan"]
+            
+            for step in step_list:
+                action = plan[step]["actions"][0]
+                name = action["name"]
+                args = action["arguments"]
+                position = self.position_pddl_to_modim(args[-1])
+                map_entry = self.get_map_by_id(position)
+                
+                if name == "move":
+                    if len(map_entry) == 0:
+                        map_entry = self.create_map_record("cell", "", position, "path")
+                        self.map_data.append(map_entry)
+                    else:
+                        map_entry[0]["classes"] += " path"
+                        
+                elif name == "take":
+                    for entry in map_entry:
+                        if entry["name"].lower() == args[-2]:
+                            entry["classes"] += " take"
+                 
+                
+    def position_pddl_to_modim(self, pos):
+        _, y, x = pos.split("_")
+        return (y+"-"+x).encode('ascii')            
     
-    def        
-        
         
     def get_user(self, name):
         for user in self.user_data:
-            print("USER", user)
-            if user["name"] == name:
+            if user["name"].encode('ascii') == name:
                 return user
         return None
     
     def create_user(self, name):
         user = {"name": name}
-        self.user_data["users"].append(user)  
+        self.user_data.append(user)  
+        with open('users.json', 'w') as userfile:
+            json.dump(self.user_data, userfile)
+    
+    def save_product_list(self, user, products):
+        user["shopping_list"] = products
         with open('users.json', 'w') as userfile:
             json.dump(self.user_data, userfile)
             
@@ -185,6 +231,25 @@ class DataHandler():
             if prod[MODIM_LABELS.TYPE.value] == "section":
                 ret.append(prod[MODIM_LABELS.NAME.value])
         return ret 
+    
+    def get_map(self, update=False):
+        if update:
+            self.update_map_data()
+        return self.map_data
+    
+    def get_map_by_id(self, id):
+        ret = []
+        for prod in self.map_data:
+            if prod[MODIM_LABELS.POSITION.value] == id:
+                ret.append(prod)
+        return ret
+    
+    def get_map_by_name(self, name):
+        ret = []
+        for prod in self.map_data:
+            if prod[MODIM_LABELS.NAME.value] == name:
+                ret.append(prod)
+        return ret
     
 
 class PDDLGenerator:
@@ -278,9 +343,9 @@ def initialization():
     
     # - sections
     household = SectionObject("household" )
-    personal_care = SectionObject("personal_care" )
+    personal_care = SectionObject("personalcare" )
     beverages = SectionObject("beverages" )
-    frozen_foods = SectionObject("frozen_foods" )
+    frozen_foods = SectionObject("frozenfoods" )
     meatcounter = SectionObject("meatcounter" )
     fishcounter = SectionObject("fishcounter" )
     infopoint = SectionObject("infopoint" )

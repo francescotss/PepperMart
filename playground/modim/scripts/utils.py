@@ -19,12 +19,13 @@ def build_vocabolary(v1, v2):
     return ret
         
 def create_mapdata_file(data):
+    data = {"data": data}
     with open('modim/actions/mapdata', 'w') as action_file:
         json_text = str(data) #json.dumps(data) Not working: modim will remove the double quotes. 
         text = "TEXT_mapdata\n<*,*,*,*>: " + json_text + "\n----"
         action_file.write(text)        
 
-def ask_loop(vocabulary, robot, timeout=5, patience=2, buttons=False):
+def ask_loop(vocabulary, robot, timeout=5, patience=3, buttons=False):
     try_again = ["try again", "Sorry, can you repeat?", "Please say again"]
     count = 0
     while count < patience:
@@ -32,7 +33,7 @@ def ask_loop(vocabulary, robot, timeout=5, patience=2, buttons=False):
         if ret != "":
             return ret
         say = random.choice(try_again)
-        robot.asay2(say)
+        robot.say(say)
         count += 1
     
     robot.say("Sorry I can't help you right now. Please wait here, an human collegue will arrive soon")

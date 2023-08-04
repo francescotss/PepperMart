@@ -1,8 +1,5 @@
-import os, sys, json, threading
-import time
+import os, sys, json
 
-
-#from playground.modim.src.entity import Product, Entity
 pepper_tools_dir = os.getenv('PEPPER_TOOLS_HOME')
 sys.path.append(pepper_tools_dir+ '/cmd_server')
 
@@ -17,7 +14,7 @@ from modim.scripts.interaction_handler import InteractionHandler
 
 global DEBUG
 DEBUG = False
-DEBUT = False
+
 
 def plan_excuter(plan, interaction_handler):
     step_list = plan["plan"]
@@ -43,10 +40,10 @@ def plan_excuter(plan, interaction_handler):
         # Find next action
         for outcome in potential_outcomes:
             if res in outcome["condition"]:
-                next_step = outcome["next"]
+                next_step = outcome["next"].encode('ascii')
                 if next_step == "GOAL":
                     print("Goal reached")
-                    interaction_handler.reset()
+                    interaction_handler.goal()
                     interacting = False
                 else:
                     next_action = plan[next_step]
@@ -78,9 +75,7 @@ if __name__ == "__main__":
         try:
             interaction_handler.init_robot()
             interaction_handler.reset()
-            
-            interaction_handler._robot_do_shopping()
-            
+                        
             # Blocking waiting
             interaction_handler.waitfor_person()
             

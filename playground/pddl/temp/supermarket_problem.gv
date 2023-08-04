@@ -8,39 +8,37 @@ strict digraph "" {
 	"(end)"	 [label=end,
 		peripheries=2,
 		shape=circle];
-	"(take human cart list cell_7_2 magnum cell_8_2)" -> "(end)";
-	"(move human cell_7_3 cell_7_2)" -> "(take human cart list cell_7_2 magnum cell_8_2)"	 [label="(at human cell_7_2)"];
-	"(move human cell_6_3 cell_7_3)" -> "(move human cell_7_3 cell_7_2)"	 [label="(at human cell_7_3)"];
-	"(move human cell_5_3 cell_6_3)" -> "(move human cell_6_3 cell_7_3)"	 [label="(at human cell_6_3)"];
-	"(take human cart list cell_5_3 salmon cell_5_2)" -> "(end)";
-	"(take human cart list cell_5_3 salmon cell_5_2)" -> "(move human cell_5_3 cell_6_3)"	 [label="(contains cart salmon)"];
-	"(move human cell_4_3 cell_5_3)" -> "(move human cell_5_3 cell_6_3)"	 [label="(at human cell_5_3)"];
-	"(move human cell_4_3 cell_5_3)" -> "(take human cart list cell_5_3 salmon cell_5_2)"	 [label="(at human cell_5_3)"];
-	"(move human cell_4_4 cell_4_3)" -> "(move human cell_4_3 cell_5_3)"	 [label="(at human cell_4_3)"];
+	"(take human cart list cell_1_5 shampoo cell_2_5)" -> "(end)";
+	"(move human cell_1_4 cell_1_5)" -> "(take human cart list cell_1_5 shampoo cell_2_5)"	 [label="(at human cell_1_5)"];
+	"(move human cell_1_3 cell_1_4)" -> "(move human cell_1_4 cell_1_5)"	 [label="(at human cell_1_4)"];
+	"(move human cell_2_3 cell_1_3)" -> "(move human cell_1_3 cell_1_4)"	 [label="(at human cell_1_3)"];
+	"(move human cell_3_3 cell_2_3)" -> "(move human cell_2_3 cell_1_3)"	 [label="(at human cell_2_3)"];
+	"(take human cart list cell_3_3 chicken cell_3_2)" -> "(end)";
+	"(take human cart list cell_3_3 chicken cell_3_2)" -> "(move human cell_3_3 cell_2_3)"	 [label="(contains cart chicken)"];
+	"(move human cell_4_3 cell_3_3)" -> "(move human cell_3_3 cell_2_3)"	 [label="(at human cell_3_3)"];
+	"(move human cell_4_3 cell_3_3)" -> "(take human cart list cell_3_3 chicken cell_3_2)"	 [label="(at human cell_3_3)"];
+	"(move human cell_4_4 cell_4_3)" -> "(move human cell_4_3 cell_3_3)"	 [label="(at human cell_4_3)"];
 	"(move human cell_4_5 cell_4_4)" -> "(move human cell_4_4 cell_4_3)"	 [label="(at human cell_4_4)"];
 	"(move human cell_4_6 cell_4_5)" -> "(move human cell_4_5 cell_4_4)"	 [label="(at human cell_4_5)"];
 	"(move human cell_4_7 cell_4_6)" -> "(move human cell_4_6 cell_4_5)"	 [label="(at human cell_4_6)"];
 	"(move human cell_4_8 cell_4_7)" -> "(move human cell_4_7 cell_4_6)"	 [label="(at human cell_4_7)"];
-	"(take human cart list cell_4_8 sugar cell_3_8)" -> "(end)";
-	"(take human cart list cell_4_8 sugar cell_3_8)" -> "(move human cell_4_8 cell_4_7)"	 [label="(contains cart sugar)"];
 	"(move human cell_4_9 cell_4_8)" -> "(move human cell_4_8 cell_4_7)"	 [label="(at human cell_4_8)"];
-	"(move human cell_4_9 cell_4_8)" -> "(take human cart list cell_4_8 sugar cell_3_8)"	 [label="(at human cell_4_8)"];
 	"(move human cell_5_9 cell_4_9)" -> "(move human cell_4_9 cell_4_8)"	 [label="(at human cell_4_9)"];
 	"(start)"	 [label=start,
 		peripheries=1,
 		shape=circle];
-	"(start)" -> "(take human cart list cell_7_2 magnum cell_8_2)";
-	"(start)" -> "(move human cell_7_3 cell_7_2)";
-	"(start)" -> "(move human cell_6_3 cell_7_3)";
-	"(start)" -> "(move human cell_5_3 cell_6_3)";
-	"(start)" -> "(take human cart list cell_5_3 salmon cell_5_2)";
-	"(start)" -> "(move human cell_4_3 cell_5_3)";
+	"(start)" -> "(take human cart list cell_1_5 shampoo cell_2_5)";
+	"(start)" -> "(move human cell_1_4 cell_1_5)";
+	"(start)" -> "(move human cell_1_3 cell_1_4)";
+	"(start)" -> "(move human cell_2_3 cell_1_3)";
+	"(start)" -> "(move human cell_3_3 cell_2_3)";
+	"(start)" -> "(take human cart list cell_3_3 chicken cell_3_2)";
+	"(start)" -> "(move human cell_4_3 cell_3_3)";
 	"(start)" -> "(move human cell_4_4 cell_4_3)";
 	"(start)" -> "(move human cell_4_5 cell_4_4)";
 	"(start)" -> "(move human cell_4_6 cell_4_5)";
 	"(start)" -> "(move human cell_4_7 cell_4_6)";
 	"(start)" -> "(move human cell_4_8 cell_4_7)";
-	"(start)" -> "(take human cart list cell_4_8 sugar cell_3_8)";
 	"(start)" -> "(move human cell_4_9 cell_4_8)";
 	"(start)" -> "(move human cell_5_9 cell_4_9)";
 }

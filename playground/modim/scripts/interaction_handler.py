@@ -6,6 +6,7 @@ import ws_client
 import utils
 global DEBUG
 DEBUG = False
+SIMULATION = True
 
 
 class InteractionHandler():
@@ -17,8 +18,8 @@ class InteractionHandler():
         self.data = data
         self.interaction_started = False
         self.user_logged = False
-        self.user_name = None
-        self.product_asked = None
+        self.user = None
+        self.asked_products = None
          
     def init_robot(self):
         def _func():
@@ -40,10 +41,10 @@ class InteractionHandler():
             self.robot.setAlive(False)
         
     def reset(self):
-        #self.data.reset_map()
         self.user_logged = False
-        self.user_name = None
-        self.product_asked = None
+        self.user = None
+        self.asked_products = None
+        self.data.reset()
             
     def is_person_here(self):
         activation_zone = 1.2 # distance in meters
@@ -102,7 +103,6 @@ class InteractionHandler():
             locode += l
         self.mws.code += textwrap.dedent(locode)
         self.mws.cconnect()
-        print(self.mws.code)
         return self.mws.csend(self.mws.code)
 
     def run_action(self, action):
@@ -129,12 +129,19 @@ class InteractionHandler():
     def goodbye(self):
         # TODO: animation
         self.robot.say("Bye. See you next time!")
-        self.reset()
+        self.reset()            
         
     def error(self):
         # TODO: animation
         self.reset()
-    
+        
+    def goal(self):
+        if self.user_logged:
+            self.robot.say("Thank you, %s for choosing Pepper Mart" %self.user["name"])
+        else:
+            self.robot.say("Thank you for choosing Pepper Mart, see you next time!")
+        if not SIMULATION:
+            self.robot.dance()    
     
     # -------- Action Handlers -------- #
     
@@ -166,7 +173,7 @@ class InteractionHandler():
         help_voc = ["help", "what can you do", "what can i ask"]
         registration_voc = ["register", "sign in", "registration"]
         shopping_voc = ["shopping", "cart"]
-        where_voc = ["where"] + utils.build_vocabolary(["where", "where i can find the"], self.data.get_product_vocabulary())
+        where_voc = ["where"] + utils.build_vocabolary(["where", "where i can find the", "where are the"], self.data.get_product_vocabulary())
         vocabulary = help_voc + registration_voc + shopping_voc + where_voc
         
         answer = self.send_interaction(_modim_callback, [["vocabulary", vocabulary]])
@@ -182,7 +189,7 @@ class InteractionHandler():
         
         elif answer in registration_voc:
             if self.user_logged:
-                self.robot.say("Hi %s, you are already registered!" %self.user_name)
+                self.robot.say("Hi %s, you are already registered!" %self.user["name"])
                 return "(can_wait_welcome human)"
             return "(human_say_registration human)"
         
@@ -196,7 +203,7 @@ class InteractionHandler():
             # answer: where + product
             answer = answer.split(" ")
             if len(answer) > 1:
-                self.product_asked = answer[1]
+                self.asked_products = [{"name": answer[-1], "type": "product"}]
             return "(human_say_where human)"
         
         
@@ -217,14 +224,30 @@ class InteractionHandler():
             print("User %s not found, creating data record" %answer)
             self.data.create_user(answer)
             self.robot.say("Hi %s, nice to meet you. Welcome to peppermart!" %answer)
+            self.user = self.data.get_user(answer)
         else:
-            self.robot.say("Welcome back %s" %answer)    
+            self.user = self.data.get_user(answer)
+            if username.get("shopping_list", False):
+                self.robot.say("Welcome back %s! You have some products in your shopping cart, do you want to check it?" %answer)
+                yesno = utils.ask_loop(["yes", "no"], self.robot)
+                if yesno == "yes":
+                    self.asked_products = username.get("shopping_list")
+                    self._robot_do_shopping()
+                    return "GOODBYE"
+                elif yesno == "no":
+                    self.robot.say("No problem")
+                else:
+                    return "ERROR"
+            else:    
+                self.robot.say("Welcome back %s" %answer)
+             
         
         self.robot.say("How can I help you today?")
         self.user_logged = True
         return "(human_is_registered human)"  
     
     def _robot_do_info(self):
+        self.robot.say("I'm Pepper, your shopping assistant. I can help you in many ways! For example you ask me where are the eggs, we can even create your shopping list together. Remember, you can use both your voice and the button on my screen")
         return "(interaction_start human robot)"
     
     def _robot_do_where(self):
@@ -232,28 +255,55 @@ class InteractionHandler():
             im.display.loadUrl('map.html')
             im.execute('mapdata')
             im.execute('showProduct')
-            
-        if self.product_asked is None:
-            self.robot.asay("What are you looking for?")
-            answer = utils.ask_loop(self.data.get_product_vocabulary(), self.robot)
-            if answer == "ERROR":
-                return "ERROR"
-            self.product_asked = answer
         
-        self.data.add_product_class(self.product_asked,"show")
-        map_data = self.data.get_map_data()
-        utils.create_mapdata_file(map_data)
-        self.robot.asay("Check the map to find the {}".format(self.product_asked))            
+        def _finish_callback():
+            im.executeModality('BUTTONS',[['thanks','Thank You!']])
+            im.executeModality('ASR',['Thank You','Bye', 'Goodbye'])
+            im.ask(actionname=None, timeout=120)
+            
+        if self.asked_products is None:
+            self.asked_products = self._choose_products(single_mode=True)
+        
+        self.data.set_where_goal(self.asked_products)
+        self.data.solve_problem()
+        mapdata = self.data.get_map(update=True)
+        utils.create_mapdata_file(mapdata)
+        self.robot.asay("Check the map to find the {}".format(self.asked_products[0]["name"]))            
         self.mws.run_interaction(_modim_callback)
-        self.data.reset_map()  
-              
+        self.data.init_map()
+        self.asked_products = None
+        self.mws.run_interaction(_finish_callback)
         return "(interaction_done human robot)"
     
+     
+    def _robot_do_shopping(self):
+        def _modim_callback():
+            im.display.loadUrl('map.html')
+            im.execute('mapdata')
+            im.execute('showProducts')
+            
+        def _finish_callback():
+            im.executeModality('BUTTONS',[['thanks','Thank You!']])
+            im.executeModality('ASR',['Thank You','Bye', 'Goodbye'])
+            im.ask(actionname=None, timeout=120)
+        
+        if self.asked_products is None:   
+            self.asked_products = self._choose_products()
+        self.data.save_product_list(self.user, self.asked_products)
+        self.data.set_shopping_goal(self.asked_products)
+        self.data.solve_problem()
+        mapdata = self.data.get_map(update=True)
+        utils.create_mapdata_file(mapdata)
+        self.mws.run_interaction(_modim_callback)
+        self.data.init_map()  
+        self.asked_products = None
+        self.mws.run_interaction(_finish_callback)
+        return "(interaction_done human robot)"
     
     def _choose_products(self, single_mode=False):
         def _show_interface():
             im.display.loadUrl('products.html')
-            im.executeModality('BUTTONS', buttons)
+            #im.executeModality('BUTTONS', buttons)
             im.executeModality('BUTTONS_continue', ["continue", "Continue"])
             if single_mode:
                 im.execute('chooseProduct')
@@ -286,13 +336,15 @@ class InteractionHandler():
             product = self.send_interaction(_ask_callback, [["vocabulary", vocabulary], ["buttons", product_buttons]])
             if product in continue_voc:
                 return selected
-            if product == 'timeout':
+            if product == 'timeout' or product == '00' or product == '01':
                 continue
             
             section = "product" if product in product_voc else "section"
             entry = {"name": product, "type": section}  
             selected.append(entry)
             vocabulary.remove(product)
+            for button in product_buttons:
+                if button[0] == product: product_buttons.remove(button)
             if single_mode:
                 return selected
             elif len(selected) == 1:
@@ -300,34 +352,3 @@ class InteractionHandler():
             else:
                 self.robot.say("%s added" %product)
                           
- 
-    def _robot_do_shopping(self):
-        products = self._choose_products()
-        print("Product List", products)
-        self.data.set_shopping_goal(products)
-        self.data.solve_problem()
-        
-        return "(interaction_done human robot)"
-      
-   
-   
-   
-   
-   
-   
-    def show_path(self, data=None):
-
-        def _func():
-            im.display.loadUrl('map.html')
-            im.execute('mapdata') 
-            im.execute('showPath')
-            
-
-        self.mws.run_interaction(_func)
-
-        
-        timeout = 30 
-        answer = self.robot.asr(self.product_vocabolary,timeout)
-        if answer!="":
-            print(answer)
-    

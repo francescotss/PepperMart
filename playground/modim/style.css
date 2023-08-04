@@ -55,23 +55,19 @@ input[type=button] {
     text-align: center;
 }
 
-.walkable {
-    background-color: rgba(128, 128, 128, 0.342);
+.map-tile {
+    background-color: rgba(255, 255, 255, 0.7);
 }
 
-.shelf {
-    background-color: rgba(0, 95, 124, 0.384);
-}
-
-.shelf.food {
-    background-color: chocolate;
+.beverages {
+    background-color: rgba(210, 105, 30, 0.699);
 }
 
 .shelf.not-available {
     filter: grayscale(0.9);
 }
 
-.map-start .start {
+.start {
     background-color: green;
     color: white;
     border-radius: 30px;
@@ -96,7 +92,19 @@ input[type=button] {
     color: green;
 }
 
-
+.loader {
+    border: 16px solid #00000088; /* Light grey */
+    border-top: 16px solid #FF914D; 
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
 
 /* Arrows */
 .arrow {

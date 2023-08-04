@@ -1,1 +1,1 @@
-{"users": [{"name": "francesco"}]}
+[{"shopping_list": [{"type": "product", "name": "DEODORAN"}], "name": "francesco"}, {"shopping_list": [{"type": "product", "name": "SHAMPOO"}, {"type": "product", "name": "CHICKEN"}], "name": "leonardo"}]

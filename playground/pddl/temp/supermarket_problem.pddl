@@ -55,9 +55,9 @@
 		MAGNUM - product
 		POPSICLE - product
 		household - section
-		personal_care - section
+		personalcare - section
 		beverages - section
-		frozen_foods - section
+		frozenfoods - section
 		meatcounter - section
 		fishcounter - section
 		infopoint - section
@@ -167,24 +167,24 @@
 		(is cell_3_2 meatcounter)
 		(is cell_5_2 fishcounter)
 		(is cell_6_2 fishcounter)
-		(is cell_2_4 personal_care)
-		(is cell_3_4 personal_care)
-		(is cell_2_5 personal_care)
-		(is cell_3_5 personal_care)
+		(is cell_2_4 personalcare)
+		(is cell_3_4 personalcare)
+		(is cell_2_5 personalcare)
+		(is cell_3_5 personalcare)
 		(is cell_2_7 household)
 		(is cell_3_7 household)
 		(is cell_2_8 household)
 		(is cell_3_8 household)
 		(is cell_2_9 household)
 		(is cell_3_9 household)
-		(is cell_8_2 frozen_foods)
-		(is cell_8_2 frozen_foods)
-		(is cell_8_2 frozen_foods)
-		(is cell_8_2 frozen_foods)
-		(is cell_8_2 frozen_foods)
-		(is cell_8_2 frozen_foods)
-		(is cell_8_2 frozen_foods)
-		(is cell_8_2 frozen_foods)
+		(is cell_8_2 frozenfoods)
+		(is cell_8_2 frozenfoods)
+		(is cell_8_2 frozenfoods)
+		(is cell_8_2 frozenfoods)
+		(is cell_8_2 frozenfoods)
+		(is cell_8_2 frozenfoods)
+		(is cell_8_2 frozenfoods)
+		(is cell_8_2 frozenfoods)
 		(is cell_5_4 beverages)
 		(is cell_6_4 beverages)
 		(is cell_5_5 beverages)
@@ -194,9 +194,6 @@
 		(is cell_7_9 infopoint)
 		(is cell_9_7 cashdesk)
 		(is cell_9_9 cashdesk)
-		(contains LIST SALMON)
-		(contains LIST MAGNUM)
-		(contains LIST SUGAR)
 
 
     )
@@ -204,9 +201,7 @@
     (:goal
         
         (and 
-    		(contains CART SALMON)
-		(contains CART MAGNUM)
-		(contains CART SUGAR)
+    		(reached HUMAN SHAMPOO)
 
         )
     )
