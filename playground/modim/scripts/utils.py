@@ -26,16 +26,18 @@ def create_mapdata_file(data):
         action_file.write(text)        
 
 def ask_loop(vocabulary, robot, timeout=5, patience=3, buttons=False):
-    try_again = ["try again", "Sorry, can you repeat?", "Please say again"]
-    count = 0
-    while count < patience:
+    try_again = [["try again", "animations/Stand/Gestures/Desperate_2"], ["Sorry, can you repeat?", "animations/Stand/Emotions/Neutral/Embarrassed_1"], ["Please say again", "animations/Stand/Gestures/Please_1"]]
+    count = 1
+    while True:
         ret = robot.asr(vocabulary, timeout) 
         if ret != "":
             return ret
-        say = random.choice(try_again)
-        robot.say(say)
+        if count == patience:
+            robot.say("Sorry I can't help you right now. Please wait here, an human collegue will arrive soon")
+            return "ERROR"
+        say, anim = random.choice(try_again)
+        animated_say(say, anim, robot)
         count += 1
     
-    robot.say("Sorry I can't help you right now. Please wait here, an human collegue will arrive soon")
-    return "ERROR"
-        
+def animated_say(text, animation, robot):
+    robot.say("^start("+animation+") " + text+" ^wait("+animation+")")

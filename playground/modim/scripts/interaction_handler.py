@@ -127,19 +127,17 @@ class InteractionHandler():
         return res
         
     def goodbye(self):
-        # TODO: animation
-        self.robot.say("Bye. See you next time!")
+        utils.animated_say("Bye. See you next time!", "animations/Stand/Gestures/Hey_4", self.robot)
         self.reset()            
         
     def error(self):
-        # TODO: animation
         self.reset()
         
     def goal(self):
         if self.user_logged:
-            self.robot.say("Thank you, %s for choosing Pepper Mart" %self.user["name"])
+            utils.animated_say("Thank you, %s for choosing Pepper Mart" %self.user["name"], "animations/Stand/Gestures/Excited_1", self.robot)
         else:
-            self.robot.say("Thank you for choosing Pepper Mart, see you next time!")
+            utils.animated_say("Thank you for choosing Pepper Mart, see you next time!", "animations/Stand/Gestures/Excited_1", self.robot)
         if not SIMULATION:
             self.robot.dance()    
     
@@ -223,7 +221,7 @@ class InteractionHandler():
         if username is None:
             print("User %s not found, creating data record" %answer)
             self.data.create_user(answer)
-            self.robot.say("Hi %s, nice to meet you. Welcome to peppermart!" %answer)
+            utils.animated_say("Hi %s, nice to meet you. Welcome to peppermart!" %answer, "animations/Stand/Gestures/Enthusiastic_4", self.robot)
             self.user = self.data.get_user(answer)
         else:
             self.user = self.data.get_user(answer)
@@ -247,7 +245,9 @@ class InteractionHandler():
         return "(human_is_registered human)"  
     
     def _robot_do_info(self):
-        self.robot.say("I'm Pepper, your shopping assistant. I can help you in many ways! For example you ask me where are the eggs, we can even create your shopping list together. Remember, you can use both your voice and the button on my screen")
+        utils.animated_say("I'm Pepper, your shopping assistant. I can help you in many ways! For example you ask me where are the eggs, we can even create your shopping list together. Remember, you can use both your voice and the button on my screen",
+                           "animations/Stand/Gestures/Explain_11",
+                           self.robot)
         return "(interaction_start human robot)"
     
     def _robot_do_where(self):
@@ -303,7 +303,6 @@ class InteractionHandler():
     def _choose_products(self, single_mode=False):
         def _show_interface():
             im.display.loadUrl('products.html')
-            #im.executeModality('BUTTONS', buttons)
             im.executeModality('BUTTONS_continue', ["continue", "Continue"])
             if single_mode:
                 im.execute('chooseProduct')
@@ -342,7 +341,7 @@ class InteractionHandler():
             section = "product" if product in product_voc else "section"
             entry = {"name": product, "type": section}  
             selected.append(entry)
-            vocabulary.remove(product)
+            if product in vocabulary: vocabulary.remove(product)
             for button in product_buttons:
                 if button[0] == product: product_buttons.remove(button)
             if single_mode:
