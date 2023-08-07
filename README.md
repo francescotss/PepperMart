@@ -47,6 +47,8 @@ example planning with costs: https://github.com/planimation/backend/issues/19
 
 https://github.com/mokhtarivahid/safe-planner
 
+https://www.freepik.com/icons
+
 
 # Istruzioni
 Start naoqi server: /opt/Aldebaran/naoqi-sdk-2.5.5.5-linux64/naoqi
