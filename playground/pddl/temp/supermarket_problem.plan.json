@@ -11,10 +11,18 @@
             "move_human_cell_4_3_cell_3_3",
             "take_human_cart_list_cell_3_3_chicken_cell_3_2",
             "move_human_cell_3_3_cell_2_3",
-            "move_human_cell_2_3_cell_1_3",
-            "move_human_cell_1_3_cell_1_4",
-            "move_human_cell_1_4_cell_1_5",
-            "take_human_cart_list_cell_1_5_shampoo_cell_2_5"
+            "take_human_cart_list_cell_2_3_toothpaste_cell_2_4",
+            "move_human_cell_2_3_cell_3_3",
+            "move_human_cell_3_3_cell_4_3",
+            "move_human_cell_4_3_cell_5_3",
+            "move_human_cell_5_3_cell_6_3",
+            "move_human_cell_6_3_cell_7_3",
+            "move_human_cell_7_3_cell_7_2",
+            "take_human_cart_list_cell_7_2_pizza_cell_8_2",
+            "move_human_cell_7_2_cell_7_3",
+            "move_human_cell_7_3_cell_7_4",
+            "move_human_cell_7_4_cell_7_5",
+            "take_human_cart_list_cell_7_5_juice_cell_6_5"
         ],
         "ordering": "total"
     },
@@ -29,9 +37,17 @@
         "move_human_cell_4_3_cell_3_3",
         "take_human_cart_list_cell_3_3_chicken_cell_3_2",
         "move_human_cell_3_3_cell_2_3",
-        "move_human_cell_2_3_cell_1_3",
-        "move_human_cell_1_3_cell_1_4",
-        "move_human_cell_1_4_cell_1_5",
-        "take_human_cart_list_cell_1_5_shampoo_cell_2_5"
+        "take_human_cart_list_cell_2_3_toothpaste_cell_2_4",
+        "move_human_cell_2_3_cell_3_3",
+        "move_human_cell_3_3_cell_4_3",
+        "move_human_cell_4_3_cell_5_3",
+        "move_human_cell_5_3_cell_6_3",
+        "move_human_cell_6_3_cell_7_3",
+        "move_human_cell_7_3_cell_7_2",
+        "take_human_cart_list_cell_7_2_pizza_cell_8_2",
+        "move_human_cell_7_2_cell_7_3",
+        "move_human_cell_7_3_cell_7_4",
+        "move_human_cell_7_4_cell_7_5",
+        "take_human_cart_list_cell_7_5_juice_cell_6_5"
     ]
 }

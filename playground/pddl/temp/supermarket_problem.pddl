@@ -21,46 +21,42 @@
 		HUMAN - human
 		CART - cart
 		LIST - list
-		TOOTHPASTE - product
-		SHAMPOO - product
-		BODYLOTION - product
-		DEODORAN - product
-		BEEF - product
-		CHICKEN - product
-		HAMBURGER - product
-		SALMON - product
-		TUNA - product
-		OCTOPUS - product
-		OYSTER - product
-		EGGS - product
-		MILK - product
-		BREAD - product
-		CHEESE - product
-		RICE - product
-		SUGAR - product
-		SALT - product
-		COFFEE - product
-		COOKIES - product
-		KETCHUP - product
-		COCACOLA - product
-		ORANGEJUICE - product
-		WATER - product
-		CHINOTTO - product
-		FROZENPIZZA - product
-		FROZENFISH - product
-		ICECREAM - product
-		FROZENSHRIMP - product
-		FROZENFISHSTICKS - product
-		WAFFLE - product
-		MAGNUM - product
-		POPSICLE - product
-		household - section
+		toothpaste - product
+		shampoo - product
+		soap - product
+		deodorant - product
+		beef - product
+		chicken - product
+		tuna - product
+		oyster - product
+		eggs - product
+		milk - product
+		bread - product
+		cheese - product
+		rice - product
+		sugar - product
+		salt - product
+		coffee - product
+		cookies - product
+		cola - product
+		juice - product
+		water - product
+		champagne - product
+		octopus - product
+		shrimp - product
+		lobster - product
+		pizza - product
+		icecream - product
+		popsicle - product
+		waffle - product
+		croissant - product
+		house - section
 		personalcare - section
 		beverages - section
-		frozenfoods - section
-		meatcounter - section
-		fishcounter - section
-		infopoint - section
+		frozen - section
+		meat - section
+		fish - section
+		info - section
 		cashdesk - section
 		entrace - section
 		exit - section
@@ -130,70 +126,67 @@
         ; (is cell_9_7 cashdesk) (is cell_9_9 cashdesk)
         
 		(at HUMAN cell_5_9)
-		(at TOOTHPASTE cell_2_4)
-		(at SHAMPOO cell_2_5)
-		(at BODYLOTION cell_3_4)
-		(at DEODORAN cell_3_5)
-		(at BEEF cell_2_2)
-		(at CHICKEN cell_3_2)
-		(at HAMBURGER cell_3_2)
-		(at SALMON cell_5_2)
-		(at TUNA cell_5_2)
-		(at OCTOPUS cell_6_2)
-		(at OYSTER cell_6_2)
-		(at EGGS cell_2_7)
-		(at MILK cell_2_8)
-		(at BREAD cell_2_9)
-		(at CHEESE cell_3_7)
-		(at RICE cell_3_7)
-		(at SUGAR cell_3_8)
-		(at SALT cell_3_9)
-		(at COFFEE cell_2_8)
-		(at COOKIES cell_3_8)
-		(at KETCHUP cell_2_9)
-		(at COCACOLA cell_5_4)
-		(at WATER cell_5_5)
-		(at CHINOTTO cell_6_4)
-		(at ORANGEJUICE cell_6_5)
-		(at FROZENPIZZA cell_8_2)
-		(at FROZENFISH cell_8_2)
-		(at ICECREAM cell_8_2)
-		(at WAFFLE cell_8_2)
-		(at MAGNUM cell_8_2)
-		(at POPSICLE cell_8_2)
-		(at FROZENSHRIMP cell_8_2)
-		(at FROZENFISHSTICKS cell_8_2)
-		(is cell_2_2 meatcounter)
-		(is cell_3_2 meatcounter)
-		(is cell_5_2 fishcounter)
-		(is cell_6_2 fishcounter)
+		(at toothpaste cell_2_4)
+		(at shampoo cell_2_5)
+		(at soap cell_3_4)
+		(at deodorant cell_3_5)
+		(at beef cell_2_2)
+		(at chicken cell_3_2)
+		(at tuna cell_5_2)
+		(at oyster cell_6_2)
+		(at eggs cell_2_7)
+		(at milk cell_2_8)
+		(at bread cell_2_9)
+		(at cheese cell_3_7)
+		(at rice cell_3_8)
+		(at sugar cell_3_9)
+		(at cola cell_5_4)
+		(at water cell_5_5)
+		(at champagne cell_6_4)
+		(at juice cell_6_5)
+		(at pizza cell_8_2)
+		(at shrimp cell_8_2)
+		(at lobster cell_8_2)
+		(at octopus cell_8_2)
+		(at icecream cell_8_2)
+		(at popsicle cell_8_2)
+		(at waffle cell_8_2)
+		(at croissant cell_8_2)
+		(is cell_2_2 meat)
+		(is cell_3_2 meat)
+		(is cell_5_2 fish)
+		(is cell_6_2 fish)
 		(is cell_2_4 personalcare)
 		(is cell_3_4 personalcare)
 		(is cell_2_5 personalcare)
 		(is cell_3_5 personalcare)
-		(is cell_2_7 household)
-		(is cell_3_7 household)
-		(is cell_2_8 household)
-		(is cell_3_8 household)
-		(is cell_2_9 household)
-		(is cell_3_9 household)
-		(is cell_8_2 frozenfoods)
-		(is cell_8_2 frozenfoods)
-		(is cell_8_2 frozenfoods)
-		(is cell_8_2 frozenfoods)
-		(is cell_8_2 frozenfoods)
-		(is cell_8_2 frozenfoods)
-		(is cell_8_2 frozenfoods)
-		(is cell_8_2 frozenfoods)
+		(is cell_2_7 house)
+		(is cell_3_7 house)
+		(is cell_2_8 house)
+		(is cell_3_8 house)
+		(is cell_2_9 house)
+		(is cell_3_9 house)
+		(is cell_8_2 frozen)
+		(is cell_8_2 frozen)
+		(is cell_8_2 frozen)
+		(is cell_8_2 frozen)
+		(is cell_8_2 frozen)
+		(is cell_8_2 frozen)
+		(is cell_8_2 frozen)
+		(is cell_8_2 frozen)
 		(is cell_5_4 beverages)
 		(is cell_6_4 beverages)
 		(is cell_5_5 beverages)
 		(is cell_6_5 beverages)
-		(is cell_7_7 infopoint)
-		(is cell_7_8 infopoint)
-		(is cell_7_9 infopoint)
+		(is cell_7_7 info)
+		(is cell_7_8 info)
+		(is cell_7_9 info)
 		(is cell_9_7 cashdesk)
 		(is cell_9_9 cashdesk)
+		(contains LIST toothpaste)
+		(contains LIST chicken)
+		(contains LIST juice)
+		(contains LIST pizza)
 
 
     )
@@ -201,7 +194,10 @@
     (:goal
         
         (and 
-    		(reached HUMAN SHAMPOO)
+    		(contains CART toothpaste)
+		(contains CART chicken)
+		(contains CART juice)
+		(contains CART pizza)
 
         )
     )

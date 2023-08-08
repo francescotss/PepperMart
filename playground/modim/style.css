@@ -53,14 +53,7 @@ input[type=button] {
     height: 100%;
     width: 100%;
     text-align: center;
-}
-
-.map-tile {
-    background-color: rgba(255, 255, 255, 0.7);
-}
-
-.beverages {
-    background-color: rgba(210, 105, 30, 0.699);
+    background-color: rgba(253, 238, 215, 0.7);
 }
 
 .shelf.not-available {
@@ -72,6 +65,7 @@ input[type=button] {
     color: white;
     border-radius: 30px;
     padding: 5px 15px;
+    margin: 5px 5px;
 }
 
 .product.take {
@@ -79,6 +73,7 @@ input[type=button] {
     color: white;
     border-radius: 30px;
     padding: 5px 15px;
+    margin: 5px 5px;
 }
 
 .product.show {
@@ -92,8 +87,37 @@ input[type=button] {
     color: green;
 }
 
+
+
+/* Sections */
+.beverages {
+    background-color: rgba(210, 30, 129, 0.8);
+}
+
+.meat {
+    background-color: rgba(172, 4, 4, 0.8);
+}
+
+.personalcare {
+    background-color: rgba(190, 164, 46, 0.8);
+}
+
+.house {
+    background-color: rgba(99, 190, 46, 0.8);
+}
+
+.fish {
+    background-color: rgba(64, 119, 221, 0.8);
+}
+
+.frozen {
+    background-color: rgba(19, 32, 221, 0.8);
+}
+
+
+/* Loading screen */
 .loader {
-    border: 16px solid #00000088; /* Light grey */
+    border: 16px solid #00000088;
     border-top: 16px solid #FF914D; 
     border-radius: 50%;
     width: 120px;
@@ -104,32 +128,4 @@ input[type=button] {
   @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
-  }
-
-/* Arrows */
-.arrow {
-    border: solid green;
-    border-width: 0 6px 6px 0;
-    display: inline-block;
-    padding: 6px;
-}
-
-.arrow.right {
-    transform: rotate(-45deg);
-    -webkit-transform: rotate(-45deg);
-  }
-  
-.arrow.left {
-    transform: rotate(135deg);
-    -webkit-transform: rotate(135deg);
-  }
-  
-.arrow.up {
-    transform: rotate(-135deg);
-    -webkit-transform: rotate(-135deg);
-  }
-  
-.arrow.down {
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
   }

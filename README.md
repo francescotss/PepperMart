@@ -50,6 +50,9 @@ https://github.com/mokhtarivahid/safe-planner
 https://www.freepik.com/icons
 
 
+# Note
+Bug lobster non diventa verde, manca la categoria dei gamberetti 
+
 # Istruzioni
 Start naoqi server: /opt/Aldebaran/naoqi-sdk-2.5.5.5-linux64/naoqi
 Start modim: cd ~/src/modim/src/GUI && python ws_server.py -robot pepper

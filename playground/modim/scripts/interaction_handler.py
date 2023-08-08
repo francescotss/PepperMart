@@ -193,7 +193,7 @@ class InteractionHandler():
         
         elif answer in shopping_voc:
             if not self.user_logged:
-                self.robot.say("I'm sorry, you must be registered")
+                utils.animated_say("I'm sorry, you must be registered", "animations/Stand/Gestures/No_8", self.robot)
                 return "(can_wait_welcome human)"
             return "(human_say_shopping human)"
         
@@ -264,11 +264,12 @@ class InteractionHandler():
         if self.asked_products is None:
             self.asked_products = self._choose_products(single_mode=True)
         
-        self.data.set_where_goal(self.asked_products)
+        utils.animated_say("Ok, give me one moment to think", "animations/Stand/Gestures/Thinking_8", self.robot)
+        self.data.set_shopping_goal(self.asked_products)
         self.data.solve_problem()
         mapdata = self.data.get_map(update=True)
         utils.create_mapdata_file(mapdata)
-        self.robot.asay("Check the map to find the {}".format(self.asked_products[0]["name"]))            
+        self.robot.asay("Done!, Check the map to find the {}".format(self.asked_products[0]["name"]))            
         self.mws.run_interaction(_modim_callback)
         self.data.init_map()
         self.asked_products = None
@@ -290,6 +291,7 @@ class InteractionHandler():
         if self.asked_products is None:   
             self.asked_products = self._choose_products()
         self.data.save_product_list(self.user, self.asked_products)
+        utils.animated_say("Ok, give me one moment to think", "animations/Stand/Gestures/Thinking_8", self.robot)
         self.data.set_shopping_goal(self.asked_products)
         self.data.solve_problem()
         mapdata = self.data.get_map(update=True)

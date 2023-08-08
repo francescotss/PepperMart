@@ -97,11 +97,11 @@
         div.className += tile.classes + " ";
         
         if (tile.type == 'human') {
-           div.innerHTML = '<div class="start">start</div>';
+           div.innerHTML = '<div class="start">You are here</div>';
         }
 
         if (tile.type == 'product') {
-          div.innerHTML = ` <img class="product ${tile.classes}" height=50% src="img/${tile.name}.png" alt="No image"/></div>`;
+          div.innerHTML = ` <img class="product ${tile.classes}" height=50% src="img/icons/${tile.name}.png" alt="No image"/></div>`;
           if (tile.classes.includes("not-available")) {
             div.classList.add("not-available")
           }

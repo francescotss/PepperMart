@@ -104,8 +104,6 @@ class DataHandler():
                 }
                 self.map_data.append(map_record)
         
-        # print(self.map_data)
-        # print(self.vocabulary_data)
             
     def reset(self):
         self.data = initialization()

@@ -13,7 +13,15 @@
         "step_10",
         "step_11",
         "step_12",
-        "step_13"
+        "step_13",
+        "step_14",
+        "step_15",
+        "step_16",
+        "step_17",
+        "step_18",
+        "step_19",
+        "step_20",
+        "step_21"
     ],
     "step_0": {
         "actions": [
@@ -221,18 +229,21 @@
     "step_10": {
         "actions": [
             {
-                "name": "move",
+                "name": "take",
                 "arguments": [
                     "human",
+                    "cart",
+                    "list",
                     "cell_2_3",
-                    "cell_1_3"
+                    "toothpaste",
+                    "cell_2_4"
                 ]
             }
         ],
         "outcomes": [
             {
                 "condition": [
-                    "(at human cell_1_3)"
+                    "(contains cart toothpaste)"
                 ],
                 "next": "step_11"
             }
@@ -244,15 +255,15 @@
                 "name": "move",
                 "arguments": [
                     "human",
-                    "cell_1_3",
-                    "cell_1_4"
+                    "cell_2_3",
+                    "cell_3_3"
                 ]
             }
         ],
         "outcomes": [
             {
                 "condition": [
-                    "(at human cell_1_4)"
+                    "(at human cell_3_3)"
                 ],
                 "next": "step_12"
             }
@@ -264,15 +275,15 @@
                 "name": "move",
                 "arguments": [
                     "human",
-                    "cell_1_4",
-                    "cell_1_5"
+                    "cell_3_3",
+                    "cell_4_3"
                 ]
             }
         ],
         "outcomes": [
             {
                 "condition": [
-                    "(at human cell_1_5)"
+                    "(at human cell_4_3)"
                 ],
                 "next": "step_13"
             }
@@ -281,21 +292,184 @@
     "step_13": {
         "actions": [
             {
-                "name": "take",
+                "name": "move",
                 "arguments": [
                     "human",
-                    "cart",
-                    "list",
-                    "cell_1_5",
-                    "shampoo",
-                    "cell_2_5"
+                    "cell_4_3",
+                    "cell_5_3"
                 ]
             }
         ],
         "outcomes": [
             {
                 "condition": [
-                    "(contains cart shampoo)"
+                    "(at human cell_5_3)"
+                ],
+                "next": "step_14"
+            }
+        ]
+    },
+    "step_14": {
+        "actions": [
+            {
+                "name": "move",
+                "arguments": [
+                    "human",
+                    "cell_5_3",
+                    "cell_6_3"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(at human cell_6_3)"
+                ],
+                "next": "step_15"
+            }
+        ]
+    },
+    "step_15": {
+        "actions": [
+            {
+                "name": "move",
+                "arguments": [
+                    "human",
+                    "cell_6_3",
+                    "cell_7_3"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(at human cell_7_3)"
+                ],
+                "next": "step_16"
+            }
+        ]
+    },
+    "step_16": {
+        "actions": [
+            {
+                "name": "move",
+                "arguments": [
+                    "human",
+                    "cell_7_3",
+                    "cell_7_2"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(at human cell_7_2)"
+                ],
+                "next": "step_17"
+            }
+        ]
+    },
+    "step_17": {
+        "actions": [
+            {
+                "name": "take",
+                "arguments": [
+                    "human",
+                    "cart",
+                    "list",
+                    "cell_7_2",
+                    "pizza",
+                    "cell_8_2"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(contains cart pizza)"
+                ],
+                "next": "step_18"
+            }
+        ]
+    },
+    "step_18": {
+        "actions": [
+            {
+                "name": "move",
+                "arguments": [
+                    "human",
+                    "cell_7_2",
+                    "cell_7_3"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(at human cell_7_3)"
+                ],
+                "next": "step_19"
+            }
+        ]
+    },
+    "step_19": {
+        "actions": [
+            {
+                "name": "move",
+                "arguments": [
+                    "human",
+                    "cell_7_3",
+                    "cell_7_4"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(at human cell_7_4)"
+                ],
+                "next": "step_20"
+            }
+        ]
+    },
+    "step_20": {
+        "actions": [
+            {
+                "name": "move",
+                "arguments": [
+                    "human",
+                    "cell_7_4",
+                    "cell_7_5"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(at human cell_7_5)"
+                ],
+                "next": "step_21"
+            }
+        ]
+    },
+    "step_21": {
+        "actions": [
+            {
+                "name": "take",
+                "arguments": [
+                    "human",
+                    "cart",
+                    "list",
+                    "cell_7_5",
+                    "juice",
+                    "cell_6_5"
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "condition": [
+                    "(contains cart juice)"
                 ],
                 "next": "GOAL"
             }

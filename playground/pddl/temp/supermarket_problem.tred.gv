@@ -8,11 +8,19 @@ strict digraph "" {
 	"(end)"	 [label=end,
 		peripheries=2,
 		shape=circle];
-	"(take human cart list cell_1_5 shampoo cell_2_5)" -> "(end)";
-	"(move human cell_1_4 cell_1_5)" -> "(take human cart list cell_1_5 shampoo cell_2_5)"	 [label="(at human cell_1_5)"];
-	"(move human cell_1_3 cell_1_4)" -> "(move human cell_1_4 cell_1_5)"	 [label="(at human cell_1_4)"];
-	"(move human cell_2_3 cell_1_3)" -> "(move human cell_1_3 cell_1_4)"	 [label="(at human cell_1_3)"];
-	"(move human cell_3_3 cell_2_3)" -> "(move human cell_2_3 cell_1_3)"	 [label="(at human cell_2_3)"];
+	"(take human cart list cell_7_5 juice cell_6_5)" -> "(end)";
+	"(move human cell_7_4 cell_7_5)" -> "(take human cart list cell_7_5 juice cell_6_5)"	 [label="(at human cell_7_5)"];
+	"(move human cell_7_3 cell_7_4)" -> "(move human cell_7_4 cell_7_5)"	 [label="(at human cell_7_4)"];
+	"(move human cell_7_2 cell_7_3)" -> "(move human cell_7_3 cell_7_4)"	 [label="(at human cell_7_3)"];
+	"(take human cart list cell_7_2 pizza cell_8_2)" -> "(move human cell_7_2 cell_7_3)"	 [label="(contains cart pizza)"];
+	"(move human cell_7_3 cell_7_2)" -> "(take human cart list cell_7_2 pizza cell_8_2)"	 [label="(at human cell_7_2)"];
+	"(move human cell_6_3 cell_7_3)" -> "(move human cell_7_3 cell_7_2)"	 [label="(at human cell_7_3)"];
+	"(move human cell_5_3 cell_6_3)" -> "(move human cell_6_3 cell_7_3)"	 [label="(at human cell_6_3)"];
+	"(move human cell_4_3 cell_5_3)" -> "(move human cell_5_3 cell_6_3)"	 [label="(at human cell_5_3)"];
+	"(move human cell_3_3 cell_4_3)" -> "(move human cell_4_3 cell_5_3)"	 [label="(at human cell_4_3)"];
+	"(move human cell_2_3 cell_3_3)" -> "(move human cell_3_3 cell_4_3)"	 [label="(at human cell_3_3)"];
+	"(take human cart list cell_2_3 toothpaste cell_2_4)" -> "(move human cell_2_3 cell_3_3)"	 [label="(contains cart toothpaste)"];
+	"(move human cell_3_3 cell_2_3)" -> "(take human cart list cell_2_3 toothpaste cell_2_4)"	 [label="(at human cell_2_3)"];
 	"(take human cart list cell_3_3 chicken cell_3_2)" -> "(move human cell_3_3 cell_2_3)"	 [label="(contains cart chicken)"];
 	"(move human cell_4_3 cell_3_3)" -> "(take human cart list cell_3_3 chicken cell_3_2)"	 [label="(at human cell_3_3)"];
 	"(move human cell_4_4 cell_4_3)" -> "(move human cell_4_3 cell_3_3)"	 [label="(at human cell_4_3)"];
