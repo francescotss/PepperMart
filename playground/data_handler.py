@@ -399,14 +399,14 @@ def initialization():
     
     # - cells
     cell_8_2 = CellObject("cell_8_2", (8, 2))	
-    cell_8_3 = CellObject("cell_8_2", (8, 3))	
-    cell_8_4 = CellObject("cell_8_2", (8, 4))	
-    cell_8_5 = CellObject("cell_8_2", (8, 5))	
+    cell_8_3 = CellObject("cell_8_3", (8, 3))	
+    cell_8_4 = CellObject("cell_8_4", (8, 4))	
+    cell_8_5 = CellObject("cell_8_5", (8, 5))	
 
-    cell_9_2 = CellObject("cell_8_2", (9, 2))	
-    cell_9_3 = CellObject("cell_8_2", (9, 3))	
-    cell_9_4 = CellObject("cell_8_2", (9, 4))	
-    cell_9_5 = CellObject("cell_8_2", (9, 5))	
+    cell_9_2 = CellObject("cell_9_2", (9, 2))	
+    cell_9_3 = CellObject("cell_9_3", (9, 3))	
+    cell_9_4 = CellObject("cell_9_4", (9, 4))	
+    cell_9_5 = CellObject("cell_9_5", (9, 5))	
 
     cell_5_4 = CellObject("cell_5_4", (5, 4))	
     cell_5_5 = CellObject("cell_5_5", (5, 5))	
@@ -564,12 +564,13 @@ def initialization():
     inits.append(Predicate("is", [cell_3_9, house]))
             
     inits.append(Predicate("is", [cell_8_2, frozen])) 
-    inits.append(Predicate("is", [cell_9_2, frozen]))
-    inits.append(Predicate("is", [cell_9_3, frozen])) 
-    inits.append(Predicate("is", [cell_9_3, frozen]))
+    inits.append(Predicate("is", [cell_8_3, frozen])) 
     inits.append(Predicate("is", [cell_8_4, frozen])) 
-    inits.append(Predicate("is", [cell_9_4, frozen]))
     inits.append(Predicate("is", [cell_8_5, frozen])) 
+    
+    inits.append(Predicate("is", [cell_9_2, frozen]))
+    inits.append(Predicate("is", [cell_9_3, frozen]))
+    inits.append(Predicate("is", [cell_9_4, frozen]))
     inits.append(Predicate("is", [cell_9_5, frozen]))
 
     inits.append(Predicate("is", [cell_5_4, beverages])) 
