@@ -10,7 +10,7 @@ In this work, we present a proof of concept for a shop assistant robot. This typ
    
 3. Shopping: Reserved exclusively for registered customers, this functionality enables Pepper to assist users in compiling their shopping lists and optimizing their shopping experience. Users can select products either via the tablet interface or by using voice commands. The robot then generates a planning problem, displaying the solution on a map via the tablet. Furthermore, the shopping list is stored in the user’s profile for future reference.
 
-# Istructions
+# Instructions
 Start naoqi server: /opt/Aldebaran/naoqi-sdk-2.5.5.5-linux64/naoqi
 Start modim: cd ~/src/modim/src/GUI && python ws_server.py -robot pepper
 Start main: cd ~/playground/ && python main.py 
