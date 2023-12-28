@@ -1,59 +1,16 @@
-# Interazioni
+# PepperMart: A Multimodal Interaction Approach for Shopping Assistant Robots
 
-## Fase 0 - welcome
-Attivato via tocco testa, avvicinamento frontale e saluto.
-
-P: Come posso aiutarti? Ricorda, se sei già registrato mostrami la tessera.
-- Dove: Reparto, prodotto (No login)
-- Registrazione: Voglio registrarmi (No login)
-- Spesa: Voglio fare la spesa (Login)
-- Tutorial: Cosa posso chiederti? (No login)
+In this work, we present a proof of concept for a shop assistant robot. This type of system can be employed in various types of shops, including groceries, furniture, electronics, or any medium to large shop open to the public. Our goal is to demonstrate that social robots can play a significant role in our daily lives by collaborating with humans in complex environments. We developed our system for Pepper, a semi-humanoid robot designed to appear friendly and interact naturally with humans using natural language, gestures, vision, and touch. In our application, Pepper serves as a customer receptionist in a grocery store, assisting customers in locating products, creating shopping lists, and registering at the store.
 
 
-## Dove
+# Features
+1. Login/Sign in: In this mode, the robot prompts the user for their name and adds it to the database. If the user is already registered, Pepper facilitates the login process. Additionally, the robot checks if the user has any items on their shopping list and autonomously suggests the optimal route for accessing these products.
 
-P: Che cosa stai cercando?
+2. Find a Product: This action allows users to locate a specific item within the store. Pepper verbally inquires about the product the user is searching for, and the robot subsequently calculates the shortest path in real-time using a classical planning problem generated and solved at runtime.
+   
+3. Shopping: Reserved exclusively for registered customers, this functionality enables Pepper to assist users in compiling their shopping lists and optimizing their shopping experience. Users can select products either via the tablet interface or by using voice commands. The robot then generates a planning problem, displaying the solution on a map via the tablet. Furthermore, the shopping list is stored in the user’s profile for future reference.
 
-## Registrazione:
-
-P: ciao, come ti chiami?
-U: nome
-P: ciao "nome", d'ora in poi basta che mi mostri il barcode...
-
-## Spesa
-P: mostrami il code (se necessario)
-Se lista vuota:
-P: ho visto che è vuota, ti aiuto a fare la lista della spesa.
-Se lista piena:
-P: hai già una lista della spesa, vuoi aggiungere altro? [si, no] -> che prodotti vuoi aggiungere? [lista]
-
-P: questa è la strada più veloce per fare la spesa. Se vuoi aggiungere un prodotto dimmi pure, se vuoi rimuoverlo basta cliccarci sopra. 
-
-
-## Tutorial
-
-- Cosa sa fare pepper.
-
-
-
-# Resources
-pddl notes: https://ai.dmi.unibas.ch/_files/teaching/hs21/po/exercises/pddl_intro.pdf
-
-online pddl planner: http://editor.planning.domains/#
-
-example planning with costs: https://github.com/planimation/backend/issues/19
-
-(http://editor.planning.domains/#read_session=873KGrMAIa)
-
-https://github.com/mokhtarivahid/safe-planner
-
-https://www.freepik.com/icons
-
-
-# Note
-Bug lobster non diventa verde, manca la categoria dei gamberetti 
-
-# Istruzioni
+# Istructions
 Start naoqi server: /opt/Aldebaran/naoqi-sdk-2.5.5.5-linux64/naoqi
 Start modim: cd ~/src/modim/src/GUI && python ws_server.py -robot pepper
 Start main: cd ~/playground/ && python main.py 
