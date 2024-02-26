@@ -4,7 +4,7 @@
 
 # PepperMart: A Multimodal Interaction Approach for Shopping Assistant Robots
 
-In this work, we present a proof of concept for a shop assistant robot. This type of system can be employed in various types of shops, including groceries, furniture, electronics, or any medium to large shop open to the public. Our goal is to demonstrate that social robots can play a significant role in our daily lives by collaborating with humans in complex environments. We developed our system for [Pepper](https://us.softbankrobotics.com/pepper), a semi-humanoid robot designed to appear friendly and interact naturally with humans using natural language, gestures, vision, and touch. In our application, Pepper serves as a customer receptionist in a grocery store, assisting customers in locating products, creating shopping lists, and registering at the store.
+PepperMart is a shop assistant robot. This type of system can be employed in various types of shops, including groceries, furniture, electronics, or any medium to large shop open to the public. Our goal is to demonstrate that social robots can play a significant role in our daily lives by collaborating with humans in complex environments. We developed our system for [Pepper](https://us.softbankrobotics.com/pepper), a semi-humanoid robot designed to appear friendly and interact naturally with humans using natural language, gestures, vision, and touch. In our application, Pepper serves as a customer receptionist in a grocery store, assisting customers in locating products, creating shopping lists, and registering at the store.
 
 
 # Features
